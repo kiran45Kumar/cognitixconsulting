@@ -1,0 +1,207 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Signup | Cognitix Consulting{% endblock  %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/f3c81801f8.js" crossorigin="anonymous"></script>
+  </head>
+  {% block body %}
+  <body>
+
+    <section class="signup">
+      <div class="signup-left slider">
+        <img src="{% static 'images/leftimg.jpg' %}" alt="Image 1" class="active" />
+        <img src="{% static 'images/leftimg2.jpg' %}" alt="Image 2" />
+        <img src="{% static 'images/leftimg3.jpg' %}" alt="Image 3" />
+        <img src="{% static 'images/leftimg4.jpg' %}" alt="Image 4" />
+        <img src="{% static 'images/leftimg5.jpg' %}" alt="Image 5" />
+    </div>
+    
+      <div class="signup-section">
+      <!-- <div class="signup-flex">
+        <div class="signup-text">
+          <h1><span>Cognitix</span>Consulting</h1>
+        </div>
+        <div class="social-icons">
+          <i class='bx bxl-instagram' ></i>
+          <i class='bx bxl-facebook' ></i>
+          <i class='bx bxl-linkedin-square' ></i>
+        </div>
+      </div> -->
+        <p id="passwordtext"></p>
+        <div class="signup-flex-column signup-nav">
+          <h2 id="success">Sign Up to</h2>
+          <h1><span>Cognitix</span>Consulting</h1>
+          <p>Create Your Account</p>
+          <label for="username">Username</label>
+          <div class="signup-forms">
+            <i class="bx bx-user-circle"></i>
+            <input
+              type="text"
+              name="username"
+              id="username"
+              placeholder="Your Name"
+            />
+          </div>
+          <label for="">Email</label>
+          <div class="signup-forms">
+            <i class="bx bx-envelope"></i>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Your Email"
+            />
+          </div>
+          <label for="">Phone</label>
+          <div class="signup-forms">
+            <i class="bx bx-envelope"></i>
+            <input
+              type="number"
+              name="phone"
+              id="phone"
+              placeholder="Your Phone no"
+            />
+          </div>
+          <label for="">Password</label>
+          <div class="signup-forms">
+            <i class="bx bxs-lock-alt"></i>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Your Password"
+            />
+            <i class="fa-regular fa-eye fa-eyem" onclick="toggleIcon(this)"></i>
+          </div>
+          <label for="">Confirm Password</label>
+          <div class="signup-forms">
+            <i class="bx bx-lock-alt"></i>
+            <input
+              type="password"
+              name="cpassword"
+              id="cpassword"
+              placeholder="Repeat Password"
+            />
+            <i class="fa-regular fa-eye fa-eyem" id="icon2" onclick="toggleIcon(this)"></i>
+          </div>
+          <p id="passwordtext2"></p>
+          <input type="hidden" id="role" value="customer" style="display: none;">
+          <div class="signup-forms-button">
+            <button onclick="signup()">Sign Up</button>
+          </div>
+          <p>Already Have an account? <a href="/login/">Login</a></p>
+        </div>
+      </div>
+    </section>
+
+<script>
+function toggleIcon(iconElement) {
+  let eye = $(iconElement);
+  let passwordField = eye.prev("input");
+  if (eye.hasClass('fa-eye')) {
+    eye.removeClass('fa-eye').addClass("fa-eye-slash");
+    passwordField.attr('type', 'text'); 
+  } else {
+    eye.removeClass('fa-eye-slash').addClass("fa-eye");
+    passwordField.attr('type', 'password'); 
+  }
+}
+document.addEventListener('DOMContentLoaded', function() {
+    let currentIndex = 0;
+    const images = document.querySelectorAll('.signup-left img');
+    const totalImages = images.length;
+
+    function showNextImage() {
+        images[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex + 1) % totalImages;
+        images[currentIndex].classList.add('active');
+    }
+    setInterval(showNextImage, 3000);
+});
+  function signup() {
+    let username = $("#username").val();
+    let email = $("#email").val();
+    let phone = $("#phone").val();
+    let password = $("#password").val();
+    let cpassword = $("#cpassword").val();
+    let role = $("#role").val();
+
+    const passwordPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+    if (!username) {
+      $("#success").html("Enter Username").css('color', '#dc3545');
+      return;
+    } else if (!email) {
+      $("#success").html("Your Email Please").css('color', '#dc3545');
+      return;
+    } 
+    else if(!phone){
+      $("#success").html("Your Phoneno Please").css('color', '#dc3545');
+      return;
+    }
+    else if(phone.length !== 10){
+      $("#success").html("Invalid Phoneno").css('color', '#dc3545');
+      return;
+    }
+    
+    else if (!password) {
+      $("#success").html("Your Password").css('color', '#dc3545');
+      return;
+    } else if (!cpassword) {
+      $("#success").html("Confirm the Password").css('color', '#dc3545');
+      return;
+    } else if (!passwordPattern.test(password)) {
+      $("#passwordtext").html("Password must contain at least one capital letter, one number, and one special character").css('color', '#dc3545');
+      return;
+    } else if (password !== cpassword) {
+      $("#passwordtext2").html("Passwords do not match").css('color', '#dc3545');
+      return;
+    }
+
+    $.ajax({
+      type: "POST",
+      url: "/create_user/",
+      data: {
+        "username": username,
+        "email": email,
+        "phone":phone,
+        "password": password,
+        "cpassword": cpassword,
+        "role": role,
+      },
+      success: function (data) {
+        if (data['status'] == 'pass') {
+          $("#success").html("Signup Successful").css('color', '#28a475');
+          $("#passwordtext").html("")
+          $("#passwordtext2").html("")
+          window.location.replace("/login/")
+        } 
+        else if(data['status'] == 'fail')
+        {
+          $("#passwordtext").html(data['message']).css({'color':'#dc3545','font-size':'18px','font-weight':"bold"});
+        }
+        else {
+          alert("Failed");
+        }
+      },
+    });
+  }
+</script>
+    {% endblock %}
+  </body>
+</html>
