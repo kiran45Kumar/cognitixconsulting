@@ -1,0 +1,12 @@
+<select name="category" id="category">
+    <option value="">Select Course Category</option>
+    {% for category in categories %}
+        <option value="{{category.id}}">{{category.name}}</option>
+    {% endfor %}
+</select>
+<select name="trainer" id="trainer">
+    <option value="">Select Trainer</option>
+    {% for trainer in trainers %}
+        <option value="{{trainer.id}}">{{trainer.trainer_name}} ({{trainer.trainer_bio}})</option>
+    {% endfor %}
+</select>

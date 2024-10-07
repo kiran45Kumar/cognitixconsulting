@@ -28,7 +28,7 @@ class CreateUser(APIView):
         customer.save()
         return JsonResponse({"status":"pass"})
 def index(request):
-    return render(request, 'customer/index.html',{"currentUser":request.session['user_name'],'currentEmail':request.session['customer_email']})
+    return render(request, 'customer/index.html',{"currentUser":request.session['user_name'],'currentEmail':request.session['customer_email'],'currentUserId':request.session['customer_id']})
 class LoginCheck(APIView):
     def post(self, request):
         email_1 = request.POST['email'] # Using request.data if POST data is sent as JSON

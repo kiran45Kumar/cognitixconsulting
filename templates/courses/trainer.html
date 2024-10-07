@@ -1,0 +1,204 @@
+{% extends 'customer/index.html' %} {% block navbar %}
+<style>
+  .trainer-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 130px 100px;
+  }
+  .trainer-text-design h1 {
+    font-size: 4rem;
+    font-weight: 300;
+    background: linear-gradient(to right, red, orange);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .trainer-text-design p {
+    font-size: 25px;
+    font-weight: 200;
+    margin: 10px 0;
+  }
+  .trainer-forms-section {
+    box-shadow: 0px 5px 5px 5px silver;
+    padding: 50px;
+    border-radius: 10px;
+  }
+  .trainer-forms {
+    display: flex;
+    flex-direction: column;
+  }
+  .trainer-forms input {
+    padding: 20px 150px;
+    margin: 15px 0;
+    outline: none;
+    border: 1px solid gray;
+    border-radius: 5px;
+  }
+  .trainer-forms-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .trainer-forms-button button {
+    width: 100%;
+    padding: 20px;
+    border: 1px solid #28a475;
+    color: white;
+    background: #28a475;
+    border-radius: 5px;
+    margin: 5px 0;
+  }
+  .trainer-advantages {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 700px;
+    /* box-shadow: 0px 5px 3px 4px silver; */
+    height: 400px;
+    flex-wrap: wrap;
+  }
+  .trainer-div {
+    width: 300px;
+    height: 150px;
+    border-radius: 10px;
+    box-shadow: 0px 3px 3px 3px silver;
+    margin: 0 10px;
+  }
+  .trainer-div span {
+    margin: 10px;
+    font-weight: 400;
+    font-size: 21px;
+    background: linear-gradient(to right, orange, red);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .trainer-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    margin: 12px;
+  }
+  .trainer-flex i {
+    font-size: 26px;
+    color: #283456;
+  }
+  .trainer-text p {
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.3;
+    color: #000;
+    margin: 15px;
+  }
+</style>
+<div class="hero-section trainer-section">
+  <div class="trainer-text-design">
+    <h1>Teach on Cognitix</h1>
+    <p>Advantages of teaching on Cognitix</p>
+    <div class="trainer-advantages">
+      <div class="trainer-div">
+        <div class="trainer-flex">
+          <span>Global Reach</span>
+          <i class="bx bx-user-plus"></i>
+        </div>
+        <div class="trainer-text">
+          <p>
+            Expand your classroom globally and reach students across continents effortlessly.
+          </p>
+        </div>
+      </div>
+      <div class="trainer-div">
+        <div class="trainer-flex">
+          <span>Cost-Effective</span>
+          <i class="bx bx-money-withdraw"></i>
+        </div>
+        <div class="trainer-text">
+          <p>
+            Cognitix offers powerful tools for educators at a cost that fits any budget. 
+          </p>
+        </div>
+      </div>
+      <div class="trainer-div">
+        <div class="trainer-flex">
+          <span>Collaboration</span>
+          <i class="bx bxs-user-plus"></i>
+        </div>
+        <div class="trainer-text">
+          <p>
+            Cognitix enables easy collaboration with students and educators worldwide.
+          </p>
+        </div>
+      </div>
+      <div class="trainer-div">
+        <div class="trainer-flex">
+          <span>Time-saving</span>
+          <i class="bx bx-time"></i>
+        </div>
+        <div class="trainer-text">
+          <p>
+            Streamline your teaching and focus on what matters most.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="trainer-forms-section">
+    <div class="trainer-forms">
+      <label for="trainer-name">Trainer Name</label>
+      <input type="text" placeholder="Trainer Name" id="trainer-name" />
+      <input type="hidden" id="user" value="{{currentUserId}}" />
+    </div>
+    <div class="trainer-forms">
+      <label for="trainer-name">Bio</label>
+      <input type="text" placeholder="Bio" id="bio" />
+    </div>
+    <div class="trainer-forms">
+      <label for="trainer-name">Expertise</label>
+      <input type="text" placeholder="Expertise" id="expertise" />
+    </div>
+    <div class="trainer-forms">
+      <label for="trainer-name">Contact Email </label>
+      <input type="text" placeholder="Your Email" id="trainer-email" />
+    </div>
+    <div class="trainer-forms-button">
+      <button onclick="train()">Start Teaching</button>
+    </div>
+  </div>
+</div>
+<script>
+  
+  function train() {
+    let trainer_name = $("#trainer-name").val();
+    let bio = $("#bio").val();
+    let expertise = $("#expertise").val();
+    let trainer_email = $("#trainer-email").val();
+    let user = $("#user").val();
+    $.ajax({
+      type: "POST",
+      url: "/create_trainer/",
+      data: {
+        user: user,
+        trainer_name: trainer_name,
+        bio: bio,
+        expertise: expertise,
+        trainer_email: trainer_email,
+      },
+      success: function (data) {
+        if (data["status"] == "pass") {
+          alert("Success");
+        } else {
+          alert("Failed");
+        }
+      },
+    });
+  }
+  $(document).ready(function(){
+    $(".links").hover(function(){
+        $(this).find(".bx-chevron-down").css('transform', 'rotate(180deg)');
+    }, function(){
+        $(this).find(".bx-chevron-down").css('transform', 'rotate(0deg)');
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,108 @@
+<head>
+    <title>Add Category</title>
+</head>
+<style>
+    .form {
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    padding: 20px;
+    width: 300px;
+    margin: 0 auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    display: block;
+    color: #333;
+}
+
+input[type="text"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#successMessage, #errorMessage {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+#successMessage {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+#errorMessage {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+</style>
+<body>
+    <div class="form">
+        <label for="name">Category Name:</label><br>
+        <input type="text" id="name" name="name" maxlength="100" required><br><br>
+        <label for="description">Category Description:</label><br>
+        <textarea id="description" name="description" rows="4" cols="50"></textarea><br><br>
+        <button onclick="createCategory()">Submit</button>
+    
+    </div>
+    
+    <!-- Success Message -->
+    <div id="successMessage" style="display:none;">Category successfully created!</div>
+    
+    <!-- Error Message -->
+    <div id="errorMessage" style="display:none;">There was an error creating the category.</div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+        function createCategory(){
+            const name = $("#name").val();
+            const description = $("#description").val();
+            $.ajax({
+                type:"POST",
+                url:"/create_category/",
+                data:{
+                    "name":name,
+                    "description":description,
+                },
+                success:function(data){
+                    if(data){
+                        $("#successMessage").show()
+                        setTimeout(() => {
+                          window.location.reload();  
+                        },2000);
+                    }
+                }
+            })
+        }
+    </script>
+</body>
