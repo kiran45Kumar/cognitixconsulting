@@ -1,5 +1,5 @@
 from django.urls import path    
-from .views import trainer, CreateTrainer,category,CreateCategory,ViewCategory,AddTrainer
+from .views import trainer, CreateTrainer,category,CreateCategory,ViewCategory,AddTrainer,CreateCourses
 urlpatterns = [
     path('trainer/',trainer, name='trainer'),
     path('create_trainer/',CreateTrainer.as_view(), name='create_trainer'),
@@ -7,4 +7,5 @@ urlpatterns = [
     path('create_category/',CreateCategory.as_view(), name='create_category'),
     path('add_courses/',ViewCategory.as_view(), name='view_category'),
     path('add_trainer/',AddTrainer.as_view(), name='add_trainer'),
+    path('create_courses/',CreateCourses.as_view(), name='create_courses'),
 ]

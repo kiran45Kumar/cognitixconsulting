@@ -5,6 +5,7 @@ from .models import Trainer, Category
 from adminuse.models import AddTrainers
 from django.http import JsonResponse
 from django.views.generic import TemplateView
+from .models import Course
 # Create your views here.
 def trainer(request):
     return render(request, 'courses/trainer.html',{"currentUser":request.session['user_name'],'currentEmail':request.session['customer_email'],'currentUserId':request.session['customer_id']})
@@ -45,6 +46,31 @@ class ViewCategory(TemplateView):
         context['trainers'] = trainers
         context['categories'] = categories
         return context
+class CreateCourses(APIView):
+    def post(self, request):
+        title= request.POST.get('title')
+        description = request.POST.get('description')
+        price = request.POST.get('price')
+        gst = request.POST.get('gst')
+        img = request.FILES.get('img')
+        category_id = request.POST.get('category')
+        trainer = request.POST.get('trainer')
+        started_at = request.POST.get('started_at')
+        ended_at = request.POST.get('ended_at')
+        cat = Category.objects.get(id = category_id)
+        train = AddTrainers.objects.get(trainer_id = trainer)
+        course = Course()
+        course.title = title
+        course.description = description
+        course.course_gst = gst
+        course.course_img = img
+        course.price = price
+        course.category = cat
+        course.trainer = train
+        course.started_at = started_at
+        course.ended_at = ended_at
+        course.save()
+        return JsonResponse({"status":"pass"})
 class AddTrainer(APIView):
     def post(self, request):
             tname = request.POST.get('tname')
@@ -54,6 +80,7 @@ class AddTrainer(APIView):
             temail = request.POST.get('temail')
             tphone = request.POST.get('tphone')
             taddress = request.POST.get('taddress')
+            timg = request.FILES.get('timg')
             addtrainer = AddTrainers()
             addtrainer.trainer_name = tname
             addtrainer.trainer_description = tdesc
@@ -62,5 +89,6 @@ class AddTrainer(APIView):
             addtrainer.trainer_email = temail
             addtrainer.trainer_phone = tphone
             addtrainer.trainer_address = taddress
+            addtrainer.trainer_photo = timg
             addtrainer.save()
             return JsonResponse({"status":"pass"})

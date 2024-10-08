@@ -7,19 +7,16 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <style>
-    * {
-        box-sizing: border-box;
+    *{
         margin: 0;
         padding: 0;
-        font-family: Arial, sans-serif;
+        box-sizing: border-box;
     }
-
     body {
         background-color: #f4f7f8;
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh;
     }
 
     .add-trainer-section {
@@ -29,6 +26,7 @@
         box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
         max-width: 500px;
         width: 100%;
+        margin: 20px 0;
     }
 
     .trainer-forms {
@@ -90,9 +88,23 @@
             padding: 10px;
         }
     }
+    fieldset{
+        padding: 20px;
+        border: 1px solid gray;
+        border-radius: 10px;
+        margin: 10px 0;
+    }
+    fieldset legend{
+        font-size: 25px;
+        font-weight: 300;
+    }
 </style>
 <body>
     <div class="add-trainer-section">
+<div class="trainer-form-div">
+<div class="trainer-form">
+    <fieldset>
+        <legend>Trainer Info</legend>
         <div class="trainer-forms">
             <label for="">Trainer Name</label>
             <input type="text" placeholder="Trainer Name" id="tname">
@@ -109,6 +121,11 @@
             <label for="">Expertise of Trainer</label>
             <input type="text" placeholder="Expertise of Trainer" id="texpertise">
         </div>
+    </fieldset>
+</div>
+<div class="trainer-form">
+    <fieldset>
+        <legend>Personal Info</legend>
         <div class="trainer-forms">
             <label for="">Email of Trainer</label>
             <input type="text" placeholder="Email of Trainer" id="temail">
@@ -122,8 +139,15 @@
             <input type="text" placeholder="Trainer Address" id="taddress">
         </div>
         <div class="trainer-forms">
+            <label for="">Trainer Profile Photo</label>
+            <input type="file" placeholder="Trainer Address" id="timg">
+        </div>
+        <div class="trainer-forms">
             <button onclick="addTrainer()">+ Add Trainer</button>
         </div>
+    </fieldset>
+</div>
+</div>
     </div>
 
     <script>
@@ -135,22 +159,25 @@
             const temail = $("#temail").val();
             const tphone = $("#tphone").val();
             const taddress = $("#taddress").val();
+            const timg = $("#timg")[0].files[0];
+            const formdata  = new FormData();
+            formdata.append("tname",tname)
+            formdata.append("tdesc",tdesc)
+            formdata.append("tbio",tbio)
+            formdata.append("texpertise",texpertise)
+            formdata.append("temail",temail)
+            formdata.append("tphone",tphone)
+            formdata.append("taddress",taddress)
+            formdata.append("timg",timg)
             $.ajax({
                 type:"POST",
                 url:"/add_trainer/",
-                data:
-                {
-                    "tname":tname,
-                    "tdesc":tdesc,
-                    "tbio":tbio,
-                    "texpertise":texpertise,
-                    "temail":temail,
-                    "tphone":tphone,
-                    "taddress":taddress,
-                },
+                data:formdata,
+                processData:false,
+                contentType:false,
                 success:function(data){
                     if(data){
-                        alert("success")
+                        window.location.reload();
                     }
                     else{
                         alert("failed")

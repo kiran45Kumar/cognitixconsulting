@@ -1,12 +1,138 @@
-<select name="category" id="category">
-    <option value="">Select Course Category</option>
-    {% for category in categories %}
-        <option value="{{category.id}}">{{category.name}}</option>
-    {% endfor %}
-</select>
-<select name="trainer" id="trainer">
-    <option value="">Select Trainer</option>
-    {% for trainer in trainers %}
-        <option value="{{trainer.id}}">{{trainer.trainer_name}} ({{trainer.trainer_bio}})</option>
-    {% endfor %}
-</select>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Admin | Add Courses</title>
+</head>
+<style>
+    .form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+</style>
+<body>
+    <div class="form-group">
+        <label for="title">Course Title</label>
+        <input type="text" name="title" id="title" class="form-control" placeholder="Enter course title" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="description">Course Description</label>
+        <textarea name="description" id="description" class="form-control" rows="4" placeholder="Enter course description"></textarea>
+    </div>
+    
+    <div class="form-group">
+        <label for="price">Price</label>
+        <input type="number" step="0.01" name="price" id="price" class="form-control" placeholder="Enter course price" required>
+    </div>
+    <div class="form-group">
+        <label for="price">Course GST</label>
+        <input type="number" step="0.01" name="gst" id="gst" class="form-control" placeholder="Enter course gst" required>
+    </div>
+    <div class="form-group">
+        <label for="price">Course Image</label>
+        <input type="file" step="0.01" name="img" id="img" class="form-control" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="category">Course Category</label>
+        <select name="category" id="category" class="form-control">
+            <option value="">Select Course Category</option>
+            {% for category in categories %}
+                <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label for="trainer">Trainer</label>
+        <select name="trainer" id="trainer" class="form-control">
+            <option value="">Select Trainer</option>
+            {% for trainer in trainers %}
+                <option value="{{ trainer.trainer_id }}">{{ trainer.trainer_name }} ({{ trainer.trainer_bio }})</option>
+            {% endfor %}
+        </select>
+    </div>
+    
+    <div class="form-group">
+        <label for="started_at">Course Start Date</label>
+        <input type="date" name="started_at" id="started_at" class="form-control" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="ended_at">Course End Date</label>
+        <input type="date" name="ended_at" id="ended_at" class="form-control" required>
+    </div>
+    
+    <button type="submit" class="btn btn-primary" onclick="AddCourses()">Submit</button>
+    <script>
+        function AddCourses() { 
+            let title = $("#title").val();
+            let description = $("#description").val();
+            let price = $("#price").val();
+            let gst = $("#gst").val();
+            let category = $("#category").val();
+            let trainer = $("#trainer").val();
+            let started_at = $("#started_at").val();
+            let ended_at = $("#ended_at").val();
+            let img = $("#img")[0].files[0];
+           const formdata  = new FormData();
+           formdata.append("title",title);
+           formdata.append("description",description);
+           formdata.append("price",price);
+           formdata.append("gst",gst);
+           formdata.append("category",category);
+           formdata.append("trainer",trainer);
+           formdata.append("started_at",started_at);
+           formdata.append("ended_at",ended_at);
+           formdata.append("img",img);
+            
+            $.ajax({
+                type:'POST',
+                url:"/create_courses/",
+                data:formdata,
+                processData:false,
+                contentType:false,
+                success:function(data){
+                    if(data){
+                        alert("success")
+                        window.location.reload()
+                    }
+                    else {
+                        alert("failed")
+                    }
+                }
+            })
+         }
+    </script>
+</body>
