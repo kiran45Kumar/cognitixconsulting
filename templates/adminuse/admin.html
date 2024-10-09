@@ -1,0 +1,193 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin- Manage Everything </title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="admin-section">
+        <div class="admin-left">
+            <h1>Cognitix</h1>
+            <ul>
+                <li class="active2"><div class="admin-text-flex">
+                    <i class='bx bxs-dashboard'></i>
+                    <p>Dashboard</p>
+                </div></li>
+                <li><div class="admin-text-flex">
+                    <i class='bx bx-package'></i>
+                    <p>Courses</p>
+                </div></li>
+                <li><div class="admin-text-flex">
+                    <i class='bx bx-shopping-bag' ></i>
+                    <p>Orders</p>
+                </div></li>
+                <li><div class="admin-text-flex">
+                    <i class='bx bx-money-withdraw' ></i>
+                    <p>Payments</p>
+                </div></li>
+                <li><div class="admin-text-flex">
+                    <i class='bx bx-transfer-alt' ></i>
+                    <p>Transactions</p>
+                </div></li>
+                <li><div class="admin-text-flex">
+                    <i class='bx bx-user-plus' ></i>    
+                    <p>Customers</p>
+                </div></li>
+            </ul>
+            <div class="categories">
+                <h1>Categories</h1>
+                <ul>
+                    {% for category in categories %}
+                    <li>{{category.name}}</li>
+                    {% endfor %}
+                   <div class="add-category" onclick="addCategory()">
+                    <div class="icon-plus" >
+                        <i class='bx bx-plus' ></i>
+                    </div>
+                    <p>Add More</p>
+                   </div>
+                </ul>
+            </div>
+        </div>
+
+        <div class="admin-actions" id="admin-action" style="display: none;">
+            <ul id="admin-list">
+                <li onclick="addTrainer()">Trainers</li>
+                <li onclick="addCourses()">Courses</li>
+                <li onclick="addCategory()">Categories</li>
+            </ul>
+        </div>
+        <div class="admin-right">
+            <div class="admin-nav">
+                <div class="admin-search">
+                    <i class='bx bx-search' ></i>
+                    <input type="search" name="search" id="search" placeholder="I'm Searching for">
+                    <i class='bx bx-microphone' ></i>
+                </div>
+
+                <div class="admin-basics">
+                    <div class="admin-add">
+                        <button id="btn-add">Add <i class="bx bx-chevron-down"></i></button>
+                    </div>
+                    <div class="notification"><i class='bx bx-bell'></i></div>
+                    <div class="admin-img">
+                        <img src="{% static 'images/agile.jpg' %}" alt="">
+                        <div class="admin-info">
+                            <h4>Kiran</h4>
+                            <p>kiran2003@gmail.com</p>
+                        </div>
+                        <i class="bx bx-chevron-down"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin-main-content">
+                <h1>Dashboard</h1>
+                <p><i class='bx bx-home-alt-2'></i> Home > Dashboard</p>
+                <div class="admin-flex-containers">
+                    <div class="flex-containers">
+                        <div class="flex-container">
+                            <p>Total sales</p>
+                            <i class='bx bx-dots-vertical-rounded' ></i>
+                        </div>
+                        <div class="flex-container">
+                           <div class="price-icon">
+                            <span> 
+                                <i class='bx bx-trending-up'></i>
+                            </span>
+                            <p>25,000</p>  
+                        </div>
+                            <p class="text">&UpArrow; 25.8%</p>
+                        </div>
+                        <div class="compare-text">
+                            <p>Compared to Feb2024</p>
+                        </div>
+                    </div>
+                    <div class="flex-containers">
+                        <div class="flex-container">
+                            <p>Orders Value</p>
+                            <i class='bx bx-dots-vertical-rounded' ></i>
+                        </div>
+                        <div class="flex-container">
+                           <div class="price-icon">
+                            <span> 
+                                <i class='bx bx-trending-up'></i>
+                            </span>
+                            <p>25,000</p>  
+                        </div>
+                            <p class="text">&UpArrow; 25.8%</p>
+                        </div>
+                        <div class="compare-text">
+                            <p>Compared to Feb2024</p>
+                        </div>
+                    </div>
+                    <div class="flex-containers">
+                        <div class="flex-container">
+                            <p>Daily Customers</p>
+                            <i class='bx bx-dots-vertical-rounded' ></i>
+                        </div>
+                        <div class="flex-container">
+                           <div class="price-icon">
+                            <span> 
+                                <i class='bx bx-trending-up'></i>
+                            </span>
+                            <p>25,000</p>  
+                        </div>
+                            <p class="text">&UpArrow; 25.8%</p>
+                        </div>
+                        <div class="compare-text">
+                            <p>Compared to Feb2024</p>
+                        </div>
+                    </div>
+                    <div class="flex-containers">
+                        <div class="flex-container">
+                            <p>Daily Orders</p>
+                            <i class='bx bx-dots-vertical-rounded' ></i>
+                        </div>
+                        <div class="flex-container">
+                           <div class="price-icon">
+                            <span> 
+                                <i class='bx bx-trending-up'></i>
+                            </span>
+                            <p>25,000</p>  
+                        </div>
+                            <p class="text">&UpArrow; 25.8%</p>
+                        </div>
+                        <div class="compare-text">
+                            <p>Compared to Feb2024</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const addCategory = ()=>{
+            window.location.href = '/categories'
+        }
+        const addTrainer = ()=>{
+            window.location.href = '/trainer_view'
+        }
+        const addCourses = ()=>{
+            window.location.href = '/add_courses'
+        }
+$(document).ready(function(){
+    $('#btn-add').click(function(){
+        $('#admin-action').toggle('admin-close')
+    })
+})
+
+    </script>
+</body>
+</html>
