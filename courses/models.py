@@ -28,6 +28,8 @@ class Course(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='courses')
     course_img = models.ImageField(upload_to="course_images/",default="")
     trainer = models.ForeignKey(AddTrainers, on_delete=models.CASCADE)
+    skillsgain = models.CharField(max_length=500, default="")
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     started_at = models.DateField(default=now)
     ended_at = models.DateField(default=now)
     created_at = models.DateTimeField(auto_now_add=True)

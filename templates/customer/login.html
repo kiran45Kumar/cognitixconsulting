@@ -4,33 +4,50 @@
 {% block body %}
 <section class="signup">
     <div class="signup-section">
-       <div class="signup-flex-column signup-nav">
-           <h2 id="successmsg">Log In to</h2>
-           <h1><span>Cognitix</span>Consulting</h1>
-           <p>Log into your Account</p>
-        <label for="">Email</label>
-        <div class="signup-forms">
-                <i class='bx bx-envelope' ></i>
-                <input type="email" name="email" id="email" placeholder="Your Email">
-        </div>
-        <label for="">Password</label>
-        <div class="signup-forms">
-            <i class='bx bx-lock-alt' ></i>
-            <input type="password" name="password" id="password" placeholder="Your Password">
-            <i class="fa-regular fa-eye fa-eyem" onclick="toggleIcon(this)"></i>
-        </div>
-        <div class="remember-forgot">
-            <div class="remember">
-                <input type="checkbox" name="check" id="check">
-                <p style="color: #222;">Remember me</p>
+        <div class="signup-flex-column signup-nav">
+            <div id="loginSection">
+                <h2 id="successmsg">Log In to</h2>
+                <h1><span>Cognitix</span> Consulting</h1>
+                <p>Log into your Account</p>
+                <label for="email">Email</label>
+                <div class="signup-forms">
+                    <i class='bx bx-envelope'></i>
+                    <input type="email" name="email" id="email" placeholder="Your Email">
+                </div>
+                <label for="password">Password</label>
+                <div class="signup-forms">
+                    <i class='bx bx-lock-alt'></i>
+                    <input type="password" name="password" id="password" placeholder="Your Password">
+                    <i class="fa-regular fa-eye fa-eyem" onclick="toggleIcon(this)"></i>
+                </div>
+                <div class="remember-forgot">
+                    <div class="remember">
+                        <input type="checkbox" name="check" id="check">
+                        <p style="color: #222;">Remember me</p>
+                    </div>
+                    <p onclick="showForgotPassword()" style="cursor: pointer;">Forgot Password</p>
+                </div>
+                <div class="signup-forms-button">
+                    <button onclick="login()">Log In</button>
+                </div>
+                <p>Don't Have an account? <a href="/signup">Signup</a></p>
             </div>
-            <p>Forgot Password</p>
+
+            <!-- Forgot Password Section -->
+            <div id="forgotPasswordSection" class="hidden">
+                <h2>Forgot Password</h2>
+                <p>Enter your email to send a password reset link</p>
+                <label for="forgotEmail">Email</label>
+                <div class="signup-forms">
+                    <i class='bx bx-envelope'></i>
+                    <input type="email" name="forgotEmail" id="forgotEmail" placeholder="Your Email" >
+                </div>
+                <div class="signup-forms-button">
+                    <button onclick="forgotPassword()">Send Reset Link</button>
+                </div>
+                <p><a href="/" onclick="showLogin()">Back to Log In</a></p>
+            </div>
         </div>
-        <div class="signup-forms-button">
-            <button onclick="login()">Log In</button>
-        </div>
-        <p>Don't Have an account? <a href="/signup">Signup</a></p>
-       </div>
     </div>
     <div class="signup-right signup-left slider">
         <img src="{% static 'images/leftimg.jpg' %}" alt="Image 1" class="active" />
@@ -40,6 +57,7 @@
         <img src="{% static 'images/leftimg5.jpg' %}" alt="Image 5" />
     </div>
 </section>
+
 
 <script>
     function toggleIcon(iconElement) {
@@ -104,6 +122,49 @@
     // Set interval for slider
     setInterval(showNextImage, 3000); // Change image every 3 seconds
 });
+// Show Forgot Password Section
+function showForgotPassword() {
+    document.getElementById('loginSection').classList.add('hidden');
+    document.getElementById('forgotPasswordSection').classList.add('show');
+    setTimeout(() => {
+        document.getElementById('loginSection').style.display = 'none';
+    }, 500); // Wait for transition to complete before hiding login section
+}
 
+// Show Login Section again
+function showLogin() {
+    document.getElementById('loginSection').classList.remove('hidden');
+    document.getElementById('forgotPasswordSection').classList.remove('show');
+    setTimeout(() => {
+        document.getElementById('forgotPasswordSection').style.display = 'none';
+    }, 500); // Wait for transition to complete before hiding forgot password section
+}
+
+// Optional: Function for sending reset link
+function sendResetLink() {
+    const email = document.getElementById('forgotEmail').value;
+    alert(`Reset link sent to ${email}`);
+}
+// AJAX for Forgot Password
+function forgotPassword() {
+    const email = document.getElementById('forgotEmail').value;
+
+    fetch('/forgot-password/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': '{{ csrf_token }}'
+        },
+        body: JSON.stringify({email: email})
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === "pass") {
+            alert("Reset link sent successfully!");
+        } else {
+            alert(data.message);
+        }
+    });
+}
 </script>
 {% endblock body %}

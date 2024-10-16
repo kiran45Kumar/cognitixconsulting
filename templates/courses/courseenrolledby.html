@@ -1,0 +1,36 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+{% for course in courses %}
+    <p>{{ course.title }}</p>
+    <p>{{ course.category }}</p>
+    <p><input type="hidden" id="customer_id" value="{{ customer_id }}"></p>
+
+    <p><input type="hidden" id="course_id_{{ forloop.counter }}" value="{{ course.course_id }}"></p>
+    <button onclick="enrollUser('{{ forloop.counter }}')">Enroll</button>
+{% endfor %}
+
+<script>
+    function enrollUser(counter){
+        const customer_id  = $("#customer_id").val();
+        const course_id  = $("#course_id_" + counter).val();
+        $.ajax({
+            type: "POST",
+            url: "/enroll_user/",
+            data: {
+                "course_id": course_id,
+                "customer_id": customer_id,
+            },
+            success: function(data){
+                if (data.status === "pass") {
+                    alert("Success");
+                } else {
+                    alert("Failed: " + data.message);
+                }
+            },
+            error:function(xhr, status, error){
+                if(error){
+                    alert("You Have already Enrolled")
+                }
+            }
+        });
+    }
+</script>

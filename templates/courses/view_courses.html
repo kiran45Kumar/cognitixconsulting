@@ -1,0 +1,233 @@
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: #f4f4f4; /* Light background color for contrast */
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+        border-radius: 8px; /* Rounded corners */
+        overflow: hidden; /* To ensure rounded corners are visible */
+        background-color: #ffffff; /* White background for the table */
+    }
+
+    th, td {
+        padding: 12px 15px; /* More padding for a spacious look */
+        text-align: left;
+    }
+
+    th {
+        background-color: #007bff; /* Bootstrap primary color */
+        color: white; /* White text for contrast */
+        position: sticky; /* Keep header on top while scrolling */
+        top: 0; /* Adjusts position for sticky header */
+        z-index: 10; /* Ensures header stays on top */
+    }
+
+    td {
+        border-bottom: 1px solid #ddd; /* Light border between rows */
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9; /* Lighter background for even rows */
+    }
+
+    tr:hover {
+        background-color: #e2e2e2; /* Highlight row on hover */
+    }
+
+    input[type="text"], select {
+        width: 100%; /* Full width for input and select */
+        padding: 10px; /* Padding inside input fields */
+        border: 1px solid #ccc; /* Light border for input fields */
+        border-radius: 4px; /* Rounded corners for input fields */
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Inner shadow */
+        transition: border-color 0.3s; /* Smooth transition on focus */
+    }
+
+    input[type="text"]:focus, select:focus {
+        border-color: #007bff; /* Change border color on focus */
+        outline: none; /* Remove default outline */
+    }
+
+    button {
+        padding: 10px 15px; /* Padding for buttons */
+        background-color: #28a745; /* Success button color */
+        color: white; /* White text for buttons */
+        border: none; /* Remove default border */
+        border-radius: 4px; /* Rounded corners for buttons */
+        cursor: pointer; /* Pointer cursor on hover */
+        transition: background-color 0.3s; /* Smooth transition for button */
+    }
+
+    button:hover {
+        background-color: #218838; /* Darker shade on hover */
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+        table, th, td {
+            display: block; /* Stack elements on smaller screens */
+            width: 100%; /* Full width */
+        }
+
+        th {
+            position: static; /* Remove sticky positioning on mobile */
+        }
+    }
+</style>
+
+
+<body>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Price (INR)</th>
+                <th>GST (%)</th>
+                <th>Total Price</th>
+                <th>Region</th>
+                <th>Converted Price</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for course in courses %}
+            <tr>
+                <td><input type="text" id="title{{course.course_id}}" value="{{course.title}}"></td>
+                <td><input type="text" id="description{{course.course_id}}" value="{{course.description}}"></td>
+                <td><input type="text" id="price{{course.course_id}}" value="{{course.price}}"></td>
+                <td><input type="text" id="course_gst{{course.course_id}}" value="{{course.course_gst}}" readonly></td>
+                <td><input type="text" id="total_price{{course.course_id}}" value="{{course.total_price}}" readonly></td>
+                <td>
+                    <select id="region{{course.course_id}}" onchange="convertPrice('{{course.course_id}}')">
+                        <!-- Regions will be populated here -->
+                         <script>
+                            $(document).ready(function(){
+                                fetchRegions('{{course.course_id}}');
+                            })
+                         </script>
+                    </select>
+                </td>
+                <td><input type="text" id="converted_price{{course.course_id}}" value="" readonly></td>
+                <td><button onclick="updateCourse('{{course.course_id}}')">Update</button></td>
+                <td><button onclick="delete_course('{{course.course_id}}')">Delete</button></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+<script>
+    const apiKey = 'fe11c7e7c8cf563a60f484f3';
+    // Fetch regions and populate the dropdown
+    function fetchRegions(courseId) {
+        $.ajax({
+            url: 'https://restcountries.com/v3.1/all',
+            method: 'GET',
+            success: function(data) {
+                const regionSelect = $("#region" + courseId);
+                regionSelect.empty();
+                data.forEach(country => {
+                    const currency = country.currencies ? Object.keys(country.currencies)[0] : 'N/A';
+                    const countryName = country.name.common; // You can also use country.name.official
+                    const option = `<option value="${currency}">${countryName} (${currency})</option>`;
+                    regionSelect.append(option);
+                });
+            },
+            error: function() {
+                alert("Failed to fetch regions.");
+            }
+        });
+    }
+
+    function convertPrice(courseId) {
+    // Get the total price directly from the input field
+    const totalPriceInINR = parseFloat($("#total_price" + courseId).val());
+
+    // Fetch the selected region
+    const region = $("#region" + courseId).val();
+
+    $.ajax({
+        url: `https://v6.exchangerate-api.com/v6/${apiKey}/latest/INR`,
+        method: "GET",
+        success: function(data) {
+            const conversionRate = data.conversion_rates[region];
+            if (conversionRate) {
+                // Convert total price to the selected region's currency
+                const convertedPrice = (totalPriceInINR * conversionRate).toFixed(2);
+                $("#converted_price" + courseId).val(convertedPrice);
+            } else {
+                alert("Conversion rate not available for the selected region.");
+            }
+        },
+        error: function() {
+            alert("Failed to fetch conversion rates.");
+        }
+    });
+}
+
+
+    function updateCourse(id) {
+        const title = $("#title" + id).val();
+        const description = $("#description" + id).val();
+        const price = $("#price" + id).val();
+        const course_gst = $("#course_gst" + id).val();
+
+        $.ajax({
+            type: "POST",
+            url: "/update_courses/",
+            data: {
+                "id": id,
+                "title": title,
+                "description": description,
+                "price": price,
+                "course_gst": course_gst,
+            },
+            success: function(data) {
+                if (data) {
+                    window.location.reload();
+                } else {
+                    alert('failed');
+                }
+            },
+            error: function(xhr, status, error) {
+                if (error) {
+                    alert(error.message);
+                }
+            }
+        });
+    }
+
+    function delete_course(id) {
+        $.ajax({
+            type: "POST",
+            url: "/delete_courses/",
+            data: {
+                "id": id,
+            },
+            success: function(data) {
+                if (data) {
+                    window.location.reload();
+                } else {
+                    alert("Failed");
+                }
+            }
+        });
+    }
+
+    // Fetch regions for each course on page load
+    // $(document).ready(function() {
+    //     {% for course in courses %}
+        
+    //     {% endfor %}
+    // });
+</script>
+</body>

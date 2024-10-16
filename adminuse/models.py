@@ -7,6 +7,7 @@ class AddTrainers(models.Model):
     trainer_description = models.CharField(max_length=500)
     trainer_bio = models.CharField(max_length=500)
     trainer_expertise = models.CharField(max_length=500)
+    trainer_experience = models.CharField(max_length=500,default="")
     trainer_email = models.EmailField(max_length=80, unique=True)
     trainer_phone = models.IntegerField(default=9999999999)
     trainer_address = models.CharField(max_length=200, default='Street Name, City, State pincode')

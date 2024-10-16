@@ -15,7 +15,18 @@
            <div class="nav-links">
                <li class="links"><p>E-learning</p><i class='bx bx-chevron-down'></i></li>
                <li  class="links">Resources<i class='bx bx-chevron-down'></i></li>
-               <li class="links">Get Certified<i class='bx bx-chevron-down'></i></li>
+               <li class="links" id="certified">
+                Get Certified<i class='bx bx-chevron-down'></i>
+               </li>
+               <div class="course-certifications" id="course-certification">
+                <li>Certified ScrumMaster® (CSM)</li>
+                <li>Certified Scrum Product Owner® (CSPO)</li>
+                <li>Certified Scrum Developer® (CSD)</li>
+                <li>Certified Agile Leadership® (CAL E-O-T) </li>
+                <li>Certified Scrum Professional® (CSP) SM-PO</li>
+                <li>Advanced Certified ScrumMaster® (A-CSM)</li>
+                <li>Advanced Certified Scrum Product Owner® (A-CSPO)</li>
+                </div>
                <li class="links">Ask an Expert</li>
                <li class="links" onclick="trainer()">Teach on Cognitix</li>
                <div class="user-action">
@@ -84,14 +95,9 @@
     <div class="courses-slider">
         <!-- <button id="prev">←</button> -->
         <div class="slider-container">
-            <p class="active">Agile</p>
-            <p>Project and Service Management</p>
-            <p>Data Science</p>
-            <p>DevOps</p>
-            <p>Big Data</p>
-            <p>Cloud Computing and Programming</p>
-            <p>Web and Mobile app Development</p>
-            <!-- <p>Software Testing And Visualization</p> -->
+            {% for domain in domains %}
+                <p>{{domain.name}}</p> 
+            {% endfor %}
         </div>
         <!-- <button id="next">→</button> -->
     </div>
@@ -271,7 +277,11 @@
     
     {% endblock %}
 </section>
+
     <script>
+        $(document).ready(function(){
+            $(".slider-container p:first").addClass('active'); // for children we should use :first, not first-child.
+        })
         const paragraphs = document.querySelectorAll('.slider-container p');
 
 paragraphs.forEach(paragraph => {
@@ -356,6 +366,22 @@ setInterval(() => animateText(text), 3000);
 function trainer() { 
     window.location.href = '/trainer'
  }
+ $("#certified").mouseenter(function(){
+    $("#course-certification").stop(true, true).fadeIn();
+});
+
+$("#certified").mouseleave(function(){
+    setTimeout(function(){
+        if (!$("#course-certification").is(":hover")) {
+            $("#course-certification").fadeOut();
+        }
+    }, 100);  // Adjust the delay to suit your needs
+});
+
+$("#course-certification").mouseleave(function(){
+    $(this).fadeOut();
+});
+
     </script>
  </body>
  </html>

@@ -47,9 +47,9 @@
             </ul>
             <div class="categories">
                 <h1>Categories</h1>
-                <ul>
+                <ul class="category">
                     {% for category in categories %}
-                    <li>{{category.name}}</li>
+                    <p>{{category.name}}</p>
                     {% endfor %}
                    <div class="add-category" onclick="addCategory()">
                     <div class="icon-plus" >
@@ -182,12 +182,23 @@
         const addCourses = ()=>{
             window.location.href = '/add_courses'
         }
-$(document).ready(function(){
-    $('#btn-add').click(function(){
-        $('#admin-action').toggle('admin-close')
-    })
-})
+        $(document).ready(function(){
+    $('#btn-add').click(function(event){
+        event.stopPropagation();//used to prevent clicks over elements except window click
+        $('#admin-action').toggle();
+    });
 
+    $('#admin-action').click(function(event){
+        event.stopPropagation();
+    });
+
+    // Hide admin-action when clicking anywhere else on the window
+    $(window).click(function(){
+        $("#admin-action").hide();
+    });
+});
+
+  
     </script>
 </body>
 </html>

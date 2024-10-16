@@ -1,0 +1,14 @@
+courses enrolled by {{customer_name}}
+<style>
+    .domain{
+        text-transform:lowercase;
+    }
+</style>
+{% for enroll in enrolls %}
+    <p>{{enroll.course}}</p>
+    <p><b>Course Started: </b>{{enroll.course.started_at}}</p>
+    <p><b>Course Ended:</b> {{enroll.course.ended_at}}</p>
+    <p><b>Trainer:</b> {{enroll.course.trainer.trainer_name}}</p>
+    <p class="domain"><b style="text-transform: capitalize;">Domain: </b>{{enroll.course.category}}</p>
+    <button>Download Certificate</button>
+{% endfor %}

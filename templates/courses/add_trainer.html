@@ -98,6 +98,22 @@
         font-size: 25px;
         font-weight: 300;
     }
+    #add-expertise{
+        padding: 5px;
+        margin: 10px 0;
+        cursor: pointer;
+        text-align: right;
+        background: #28a475;
+        color: white;
+        font-weight: 500;
+        width: fit-content;
+        font-size: small;
+        border-radius: 5px;
+    }
+    .texpertise{
+        margin: 10px 0;
+
+    }
 </style>
 <body>
     <div class="add-trainer-section">
@@ -118,9 +134,18 @@
             <input type="text" placeholder="Trainer Bio" id="tbio">
         </div>
         <div class="trainer-forms">
-            <label for="">Expertise of Trainer</label>
-            <input type="text" placeholder="Expertise of Trainer" id="texpertise">
+            <label for="">Trainer Experience</label>
+            <input type="text" placeholder="Trainer Experience" id="texperience">
         </div>
+  <!-- Expertise of Trainer Section -->
+<div class="trainer-forms">
+    <label for="">Expertise of Trainer</label>
+    <div id="expertise-container">
+        <input type="text" placeholder="Expertise of Trainer" class="texpertise">
+    </div>
+    <p id="add-expertise">Add More +</p>
+</div>
+
     </fieldset>
 </div>
 <div class="trainer-form">
@@ -151,40 +176,58 @@
     </div>
 
     <script>
-        function addTrainer(){
+        $(document).ready(function() {
+            // Add more expertise fields
+            $('#add-expertise').click(function() {
+                $('#expertise-container').append(`
+                    <input type="text" class="texpertise">
+                `);
+            });
+        });
+    
+        function addTrainer() {
             const tname = $("#tname").val();
             const tdesc = $("#tdesc").val();
             const tbio = $("#tbio").val();
-            const texpertise = $("#texpertise").val();
+            const texperience = $("#texperience").val();
             const temail = $("#temail").val();
             const tphone = $("#tphone").val();
             const taddress = $("#taddress").val();
             const timg = $("#timg")[0].files[0];
-            const formdata  = new FormData();
-            formdata.append("tname",tname)
-            formdata.append("tdesc",tdesc)
-            formdata.append("tbio",tbio)
-            formdata.append("texpertise",texpertise)
-            formdata.append("temail",temail)
-            formdata.append("tphone",tphone)
-            formdata.append("taddress",taddress)
-            formdata.append("timg",timg)
+            
+            const formdata = new FormData();
+            formdata.append("tname", tname);
+            formdata.append("tdesc", tdesc);
+            formdata.append("tbio", tbio);
+            
+            const expertiseArray = [];
+            $(".texpertise").each(function() {
+                expertiseArray.push($(this).val());
+            });
+            formdata.append("texpertise", JSON.stringify(expertiseArray)); 
+    
+            formdata.append("temail", temail);
+            formdata.append("texperience", texperience);
+            formdata.append("tphone", tphone);
+            formdata.append("taddress", taddress);
+            formdata.append("timg", timg);
+            
             $.ajax({
-                type:"POST",
-                url:"/add_trainer/",
-                data:formdata,
-                processData:false,
-                contentType:false,
-                success:function(data){
-                    if(data){
+                type: "POST",
+                url: "/add_trainer/",
+                data: formdata,
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    if (data) {
                         window.location.reload();
-                    }
-                    else{
-                        alert("failed")
+                    } else {
+                        alert("Failed");
                     }
                 }
-            })
+            });
         }
     </script>
+    
 </body>
 </html>

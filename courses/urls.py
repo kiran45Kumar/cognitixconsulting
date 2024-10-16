@@ -1,5 +1,5 @@
 from django.urls import path    
-from .views import trainer, CreateTrainer,category,CreateCategory,ViewCategory,AddTrainer,CreateCourses
+from .views import trainer, CreateTrainer,category,CreateCategory,ViewCategory,AddTrainer,CreateCourses,UpdateCourses,ViewCourses,DeleteCourse,Enroll_user,CoursesEnrollForUser,enrolledUsers,ViewTrainers
 urlpatterns = [
     path('trainer/',trainer, name='trainer'),
     path('create_trainer/',CreateTrainer.as_view(), name='create_trainer'),
@@ -8,4 +8,12 @@ urlpatterns = [
     path('add_courses/',ViewCategory.as_view(), name='view_category'),
     path('add_trainer/',AddTrainer.as_view(), name='add_trainer'),
     path('create_courses/',CreateCourses.as_view(), name='create_courses'),
+    path('update_courses/',UpdateCourses.as_view(), name='update_courses'),
+    path('view_courses/',ViewCourses.as_view(), name='view_courses'),
+    path('delete_courses/',DeleteCourse.as_view(), name='delete_courses'),
+    path('enroll_user/',Enroll_user.as_view(), name='Enroll_user'),
+    path('course_enrolled/',CoursesEnrollForUser.as_view(), name='course_enrolled'),
+    path('enrolled_users/',enrolledUsers, name='enrolled_users'),
+    path('view_trainer/',ViewTrainers.as_view(), name='view_trainer'),
+    
 ]

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'customer',
     'courses',
     'adminuse',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -113,6 +114,17 @@ TIME_ZONE = 'Asia/kolkata'
 USE_I18N = True
 
 USE_TZ = True
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com' 
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'kirankiccha2003@gmail.com'  
+EMAIL_HOST_PASSWORD = 'yvby pugy wlyp skdc' 
+DEFAULT_FROM_EMAIL = 'kirankiccha2003@gmail.com'
+
+
+
 
 MEDIA_ROOT = BASE_DIR / "media"
 MEDIA_URL = "/media/"

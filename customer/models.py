@@ -1,5 +1,5 @@
 from django.db import models
-
+from datetime import datetime
 # Create your models here.
 class Customer(models.Model):
     role_choices = [
@@ -12,7 +12,7 @@ class Customer(models.Model):
     phone = models.IntegerField()
     password = models.CharField(max_length=200)
     confirm_password = models.CharField(max_length=200)
-    role = models.CharField(max_length=20, choices=role_choices,default='customer')
+    role = models.CharField(max_length=20, choices=role_choices,default='customer') 
 
     def __str__(self) -> str:
         return self.username, self.customer_id

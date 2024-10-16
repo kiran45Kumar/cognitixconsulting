@@ -1,0 +1,121 @@
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: Arial, sans-serif;
+    }
+
+    table, th, td {
+        border: 1px solid #ddd;
+        padding: 5px;
+    }
+
+    th {
+        background-color: #f2f2f2;
+        text-align: left;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        color: #333;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    tr:hover {
+        background-color: #e2e2e2;
+    }
+
+    td {
+        text-align: left;
+    }
+
+</style>
+
+<body>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Password</th>
+                <th>Confirm Password</th>
+                <th>Role</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for customer in custdata %}
+            <tr>
+                <td><input type="text" id="username{{customer.customer_id}}" value="{{customer.username}}"></td>
+                <td><input type="text" id="email{{customer.customer_id}}" value="{{customer.email}}"></td>
+                <td><input type="text" id="phone{{customer.customer_id}}" value="{{customer.phone}}"></td>
+                <td><input type="text" id="password{{customer.customer_id}}" value="{{customer.password}}"></td>
+                <td><input type="text" id="confirm_password{{customer.customer_id}}" value="{{customer.confirm_password}}"></td>
+                <td><input type="text" id="role{{customer.customer_id}}" value="{{customer.role}}"></td>
+                <td><button onclick="update('{{customer.customer_id}}')">Update</button></td>
+                <td><button onclick="delete_user('{{customer.customer_id}}')">Delete</button></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+<script>
+    function update(id){
+        const username = $("#username"+id).val();
+        const email = $("#email"+id).val();
+        const phone = $("#phone"+id).val();
+        const password = $("#password"+id).val();
+        const confirm_password = $("#confirm_password"+id).val();
+        const role = $("#role"+id).val();
+        $.ajax({
+            type:"POST",
+            url:"/update_user/",
+            data:
+            {    "id":id,
+                "username":username,
+                "email":email,
+                "phone":phone,
+                "password":password,
+                "confirm_password":confirm_password,
+                "role":role,
+            },
+            success:function(data){
+                if(data){
+                    window.location.reload();
+                }
+                else{
+                    alert('failed')
+                }
+            },
+            error:function(xhr, status, error) { 
+                if(error){
+                    alert(error.message)
+                }
+             }
+        })
+    }
+    function delete_user(id) { 
+        $.ajax({
+            type:"POST",
+            url:"/delete_user/",
+            data:{
+                "id":id,
+            },
+            success:function(data){
+                if(data){
+                    window.location.reload();   
+                }
+                else{
+                    alert("Failed")
+                }
+            }
+        })
+     }
+</script>    
+</body>
