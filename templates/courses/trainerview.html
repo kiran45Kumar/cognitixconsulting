@@ -1,0 +1,125 @@
+<!-- trainer_list.html -->
+ {% extends 'adminuse/admin.html' %}
+ {% block navbar-sidebar %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trainer List</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .trainer-view-section {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .trainer-view-img img {
+      height: 40px;
+      width: 40px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid silver;
+    }
+    .trainer-view-img {
+      position: relative;
+      display: flex;
+      align-items: start;
+      flex-direction: column;
+      gap: 10px;
+      width: 300px;
+      height: 130px;
+      box-shadow: 0px 3px 2px 3px silver;
+      border-radius: 5px;
+      margin: 10px;
+    }
+    .trainer-edit {
+      display: flex;
+      align-items: center;
+      margin: 0 5px;
+    }
+    .trainer-photo {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      gap: 10px;
+      margin: 9px 5px;
+    }
+    .trainer-info h4{
+        font-size: 17px;
+        font-weight: 600;
+        color: #555;
+    }
+    .trainer-info p{
+        font-size: 16px;
+        font-weight: 300;
+        color: slategray;
+        text-transform: capitalize;
+    }
+    .trainer-photo span{
+        position: absolute;
+        right: 0;
+        margin: 0 8px;
+        cursor: pointer;
+    }
+    .toggleTrainer{
+        height:500px;
+        z-index:100000;
+    }
+    .trainer-button{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .trainer-button button{
+      margin: 10px;
+      padding: 8px 14px;
+      background: #000;
+      color: white;
+      border-radius: 5px;
+      border: 1px solid #0000;
+    }
+  </style>
+  <body>
+    <div class="trainer-view-section">
+      {% for trainer in all_trainers %}
+      <div class="trainer-view-img" id="trainer-view">
+        <div class="trainer-photo">
+          <img src="{{trainer.trainer_photo.url}}" loading="eager" alt="" />
+          <div class="trainer-info">
+            <h4>{{trainer.trainer_name}}</h4>
+            <p>{{trainer.trainer_specialization}}</p>
+          </div> 
+          <span><i class="bx bx-edit-alt edit" id="edit"></i></span>
+        </div>
+        <div class="trainer-button">
+          <button onclick="openSchedule('{{trainer.trainer_id}}')">Add Schedule</button>
+        </div>
+      </div>
+     
+      {% endfor %}
+    </div>
+    <script>
+       $(document).ready(function(){
+    $(".edit").click(function(){
+        $(this).closest(".trainer-view-img").toggleClass('toggleTrainer');
+    });
+});
+function openSchedule(id){
+  window.location.href = '/schedule/'+encodeURIComponent(id)
+}
+    </script>
+  </body>
+</html>
+
+{% endblock navbar-sidebar %}

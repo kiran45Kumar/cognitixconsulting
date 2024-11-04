@@ -1,0 +1,185 @@
+{% load static %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<style>
+    .job-view-section{
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .job-card{
+        width: 400px;
+        height: 260px;
+        box-shadow: 0px 3px 3px 3px silver;
+        border-radius: 10px;
+        margin: 10px;
+    }
+    .company-flex{
+        display: flex;
+        align-items: center;
+        margin: 0 10px;
+    }
+    .company-flex img{
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 1px solid gray;
+    }
+    .job-card h1{
+        font-size: 24px;
+        font-weight: 500;
+        margin: 10px;
+    }
+    .company-flex p{
+        font-size: 18px;
+    }
+    .job-card button{
+        padding: 7px 20px;
+        margin: 0 10px;
+        background: #06d;
+        color: white;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    .job-card p{
+        margin: 10px;
+    }
+    .job-card span{
+        margin: 10px;
+    }
+    .job-card h4{
+        font-size: 22px;
+        font-weight: bold;
+        margin: 10px;
+    }
+    .job-search-container{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        gap: 200px;
+        /* box-shadow: 0px 3px 2px 3px silver; */
+        border-bottom: 1px solid silver;
+    }
+    .job-left{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .job-left h1{
+        font-size: 28px;
+        font-weight: 400;
+    }
+    .job-search{
+        display: flex;
+        gap: 10px;
+        align-items: center;
+       
+    }
+    .job-search input{
+        padding:12px 50px;
+        background: #f1f1f1;
+        outline: none;
+        border: 1px solid gray;
+        border-radius: 5px;
+    }
+    .job-search button{
+        padding: 10px 30px;
+        background: #06d;
+        color: white;
+        font-size: 17px;
+        border: 1px solid #06d;
+        outline: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .job-left img{
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+    .job-section{
+        display: flex;
+        gap: 25px;
+        align-items: start;
+        justify-content: center;
+    }
+
+    .job-filter-section{
+        flex: 2.1;
+        overflow: scroll;
+        height: 100vh;
+    }
+    .job-view-section{
+        flex: 6;
+        width: 300px;
+    }
+    
+</style>
+<div class="job-search-container">
+    <div class="job-left">
+        <img src="{% static 'images/clog.jpg' %}" alt="">
+        <h1>Start building Your Career</h1>
+    </div>
+    <div class="job-search">
+        <input type="search" placeholder="Search for jobs..">
+        <button>Search</button>
+    </div>
+</div>
+
+
+<div class="job-section">
+<div class="job-filter-section">
+    <h3>Filter by Variety of Jobs</h3>
+    <div id="jobs"></div>
+</div>
+
+<div class="job-view-section">
+      {% for jobs in alljobs %}
+    <div class="job-card">
+        <div class="company-flex">
+            <img src="{{jobs.company_posted_by.company_logo.url}}"  alt="">
+           <p>{{jobs.company_posted_by.company_name}}</p>
+        </div>
+        <h1>{{jobs.title}}</h1>
+        <h4>{{jobs.salary}}</h4>
+        <span>{{jobs.industry}}</span>
+        <p class="job-port">{{jobs.location}}, {{jobs.company_posted_by.company_location}}</p>
+        <p class="job-port"><b>Posted On</b>: {{jobs.posted_on}}</p>
+        <button onclick="jobs('{{jobs.job_id}}')">View</button>
+    </div>
+    {% endfor %}
+    <script>
+        function jobs(id){
+            window.location.href = '/job/'+encodeURIComponent(id)+'/'
+        }
+        $(document).ready(function() {
+    const YOUR_APP_ID = "9a012741";
+    const YOUR_APP_KEY = "62640d675bd28172f530f7f4d7a792a6";
+
+    $.ajax({
+        type: "GET",
+        url: `http://api.adzuna.com/v1/api/jobs/gb/categories?app_id=${YOUR_APP_ID}&app_key=${YOUR_APP_KEY}&&content-type=application/json`, // Use the correct endpoint for categories
+        success: function(response) {
+            console.log(response); // Inspect the response
+            const categories = response.results; // Access the results array
+            if (Array.isArray(categories)) {
+                categories.forEach(function(category) {
+                    $('#jobs').append(`<p id = "${category.tag}">${category.label}</p>`); // Use 'tag' for value and 'label' for display
+                });
+            } else {
+                console.error("Categories not found or not an array in response");
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("Failed to fetch categories:", error);
+        }
+    });
+});
+    </script>
+  </div>
+</div>

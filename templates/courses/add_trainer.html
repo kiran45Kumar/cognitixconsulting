@@ -1,233 +1,288 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin | Add Trainer</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-</head>
+
+{% extends 'adminuse/admin.html' %}
+{% block navbar-sidebar %}
+{% load static %}
 <style>
-    *{
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-    body {
-        background-color: #f4f7f8;
+    .add-trainer-section{
         display: flex;
         justify-content: center;
         align-items: center;
-    }
-
-    .add-trainer-section {
-        background-color: #ffffff;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-        max-width: 500px;
-        width: 100%;
         margin: 20px 0;
     }
-
-    .trainer-forms {
-        margin-bottom: 20px;
+    .trainer-form-div{
+       width: 500px;
+       box-shadow: 0px 2px 2px 2px silver;
+       border-radius: 10px;
+       background: #ffff;
+       padding: 50px;
     }
+    .trainer-form1{
+        display: flex;
+        align-items: center;
+        gap: 10px;
 
-    .trainer-forms label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: bold;
-        color: #333;
     }
-
-    .trainer-forms input[type="text"], 
-    .trainer-forms textarea {
-        width: 100%;
-        padding: 10px;
-        border-radius: 5px;
-        border: 1px solid #ccc;
-        background-color: #f9f9f9;
-        transition: all 0.3s ease;
+    .trainer-forms label{
+        font-size: 15px;
+        font-weight: 500;
     }
-
-    .trainer-forms textarea {
-        resize: vertical;
-    }
-
-    .trainer-forms input[type="text"]:focus, 
-    .trainer-forms textarea:focus {
-        outline: none;
-        border-color: #007bff;
-        background-color: #fff;
-    }
-
-    button {
-        width: 100%;
-        padding: 12px;
-        background-color: #007bff;
+    .trainer-forms input{
+        padding: 10px 40px;
         border: none;
-        border-radius: 5px;
-        color: white;
-        font-size: 16px;
+        outline: none;
+        box-shadow: 0px 1px 1px 1px silver;
+        border: 1px solid silver;
+        opacity: 0.5;
         cursor: pointer;
-        transition: background-color 0.3s ease;
-    }
-
-    button:hover {
-        background-color: #0056b3;
-    }
-
-    @media (max-width: 600px) {
-        .add-trainer-section {
-            padding: 15px;
-            max-width: 100%;
-        }
-
-        button {
-            font-size: 14px;
-            padding: 10px;
-        }
-    }
-    fieldset{
-        padding: 20px;
-        border: 1px solid gray;
         border-radius: 10px;
         margin: 10px 0;
-    }
-    fieldset legend{
-        font-size: 25px;
-        font-weight: 300;
-    }
-    #add-expertise{
-        padding: 5px;
-        margin: 10px 0;
-        cursor: pointer;
-        text-align: right;
-        background: #28a475;
-        color: white;
-        font-weight: 500;
-        width: fit-content;
-        font-size: small;
-        border-radius: 5px;
-    }
-    .texpertise{
-        margin: 10px 0;
 
     }
+    #tdate{
+        padding:10px 58px;
+    }
+    .trainer-forms  #tname:hover{
+        border: 1px solid #dc3545;
+        transition: all 0.3s ease-in;
+    }
+    .trainer-forms  #texperience:hover{
+        border: 1px solid #dc3545;
+        transition: all 0.3s ease-in;
+    }
+    .trainer-forms  #tbio:hover{
+        border: 1px solid #dc3545;
+        transition: all 0.3s ease-in;
+    }
+    .trainer-forms  #tdate:hover{
+        border: 1px solid #dc3545;
+        transition: all 0.3s ease-in;
+    }
+    .trainer-forms  .texpertise:hover{
+        border: 1px solid #dc3545;
+        transition: all 0.3s ease-in;
+    }
+    .trainer-forms  #temail:hover{
+        border: 1px solid #dc3545;
+        transition: all 0.3s ease-in;
+    }
+    .trainer-forms  #tphone:hover{
+        border: 1px solid #dc3545;
+        transition: all 0.3s ease-in;
+    }
+    .trainer-forms  #taddress:hover{
+        border: 1px solid #dc3545;
+        transition: all 0.3s ease-in;
+    }
+    .trainer-forms  #timg:hover{
+        border: 1px solid #dc3545;
+        transition: all 0.3s ease-in;
+    }
+    .trainer-forms  #tdesc:hover{
+        border: 1px solid #dc3545;
+        transition: all 0.3s ease-in;
+    }
+    #trainer-1 h1{
+        font-size: 25px;
+        margin: 10px 0;
+        font-weight: 400;
+    }
+    #trainer-2 h1{
+        font-size: 25px;
+        margin: 10px 0;
+        font-weight: 400;
+    }
+    .trainer-forms label span {
+        font-size: 18px;
+        color: #dc3545;
+    }
+    .trainer-forms-button{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 10px 0;
+    }
+    .button-primary{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+    }
+    .button-primary button{
+        border: none;
+        font-size: 18px;
+    }
+    .button-primary:nth-child(1){
+        box-shadow: 0px 1px 1px 1px silver;
+        border-radius: 13px;
+        border: 1px solid silver;
+        width: 20%;
+        color: black;
+    }
+
+    .button-primary i{
+        font-size: 18px;
+    }
+    #next-btn-trainer{
+        background: #000;
+        color: white;
+        border: 1px solid black;
+        border-radius: 10px;
+        
+        width: 20%;
+    }
+    #next-btn-trainer button{
+        padding: 10px 14px;
+        background: #000;
+        color: white;
+        border: 1px solid black;
+        border-radius: 10px;
+    }
+    #next-btn-trainer i{
+        margin: 5px;
+    }
+    .bg-light{
+        color: #555;
+        margin: 5px 0;
+        font-weight: 600;
+    }
+    #add-expertise{
+        width: fit-content;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+    #add-expertise:hover{
+        color: #555;
+        transition: all 0.3s ease-in;
+    }
+    #trainer-column{
+        display: flex;
+        flex-direction: column;
+    }
 </style>
+
 <body>
+
     <div class="add-trainer-section">
 <div class="trainer-form-div">
-<div class="trainer-form">
-    <fieldset>
-        <legend>Trainer Info</legend>
-        <div class="trainer-forms">
-            <label for="">Trainer Name</label>
-            <input type="text" placeholder="Trainer Name" id="tname">
+<div class="trainer-form" id="trainer-1" >
+    <h1>Let's Start with Trainer Details</h1>
+    <p class="bg-light">Please Fill the details below</p>
+        <div class="trainer-form1">
+            <div class="trainer-forms">
+                {% for user in customers %}
+                <input type="hidden" name="" id="user_id" value="{{user.customer_id}}">
+                {% endfor %}
+                <label for="">Trainer Name <span>*</span></label>
+                <input type="text" placeholder="John" id="tname">
+            </div>
+        
+            <div class="trainer-forms">
+                <label for="">Trainer Experience <span>*</span></label>
+                <input type="text" placeholder="eg: 10y of Experience in Software Development" id="texperience">
+            </div>
+          
         </div>
-        <div class="trainer-forms">
-            <label for="">Description</label>
-            <textarea type="text" placeholder="Trainer Description" id="tdesc"></textarea>
-        </div>
-        <div class="trainer-forms">
-            <label for="">Trainer Bio</label>
-            <input type="text" placeholder="Trainer Bio" id="tbio">
-        </div>
-        <div class="trainer-forms">
-            <label for="">Trainer Experience</label>
-            <input type="text" placeholder="Trainer Experience" id="texperience">
-        </div>
-  <!-- Expertise of Trainer Section -->
+<div class="trainer-form1" >
+    <div class="trainer-forms">
+        <label for="">Trainer Bio <span>*</span></label>
+        <input type="text" placeholder="Trainer Bio" id="tbio">
+    </div>
+    <div class="trainer-forms">
+        <label for="">Trainer Description <span>*</span></label>
+        <input type="text" placeholder="Trainer Desc" id="tdesc">
+    </div>
+</div>
 <div class="trainer-forms">
-    <label for="">Expertise of Trainer</label>
+    <label for="">Expertise of Trainer <span>*</span></label>
     <div id="expertise-container">
         <input type="text" placeholder="Expertise of Trainer" class="texpertise">
     </div>
     <p id="add-expertise">Add More +</p>
 </div>
 
-    </fieldset>
+<div class="trainer-forms-button ">
+    <div class="button-primary" style="visibility: hidden;">
+        <i class='bx bx-left-arrow-alt'></i>
+        <button onclick="goBack()">Back </button>
+    </div>
+    <div class="button-primary" id="next-btn-trainer">
+        <button onclick="openTrainer2()">Next</button>
+        <i class='bx bx-right-arrow-alt'></i>
+    </div>
 </div>
-<div class="trainer-form">
-    <fieldset>
-        <legend>Personal Info</legend>
-        <div class="trainer-forms">
-            <label for="">Email of Trainer</label>
-            <input type="text" placeholder="Email of Trainer" id="temail">
-        </div>
-        <div class="trainer-forms">
-            <label for="">Phone no of Trainer</label>
-            <input type="text" placeholder="Phone no of Trainer" id="tphone">
-        </div>
-        <div class="trainer-forms">
-            <label for="">Trainer Address</label>
-            <input type="text" placeholder="Trainer Address" id="taddress">
-        </div>
-        <div class="trainer-forms">
-            <label for="">Trainer Profile Photo</label>
-            <input type="file" placeholder="Trainer Address" id="timg">
-        </div>
-        <div class="trainer-forms">
-            <button onclick="addTrainer()">+ Add Trainer</button>
-        </div>
-    </fieldset>
 </div>
+
+<div class="trainer-form"  id="trainer-2" style="display: none;">
+    <h1 id="message">You'are Almost There</h1>
+    <p class="bg-light">Please Fill fields below</p>
+<div class="trainer-forms" style="display: flex;flex-direction: column;">
+    <label for="">Specialization of Trainer <span>*</span></label>
+    <input type="text" placeholder="eg: Cloud Computing Trainer" id="tspec">
+</div>
+ <div class="trainer-form1" id="trainer-column">
+    <div class="trainer-forms">
+        <label for="">Trainer Profile Photo <span>*</span></label>
+        <input type="file" placeholder="Trainer Address" id="timg">
+    </div>
+</div>
+        <div class="trainer-forms-button">
+            <div class="button-primary">
+                <i class='bx bx-left-arrow-alt'></i>
+                <button onclick="goBack()">Back </button>
+            </div>
+            <div class="button-primary" id="next-btn-trainer">
+                <button onclick="addtrainer ()">Add </button>
+                <i class='bx bx-plus' ></i>
+            </div>
+        </div>
+</div>
+</div>
+
 </div>
     </div>
-
+    <script src="{% static 'javascript/index.js' %}"></script>
     <script>
-        $(document).ready(function() {
-            // Add more expertise fields
-            $('#add-expertise').click(function() {
-                $('#expertise-container').append(`
-                    <input type="text" class="texpertise">
-                `);
-            });
-        });
-    
-        function addTrainer() {
-            const tname = $("#tname").val();
-            const tdesc = $("#tdesc").val();
-            const tbio = $("#tbio").val();
-            const texperience = $("#texperience").val();
-            const temail = $("#temail").val();
-            const tphone = $("#tphone").val();
-            const taddress = $("#taddress").val();
-            const timg = $("#timg")[0].files[0];
-            
-            const formdata = new FormData();
-            formdata.append("tname", tname);
-            formdata.append("tdesc", tdesc);
-            formdata.append("tbio", tbio);
-            
-            const expertiseArray = [];
-            $(".texpertise").each(function() {
-                expertiseArray.push($(this).val());
-            });
-            formdata.append("texpertise", JSON.stringify(expertiseArray)); 
-    
-            formdata.append("temail", temail);
-            formdata.append("texperience", texperience);
-            formdata.append("tphone", tphone);
-            formdata.append("taddress", taddress);
-            formdata.append("timg", timg);
-            
-            $.ajax({
-                type: "POST",
-                url: "/add_trainer/",
-                data: formdata,
-                processData: false,
-                contentType: false,
-                success: function(data) {
-                    if (data) {
-                        window.location.reload();
-                    } else {
-                        alert("Failed");
-                    }
-                }
-            });
-        }
+        
     </script>
+    <script>
+        function openTrainer2() { 
+        const tname = $("#tname").val();
+        const texperience = $("#texperience").val();
+        const tbio = $("#tbio").val();
+        const tdesc = $("#tdesc").val();
+        const texpertise = $(".texpertise").val();
+        if(!tname){
+            $("#tname").css('border-color','red')
+            return;
+        }
+        else if(!texperience){
+            $("#texperience").css('border-color','red')
+            return;
+        }
+       else if(!tbio){
+            $("#tbio").css('border-color','red')
+            return;
+        }
+       else if(!tdesc){
+            $("#tdesc").css('border-color','red')
+            return;
+        }
+       else if(!texpertise){
+            $(".texpertise").css('border-color','red')
+            return;
+        }
+       
+        $('#trainer-1').hide()
+        $('#trainer-2').show()
+ }
+ function goBack() { 
+    $('#trainer-1').show()
+    $('#trainer-2').hide()
+  }
+    </script>
+    {% endblock navbar-sidebar %}
+
     
 </body>
 </html>
+

@@ -1,268 +1,339 @@
-<head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <title>Admin | Add Courses</title>
-</head>
-<style>
-    .form-group {
-    margin-bottom: 15px;
-}
+    {% extends 'adminuse/admin.html' %}
+    {% block navbar-sidebar %}
+        
 
-label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <title>Admin | Add Courses</title>
+    </head>
+    <style>
+        .form-group {
+        margin-bottom: 15px;
+    }
 
-input[type="text"],
-input[type="number"],
-input[type="date"],
-select,
-textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
-}
+    label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    input:focus{
+        outline: none;
+    }
 
-button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    select,
+    textarea {
+        width: 80%;
+        padding: 10px;
+        border: 1px solid #06d;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+    input{
+        border: 1px solid #06d;
 
-button:hover {
-    background-color: #0056b3;
-}
-.toggleText{
-    margin: 0;
-    padding: 0;
-}
-</style>
-<body>
-    <div class="form-group" id="form-title">
-        <label for="title">Course Title</label>
-        <input type="text" name="title" id="title" class="form-control" placeholder="Enter course title" required>
-        <p id="ctitle" class="toggleText"></p>
+    }
+    button {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+    .toggleText{
+        margin: 0;
+        padding: 0;
+    }
+    #goBack{
+        cursor: pointer;
+        border: 1px solid gray;
+        border-radius: 4px;
+        padding: 5px;
+        width: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;    
+    }
+    #goBack i{
+        font-size: 18px;
+    }
+    .flex{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    </style>
+    <body>
+    <div class="course-first" id="first">
+        <div class="form-group" id="form-title">
+            <label for="title">Course Title</label>
+            <input type="text" name="title" id="title" class="form-control" placeholder="Enter course title" required>
+            <p id="ctitle" class="toggleText"></p>
+        </div>
+        
+        <div class="form-group" id="form-desc">
+            <label for="description">Course Description</label>
+            <textarea name="description" id="description" class="form-control" rows="4" placeholder="Enter course description"></textarea>
+            <p id="cdesc" class="toggleText"></p>
+        </div>
+        
+        <div class="form-group" id="form-price">
+            <label for="price">Price (in INR)</label>
+            <input type="number" step="0.01" name="price" id="price" class="form-control" placeholder="Enter course price" required>
+            <p id="cprice" class="toggleText"></p>
+
+        </div>
+
+        <div class="form-group" id="form-gst">
+            <label for="gst">Course GST (%)</label>
+            <input type="number" step="0.01" name="gst" id="gst" class="form-control" value="18" readonly required>
+            <p id="cgst" class="toggleText"></p>
+
+        </div>
+
+
+        <div class="form-group" id="form-gst">
+            <label for="total_price">Total Price (including GST):</label>
+            <input type="text" id="total_price" class="form-control" readonly>
+            <p id="ctprice" class="toggleText"></p>
+
+        </div>
+        <button type="submit" class="btn btn-primary" id="nextDiv" onclick="OpenNext()">Continue</button>
+
+    </div>
+    <div class="course-second" style="display: none;" id="second">
+
+        <div class="form-group" id="form-img">
+            <div class="goBack" id="goBack" onclick="goBack()">
+                <i class='bx bx-left-arrow-alt'></i>
+            </div>
+            <label for="price">Course Video</label>
+            <input type="file" step="0.01" name="img" id="vid" class="form-control" required>
+            <p id="cimg" class="toggleText"></p>
+        </div>
+        <div class="form-group" id="form-skills">
+            <label for="price">Skills Gained </label>
+            <input type="text" name="skillsgained" id="skillsgained" placeholder="eg: Agile&Scrum, Design Fundamentals, Conflict Resolution" class="form-control" required>
+            <p id="cskills" class="toggleText"></p>
+        </div>
+        <div class="form-group" id="form-skills">
+            <label for="price">Upload an Image</label>
+            <input type="file" name="img" id="img" placeholder="eg: Agile&Scrum, Design Fundamentals, Conflict Resolution" class="form-control" required>
+            <p id="ccertificate" class="toggleText"></p>
+        </div>
+        <div class="form-group" id="form-skills">
+            <label for="price">Upload a sample Certificate</label>
+            <input type="file" name="course_sample_certificate" id="course_sample_certificate" placeholder="eg: Agile&Scrum, Design Fundamentals, Conflict Resolution" class="form-control" required>
+            <p id="ccertificate" class="toggleText"></p>
+        </div>
+        <div class="form-group" id="form-skills">
+            <label for="price">Upload Course Brochure</label>
+            <input type="file" name="course_brochure" id="course_brochure" placeholder="eg: Agile&Scrum, Design Fundamentals, Conflict Resolution" class="form-control" required>
+            <p id="brochure" class="toggleText"></p>
+        </div>
+        <div class="form-group" id="form-skills">
+            <label for="price">Completion of days/weeks</label>
+            <input type="text" name="completion_of_days" id="completion_of_days" placeholder="eg: 2days, 3days or more" class="form-control" required>
+            <p id="days" class="toggleText"></p>
+        </div>
+        <div class="form-group" id="form-skills">
+            <label for="price">Completion of Hours</label>
+            <input type="text" name="completion_of_hrs" id="completion_of_hrs" placeholder="eg: 15days, 24hrs or more" class="form-control" required>
+            <p id="hrs" class="toggleText"></p>
+        </div>
+        
+        <div class="form-group" id="form-category">
+            <label for="category">Course Category</label>
+            <select name="category" id="category" class="form-control">
+                <option value="">Select Course Category</option>
+                {% for category in categories %}
+                    <option value="{{ category.id }}">{{ category.name }}</option>
+                {% endfor %}
+            </select>
+            <p id="ccategory" class="toggleText"></p>
+
+        </div>
+        
+        <div class="form-group" id="form-trainer">
+            <label for="trainer">Select Trainer</label>
+                {% for trainer in trainers %}
+                <div class="flex">
+                    <input type="checkbox" class="alltrainer" value="{{ trainer.trainer_id }}">
+                    <p>{{ trainer.trainer_name }} ({{trainer.trainer_specialization}})</p>
+                </div>
+                {% endfor %}
+            <p id="ctrainer" class="toggleText"></p>
+        </div>
+        <div class="form-group" id="form-trainer">
+            <label for="sdate">Start Date</label>
+            <input type="date" id="sdate">
+        </div>
+        <div class="form-group" id="form-trainer">
+            <label for="edate">End Date</label>
+            <input type="date" id="edate">
+        </div>
+        <button type="submit" class="btn btn-primary" onclick="AddCourses()">Submit</button>
     </div>
     
-    <div class="form-group" id="form-desc">
-        <label for="description">Course Description</label>
-        <textarea name="description" id="description" class="form-control" rows="4" placeholder="Enter course description"></textarea>
-        <p id="cdesc" class="toggleText"></p>
-    </div>
-    
-    <div class="form-group" id="form-price">
-        <label for="price">Price (in INR)</label>
-        <input type="number" step="0.01" name="price" id="price" class="form-control" placeholder="Enter course price" required>
-        <p id="cprice" class="toggleText"></p>
 
-    </div>
+        <script>
+            function OpenNext() { 
+                let title = $("#title").val();
+                let description = $("#description").val();
+                let price = $("#price").val();
 
-    <div class="form-group" id="form-gst">
-        <label for="gst">Course GST (%)</label>
-        <input type="number" step="0.01" name="gst" id="gst" class="form-control" value="18" readonly required>
-        <p id="cgst" class="toggleText"></p>
-
-    </div>
-
-
-    <div class="form-group" id="form-gst">
-        <label for="total_price">Total Price (including GST):</label>
-        <input type="text" id="total_price" class="form-control" readonly>
-        <p id="ctprice" class="toggleText"></p>
-
-    </div>
-    <div class="form-group" id="form-img">
-        <label for="price">Course Image</label>
-        <input type="file" step="0.01" name="img" id="img" class="form-control" required>
-        <p id="cimg" class="toggleText"></p>
-    </div>
-    <div class="form-group" id="form-skills">
-        <label for="price">Skills Gained By User</label>
-        <input type="text" name="skillsgained" id="skillsgained" placeholder="eg: Agile&Scrum, Design Fundamentals, Conflict Resolution" class="form-control" required>
-        <p id="cskills" class="toggleText"></p>
-
-    </div>
-    
-    <div class="form-group" id="form-category">
-        <label for="category">Course Category</label>
-        <select name="category" id="category" class="form-control">
-            <option value="">Select Course Category</option>
-            {% for category in categories %}
-                <option value="{{ category.id }}">{{ category.name }}</option>
-            {% endfor %}
-        </select>
-        <p id="ccategory" class="toggleText"></p>
-
-    </div>
-    
-    <div class="form-group" id="form-trainer">
-        <label for="trainer">Trainer</label>
-        <select name="trainer" id="trainer" class="form-control">
-            <option value="">Select Trainer</option>
-            {% for trainer in trainers %}
-                <option value="{{ trainer.trainer_id }}">{{ trainer.trainer_name }} ({{ trainer.trainer_experience }})</option>
-            {% endfor %}
-        </select>
-        <p id="ctrainer" class="toggleText"></p>
-
-    </div>
-    
-    <div class="form-group" id="form-start-date">
-        <label for="started_at">Course Start Date</label>
-        <input type="date" name="started_at" id="started_at" class="form-control" required>
-        <p id="cstarted_at" class="toggleText"></p>
-
-    </div>
-    
-    <div class="form-group" id="form-end-date">
-        <label for="ended_at">Course End Date</label>
-        <input type="date" name="ended_at" id="ended_at" class="form-control" required>
-        <p id="cended_at" class="toggleText"></p>
-    </div>
-    <button type="submit" class="btn btn-primary" onclick="AddCourses()">Submit</button>
-    <script>
-        function AddCourses() { 
-            let title = $("#title").val();
-            let description = $("#description").val();
-            let price = $("#price").val();
-            let gst = $("#gst").val();
-            let total_price = $("#total_price").val();
-            let skillsgained = $("#skillsgained").val();
-            let category = $("#category").val();
-            let trainer = $("#trainer").val();
-            let started_at = $("#started_at").val();
-            let ended_at = $("#ended_at").val();
-            let img = $("#img")[0].files[0];
-           const formdata  = new FormData();
-           formdata.append("title",title);
-           formdata.append("description",description);
-           formdata.append("price",price);
-           formdata.append("gst",gst);
-           formdata.append("total_price",total_price);
-           formdata.append("skillsgained",skillsgained);
-           formdata.append("category",category);
-           formdata.append("trainer",trainer);
-           formdata.append("started_at",started_at);
-           formdata.append("ended_at",ended_at);
-           formdata.append("img",img);
-            if(!title){
-                $("#ctitle").html("Please Enter the Course Title").css('color','red') 
-                $("#title").css('border-color','red');
-                window.location.href = '#form-title';
-                return; 
-            }
-            if(!description){
-                $("#cdesc").html("Please Enter the Course Description").css('color','red') 
-                $("#description").css('border-color','red');
-                window.location.href = '#form-desc';
-                return; 
-            }
-            if(!price){
-                $("#cprice").html("Please Enter the Course Price").css('color','red') 
-                $("#price").css('border-color','red');
-                window.location.href = '#form-price';
-                return; 
-            }
-            if(!skillsgained){
-                $("#cskills").html("Please Enter the Skills Gained from Course").css('color','red') 
-                $("#skillsgained").css('border-color','red');
-                window.location.href = '#form-skills';
-                return; 
-            }
-            if(!category){
-                $("#ccategory").html("Please Enter the Course Category").css('color','red') 
-                $("#category").css('border-color','red');
-                window.location.href = '#form-category';
-                return; 
-            }
-            if(!trainer){
-                $("#ctrainer").html("Please Enter the Course Trainer").css('color','red') 
-                $("#trainer").css('border-color','red');
-                window.location.href = '#form-trainer';
-                return; 
-            }
-            if(!started_at){
-                $("#cstarted_at").html("Please Enter the Course Start Date").css('color','red') 
-                $("#started_at").css('border-color','red');
-                window.location.href = '#form-start-date';
-                return; 
-            }
-            if(!ended_at){
-                $("#cended_at").html("Please Enter the Course End Date").css('color','red') 
-                $("#ended_at").css('border-color','red');
-                window.location.href = '#form-end-date';
-                return; 
-            }
-            if(!img){
-                $("#cimg").html("Please Upload the Course Image").css('color','red') 
-                $("#img").css('border-color','red');
-                window.location.href = '#form-img';
-                return; 
-            }
-            $.ajax({
-                type:'POST',
-                url:"/create_courses/",
-                data:formdata,
-                processData:false,
-                contentType:false,
-                success:function(data){
-                    if(data){
-                        alert("success")
-                        window.location.reload()
-                    }
-                    else {
-                        alert("failed")
-                    }
+                if(!title){
+                    $("#ctitle").html("Please Enter the Course Title").css('color','red') 
+                    $("#title").css('border-color','red');
+                    window.location.href = '#form-title';
+                    return; 
                 }
-            })
-         }
-        function fetchRegions() {
-            $.ajax({
-                url: 'https://restcountries.com/v3.1/all',
-                type: 'GET',
-                success: function(data) {
-                    const regionSelect = $("#region");
-                    data.forEach(country => {
-                        const countryCode = country.currencies ? Object.keys(country.currencies)[0] : null;
-                        if (countryCode) {
-                            regionSelect.append(`<option value="${countryCode}">${country.name.common}</option>`);
-                        }
-                    });
-                },
-                error: function() {
-                    alert('Failed to load regions');
+            else if(!description){
+                    $("#cdesc").html("Please Enter the Course Description").css('color','red') 
+                    $("#description").css('border-color','red');
+                    window.location.href = '#form-desc';
+                    return; 
                 }
-            });
-        }
-        function calculateTotalPrice() {
-            let price = parseFloat($("#price").val()) || 0;
-            let gst = parseFloat($("#gst").val()) || 18;
-            let gstAmount = (price * gst) / 100;
-            let totalPrice = price + gstAmount;
-            $("#total_price").val(totalPrice.toFixed(2));
-            return totalPrice;
-        }
+            else if(!price){
+                    $("#cprice").html("Please Enter the Course Price").css('color','red') 
+                    $("#price").css('border-color','red');
+                    window.location.href = '#form-price';
+                    return; 
+                }
+                else{
+                    $("#ctitle").hide() 
+                    $("#title").css('border-color','#06d');
+                    $("#cdesc").hide()
+                    $("#description").css('border-color','#06d');
+                    $("#cprice").hide()
+                    $("#price").css('border-color','#06d');
+                }
+                $("#first").hide()
+                $("#second").show()
+            }
+            function AddCourses() { 
+        let title = $("#title").val();
+        let description = $("#description").val();
+        let price = $("#price").val();
+        let gst = $("#gst").val();
+        let total_price = $("#total_price").val();
+        let skillsgained = $("#skillsgained").val();
+        let course_sample_certificate = $("#course_sample_certificate")[0].files[0];
+        let img = $("#img")[0].files[0];
+        let course_brochure = $("#course_brochure")[0].files[0];
+        let completion_of_days = $("#completion_of_days").val();
+        let completion_of_hrs = $("#completion_of_hrs").val();
+        let category = $("#category").val();
+        let vid = $("#vid")[0].files[0];
+        let sdate = $("#sdate").val();
+        let edate = $("#edate").val();
 
-        function calculatePriceByRegion() {
-            let totalPrice = calculateTotalPrice();
-            let selectedRegion = $("#region").val();
-
-            // Get conversion rate based on the selected region
-            let conversionRate = conversionRates[selectedRegion] || 1;
-            let convertedPrice = totalPrice * conversionRate;
-            $("#converted_price").val(convertedPrice.toFixed(2));
-        }
-
-        $(document).ready(function() {
-            $("#price, #gst").on('input', function() {
-                calculatePriceByRegion();
-            });
+        // Collect all selected trainer IDs
+        let selectedTrainers = [];
+        $(".alltrainer:checked").each(function() {
+            selectedTrainers.push($(this).val());
         });
-    </script>
-    </script>
-</body>
+
+        // Create form data
+        const formdata  = new FormData();
+        formdata.append("title", title);
+        formdata.append("description", description);
+        formdata.append("price", price);
+        formdata.append("gst", gst);
+        formdata.append("total_price", total_price);
+        formdata.append("skillsgained", skillsgained);
+        formdata.append("category", category);
+        formdata.append("trainers", JSON.stringify(selectedTrainers)); // Pass trainers as JSON array
+        formdata.append("vid", vid);
+        formdata.append("img", img);
+        formdata.append("course_sample_certificate", course_sample_certificate);
+        formdata.append("course_brochure", course_brochure);
+        formdata.append("completion_of_days", completion_of_days);
+        formdata.append("completion_of_hrs", completion_of_hrs);
+        formdata.append("sdate", sdate);
+        formdata.append("edate", edate);
+
+        // Validation (optional)
+        if (!skillsgained) {
+            $("#cskills").html("Please Enter the Skills Gained from Course").css('color', 'red');
+            $("#skillsgained").css('border-color', 'red');
+            window.location.href = '#form-skills';
+            return; 
+        }
+        // Add more validation checks as needed
+
+        // AJAX request
+        $.ajax({
+            type: 'POST',
+            url: "/create_courses/",
+            data: formdata,
+            processData: false,
+            contentType: false,
+            success: function(data) {
+                if (data) {
+                    alert("Course added successfully!");
+                    window.location.reload();
+                } else {
+                    alert("Failed to add course.");
+                }
+            }
+        });
+    }
+
+            function goBack() { 
+                $("#second").hide()
+                $("#first").show();
+            }
+            function fetchRegions() {
+                $.ajax({
+                    url: 'https://restcountries.com/v3.1/all',
+                    type: 'GET',
+                    success: function(data) {
+                        const regionSelect = $("#region");
+                        data.forEach(country => {
+                            const countryCode = country.currencies ? Object.keys(country.currencies)[0] : null;
+                            if (countryCode) {
+                                regionSelect.append(`<option value="${countryCode}">${country.name.common}</option>`);
+                            }
+                        });
+                    },
+                    error: function() {
+                        alert('Failed to load regions');
+                    }
+                });
+            }
+            function calculateTotalPrice() {
+                let price = parseFloat($("#price").val()) || 0;
+                let gst = parseFloat($("#gst").val()) || 18;
+                let gstAmount = (price * gst) / 100;
+                let totalPrice = price + gstAmount;
+                $("#total_price").val(totalPrice.toFixed(2));
+                return totalPrice;
+            }
+
+            function calculatePriceByRegion() {
+                let totalPrice = calculateTotalPrice();
+                let selectedRegion = $("#region").val();
+
+                // Get conversion rate based on the selected region
+                let conversionRate = conversionRates[selectedRegion] || 1;
+                let convertedPrice = totalPrice * conversionRate;
+                $("#converted_price").val(convertedPrice.toFixed(2));
+            }
+
+            $(document).ready(function() {
+                $("#price, #gst").on('input', function() {
+                    calculatePriceByRegion();
+                });
+            });
+        </script>
+        </script>
+        {% endblock navbar-sidebar %}
+    </body>

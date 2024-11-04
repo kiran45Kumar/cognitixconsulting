@@ -91,8 +91,15 @@
             },
             success:function(data){
                 if(data['status'] == 'pass'){
-                    $("#successmsg").html("Login Successful").css('color','#28a475');
-                    window.location.href = '/index/'
+
+                    if(data['role'] == 'Admin'){
+                        $("#successmsg").html("Login Successful").css('color','#28a475');
+                        window.location.href = '/admin_dashboard/'
+                    }
+                    else if(data['role'] == 'customer'){
+                         $("#successmsg").html("Login Successful").css('color','#28a475');
+                        window.location.href = '/index/'
+                    }
                 }
                 else if(data['status'] == 'fail'){
                     $("#successmsg").html(data['message']).css({'color':'#dc3545',"font-size":"18px"})

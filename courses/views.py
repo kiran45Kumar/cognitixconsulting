@@ -3,9 +3,9 @@ from rest_framework.views import APIView
 from customer.models import Customer
 from .models import Trainer, Category
 from adminuse.models import AddTrainers
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse, Http404
 from django.views.generic import TemplateView
-from .models import Course,Enrollment
+from .models import Course,Enrollment, CourseSchedule
 import json
 # Create your views here.
 def trainer(request):
@@ -27,12 +27,17 @@ class CreateTrainer(APIView):
         train.save()
         return JsonResponse({"status":"pass"})
 def category(request):
-    return render(request, 'courses/add_course_categories.html')
+    context = {}
+    categories = Category.objects.all().order_by('-created_at')
+    context['categories'] = categories
+    return render(request, 'courses/add_course_categories.html',{'categories':categories,'currentUserId':request.session['customer_id'],'currentUsername':request.session['user_name'],'currentUserEmail':request.session['customer_email']})
 
 class CreateCategory(APIView):
     def post(self, request):
         name = request.POST.get('name')
         description = request.POST.get('description')
+        if Category.objects.filter(name = name).exists():
+            return JsonResponse({'status':"fail",'message':"Category already exists"})
         cat = Category()
         cat.name = name
         cat.description = description
@@ -46,36 +51,60 @@ class ViewCategory(TemplateView):
         trainers = AddTrainers.objects.all()
         context['trainers'] = trainers
         context['categories'] = categories
+        context['currentUserId'] = self.request.session['customer_id']
+        context['currentUsername'] = self.request.session['user_name']
+        context['currentUserEmail'] = self.request.session['customer_email']
         return context
+from rest_framework.views import APIView
+from django.http import JsonResponse
+from .models import Course, Category, AddTrainers  # Make sure to import your models
+import json
+
 class CreateCourses(APIView):
     def post(self, request):
-        title= request.POST.get('title')
+        title = request.POST.get('title')
         description = request.POST.get('description')
         price = request.POST.get('price')
         gst = request.POST.get('gst')
         total_price = request.POST.get('total_price')
         skillsgained = request.POST.get('skillsgained')
+        vid = request.FILES.get('vid')
         img = request.FILES.get('img')
         category_id = request.POST.get('category')
-        trainer = request.POST.get('trainer')
-        started_at = request.POST.get('started_at')
-        ended_at = request.POST.get('ended_at')
-        cat = Category.objects.get(id = category_id)
-        train = AddTrainers.objects.get(trainer_id = trainer)
-        course = Course()
-        course.title = title
-        course.description = description
-        course.course_gst = gst
-        course.course_img = img
-        course.total_price = total_price
-        course.skillsgain = skillsgained
-        course.price = price
-        course.category = cat
-        course.trainer = train
-        course.started_at = started_at
-        course.ended_at = ended_at
+        course_sample_certificate = request.FILES.get("course_sample_certificate")
+        course_brochure = request.FILES.get("course_brochure")
+        completion_of_days = request.POST.get("completion_of_days")
+        completion_of_hrs = request.POST.get("completion_of_hrs")
+        sdate = request.POST.get("sdate")
+        edate = request.POST.get("edate")
+        trainer_ids = json.loads(request.POST.get("trainers", "[]"))
+
+        # Get category 
+        cat = Category.objects.get(id=category_id)
+        # Create a new Course instance
+        course = Course(
+            title=title,
+            description=description,
+            course_gst=gst,
+            course_video=vid,
+            course_img = img,
+            total_price=total_price,
+            skillsgain=skillsgained,
+            price=price,
+            category=cat,
+            course_sample_certificate=course_sample_certificate,
+            course_brochure=course_brochure,
+            completion_of_days=completion_of_days,
+            completion_of_hrs=completion_of_hrs,
+            start=sdate,
+            end=edate,
+        )
         course.save()
-        return JsonResponse({"status":"pass"})
+        for trainer_id in trainer_ids:
+            trainer = AddTrainers.objects.get(trainer_id=trainer_id)
+            course.trainers.add(trainer)
+        return JsonResponse({"status": "pass"})
+
 class UpdateCourses(APIView):
     def post(self, request):
         id= request.POST.get('id')
@@ -91,21 +120,22 @@ class AddTrainer(APIView):
             tdesc = request.POST.get('tdesc')
             tbio = request.POST.get('tbio')
             texpertise = json.loads(request.POST.get('texpertise')) 
-            temail = request.POST.get('temail')
             texperience = request.POST.get('texperience')
-            tphone = request.POST.get('tphone')
-            taddress = request.POST.get('taddress')
             timg = request.FILES.get('timg')
+            tspec = request.POST.get('tspec')
+            user_id = request.POST.get('user_id')
+            if AddTrainers.objects.filter(trainer_name = tname).exists():
+                return JsonResponse({"status":"fail","message":"Trainer Name Already Exists!"})
+            user = Customer.objects.get(customer_id = user_id)
             addtrainer = AddTrainers()
             addtrainer.trainer_name = tname
-            addtrainer.trainer_description = tdesc
+            addtrainer.trainer_desc = tdesc
             addtrainer.trainer_bio = tbio
             addtrainer.trainer_expertise = texpertise
             addtrainer.trainer_experience = texperience
-            addtrainer.trainer_email = temail
-            addtrainer.trainer_phone = tphone
-            addtrainer.trainer_address = taddress
             addtrainer.trainer_photo = timg
+            addtrainer.trainer_specialization = tspec
+            addtrainer.user_id = user
             addtrainer.save()
             return JsonResponse({"status":"pass"})
 class ViewCourses(TemplateView):
@@ -113,7 +143,11 @@ class ViewCourses(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         courses = Course.objects.all()
+        categories = Category.objects.all()
+        context['categories'] = categories
         context['courses'] = courses
+        context['currentUsername']=self.request.session['user_name']
+        context['currentUserEmail']=self.request.session['customer_email']
         return context
 class ViewTrainers(TemplateView):
     template_name = 'courses/view_trainer.html'
@@ -179,3 +213,115 @@ def enrolledUsers(request):
     customer_id = request.session.get('customer_id')
     enrolls = Enrollment.objects.filter(customer = customer_id)
     return render(request, 'courses/enrollment.html', {'enrolls':enrolls,'customer_name':request.session.get('user_name')})
+def viewCourseById(request, id):
+    course_by_id = Course.objects.get(course_id=id)
+    domains = Category.objects.all()
+    return render(request, 'courses/viewcoursebyid.html',{'course_by_id':course_by_id,"currentUser":request.session['user_name'],'domains':domains})
+class ViewAllTrainer(TemplateView):
+    template_name = 'courses/trainerview.html'
+    def get_context_data(self, **kwargs) :
+        context = super().get_context_data(**kwargs)
+        all_trainer = AddTrainers.objects.all().order_by('-trainer_created')
+        categories = Category.objects.all()
+        context['all_trainers'] = all_trainer
+        context['currentUsername']=self.request.session['user_name']
+        context['currentUserEmail']=self.request.session['customer_email']
+        context['categories']=categories
+        return context
+
+class DeleteCategory(APIView):
+    def post(self, request):
+        id = request.POST['id']
+        Category.objects.filter(id = id).delete()
+        return JsonResponse({'status':"pass"})
+def  schedule(request,id):
+    trainer = AddTrainers.objects.get(trainer_id = id)
+    categories = Category.objects.all()
+    return render(request, 'courses/schedule.html', {'trainer':trainer,'categories':categories,"currentUsername":request.session['user_name'],"currentUserEmail":request.session['customer_email']})
+class CreateSchedule(APIView):
+    def post(self, request):
+        trainer_id = request.POST.get('trainer')
+        region =  request.POST.get('region')
+        start =  request.POST.get('start')
+        end =  request.POST.get('end')
+        stime =  request.POST.get('stime')
+        etime =  request.POST.get('etime')
+        train = AddTrainers.objects.get(trainer_id = trainer_id)
+        sched = CourseSchedule()
+        sched.trainer = train
+        sched.region = region
+        sched.start_date = start
+        sched.end_date = end
+        sched.schedule_start_time = stime
+        sched.schedule_end_time = etime
+        sched.save()
+        return JsonResponse({"status":"pass"})
+class VieWScheduleAdmin(TemplateView):
+    template_name = 'courses/view_schedules.html'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user_id = self.request.session.get('customer_id')
+        trainerdata = AddTrainers.objects.filter(user_id = user_id)
+        schedule = CourseSchedule.objects.all().order_by('-created_at')
+        categories = Category.objects.all()
+        context['currentUsername'] = self.request.session.get('user_name')
+        context['currentUserEmail'] = self.request.session.get('customer_email')
+        context['trainerdata'] = trainerdata
+        context['schedules'] = schedule
+        context['categories']=categories
+        return context
+class RemoveScheduleAdmin(APIView):
+    def post(self, request):
+        id = request.POST['id']
+        CourseSchedule.objects.filter(id = id).delete()
+        return JsonResponse({'status':"pass"})
+    from django.http import HttpResponse, Http404
+from django.shortcuts import get_object_or_404
+from .models import Course
+
+def download_brochure(request, course_id):
+    # Get the course object
+    course = get_object_or_404(Course, course_id=course_id)
+    
+    # Get the file path
+    file_path = course.course_brochure.path
+
+    # Serve the file
+    try:
+        with open(file_path, 'rb') as pdf:
+            response = HttpResponse(pdf.read(), content_type='application/pdf')
+            response['Content-Disposition'] = f'attachment; filename="{course.title}_brochure.pdf"'
+            return response
+    except FileNotFoundError:
+        raise Http404("File not found.")
+# views.py
+from django.shortcuts import render
+from .models import CourseSchedule, AddTrainers
+
+def trainer_schedule(request, trainer_id):
+    trainer = AddTrainers.objects.get(trainer_id=trainer_id)
+    schedules = CourseSchedule.objects.filter(trainer=trainer)
+
+    context = {
+        'trainer': trainer,
+        'schedules': schedules,
+    }
+    return render(request, 'courses/trainer_schedule.html', context)
+
+from django.http import JsonResponse
+
+class FilterBy(APIView):
+    def post(self, request):
+        fregion = request.POST.get('fregion')
+        fdate = request.POST.get('fdate')
+        courseschedules = CourseSchedule.objects.filter(region=fregion, start_date=fdate)
+        
+        results = list(courseschedules.values(
+            'region', 'start_date','end_date','schedule_start_time','schedule_end_time',  # CourseSchedule fields
+            'trainer__trainer_name'  # ForeignKey field for trainer name
+        ))
+        
+        return JsonResponse({'data': results})
+
+
+        

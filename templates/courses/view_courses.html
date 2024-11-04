@@ -1,12 +1,10 @@
+{% extends 'adminuse/admin.html' %}
+{% block navbar-sidebar %}
+    
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 </head>
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-        background-color: #f4f4f4; /* Light background color for contrast */
-    }
 
     table {
         width: 100%;
@@ -56,7 +54,7 @@
         outline: none; /* Remove default outline */
     }
 
-    button {
+    .button {
         padding: 10px 15px; /* Padding for buttons */
         background-color: #28a745; /* Success button color */
         color: white; /* White text for buttons */
@@ -66,7 +64,7 @@
         transition: background-color 0.3s; /* Smooth transition for button */
     }
 
-    button:hover {
+    .button:hover {
         background-color: #218838; /* Darker shade on hover */
     }
 
@@ -118,8 +116,8 @@
                     </select>
                 </td>
                 <td><input type="text" id="converted_price{{course.course_id}}" value="" readonly></td>
-                <td><button onclick="updateCourse('{{course.course_id}}')">Update</button></td>
-                <td><button onclick="delete_course('{{course.course_id}}')">Delete</button></td>
+                <td><button class="button" onclick="updateCourse('{{course.course_id}}')">Update</button></td>
+                <td><button class="button" onclick="delete_course('{{course.course_id}}')">Delete</button></td>
             </tr>
             {% endfor %}
         </tbody>
@@ -231,3 +229,4 @@
     // });
 </script>
 </body>
+{% endblock navbar-sidebar %}

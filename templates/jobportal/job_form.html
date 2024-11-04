@@ -1,0 +1,464 @@
+
+{% if company_data %}
+  <script>
+    window.location.href = '/post-job'
+  </script>
+{% else %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Your Company Profile</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body{
+        font-family: "Montserrat", sans-serif;
+        font-style: normal;
+      }
+      .sad-icon{
+        height: 30px;
+        width: 30px;
+        object-fit: cover;
+      }
+      .flex-danger{
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+     .flex-danger .flex-text{
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="section-main">
+      <div class="section-left">
+        <h1>Cognitix Consulting</h1>
+        <div class="section-text">
+          <h2> Let’s Set Up Your Job Posting Account</h2>
+          <p>Let’s get your hiring process started! Create your company account, post jobs in minutes, and connect with top talent.</p>
+        </div>
+        <div class="section-bottom">
+        <div class="section-flex">
+          <div class="section-cards">
+            <h3>I barely had to do anything</h3>
+            <p>Love the experience. Got my business set up and all necessary details in about a month and i barely had to do anything. Definitely recommend!</p>
+            <div class="section-account">
+              <div class="account">
+                <img src="{% static 'images/agile.jpg' %}" alt="">
+                <p>Kiran Kumar B K</p>
+              </div>
+              <div class="ratings">
+                <i class='bx bxs-star'></i>
+                <i class='bx bxs-star'></i>
+                <i class='bx bxs-star'></i>
+                <i class='bx bxs-star'></i>
+                <i class='bx bxs-star-half' ></i>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="section-dots">
+          <p>.</p>
+          <p>.</p>
+          <p>.</p>
+        </div>
+        </div>
+      </div>
+      <div class="company-profile">
+        <div class="job-form-section">
+          <input type="hidden" value="{{currentUserId}}" id="currentUserId" />
+          <div class="job-main-company" id="jobform-1">
+            <div class="section-design">
+              <p>Let's get started   <i class='bx bx-happy animated-icon'></i></p>
+              <h1>Create Your Company Account</h1>
+            </div>
+            <button style="text-align: left" id="goback" onclick="index()">
+              <i class="bx bx-arrow-back"></i>
+            </button>
+            <div class="job-form-flex">
+              <div class="job-forms">
+                <label for="">Company Name</label>
+                <input
+                  type="text"
+                  id="cname"
+                  value=""
+                  placeholder="e.g., Cognitix Consulting or XYZ Solutions"
+                  style="padding: 10px 50px;"
+                />
+                <p id="coname"></p>
+              </div>
+              <div class="job-forms">
+                <label for="">Tagline</label>
+                <input
+                  type="text"
+                  id="ctagline"
+                  value=""
+                  placeholder="e.g., Innovating the Future!"
+                  style="padding: 10px 50px;"
+                />
+                <p id="cocountry"></p>
+              </div>
+
+
+            </div>
+
+            <div class="job-form-flex">
+              <div class="job-forms">
+                <label for="">Company Established</label>
+                <input
+                  type="date"
+                  id="cest"
+                  value=""
+                  placeholder="Choose the year of establishment"
+                  style="padding: 8px 70px"
+                />
+                <p id="coest"></p>
+              </div>
+
+              <div class="job-forms">
+                <label for="">Company Email</label>
+                <input
+                  type="email"
+                  id="cemail"
+                  value=""
+                  placeholder="e.g., contact@yourcompany.com"
+                />
+                <p id="coemail"></p>
+              </div>
+            </div>
+            <div class="job-forms">
+              <label for="cloc">Company Location</label>
+              <select id="cloc">
+                  <option value="">Loading countries...</option>
+              </select>
+              <p id="coloc"></p>
+          </div>
+            <div class="job-forms">
+              <label for="">Company Description</label>
+              <input
+                id="cdesc"
+                value=""
+                placeholder="Briefly describe your company’s mission, vision, and services"
+                style="padding: 20px"
+              />
+              <p id="codesc"></p>
+            </div>
+            
+            <div class="nextBtn">
+              <button onclick="openNext()" id="next-btn">Continue</button>
+            </div>
+          </div>
+          <div class="job-main-profile2" style="display: none" id="jobform-2">
+            <div class="section-design">
+              <p id="danger-message">Little Bit...</p>
+              <h1>You're Almost There</h1>
+            </div>
+            <button style="text-align: left" id="goback" onclick="goback()">
+              <i class="bx bx-arrow-back"></i>
+            </button>
+            <div class="job-form-flex">
+              <div class="job-forms">
+                <label for="">Company Linkedin</label>
+                <input
+                  type="text"
+                  id="clinkedin"
+                  value=""
+                  placeholder="e.g., linkedin.com/company/yourcompanyname"
+                />
+                <p id="colink"></p>
+              </div>
+
+              <div class="job-forms">
+                <label for="">Company Instagram</label>
+                <input
+                  type="text"
+                  id="cinstagram"
+                  value=""
+                  placeholder="e.g., instagram.com/yourcompanyname"
+                />
+                <p id="coinsta"></p>
+              </div>
+            </div>
+       <div class="job-form-flex">
+        <div class="job-forms">
+          <label for="">Company Facebook</label>
+          <input
+            type="text"
+            id="cfacebook"
+            value=""
+            placeholder="e.g., facebook.com/yourcompanyname"
+          />
+          <p id="cofacebook"></p>
+        </div>
+        <div class="job-forms">
+          <label for="">Company Address</label>
+          <input
+            type="text"
+            id="caddress"
+            value=""
+            placeholder="e.g., New york city or Bengaluru"
+          />
+          <p id="coaddress"></p>
+        </div>
+
+       </div>
+       <div class="job-form-flex">
+        <div class="job-forms">
+          <label for="">City</label>
+          <input
+            type="text"
+            id="ccity"
+            value=""
+            placeholder="e.g., Bengaluru.."
+          />
+          <p id="cocity"></p>
+        </div>
+        <div class="job-forms">
+          <label for="">State</label>
+          <input
+            type="text"
+            id="cstate"
+            value=""
+            placeholder="e.g., Karnataka"
+          />
+          <p id="costate"></p>
+        </div>
+       </div>
+       <div class="job-forms">
+        <label for="">Pincode</label>
+        <input
+          type="text"
+          id="cpincode"
+          value=""
+          placeholder="567876"
+        />
+        <p id="copincode"></p>
+      </div>
+            <div class="job-forms">
+              <label for="">Company Logo</label>
+              <input
+                type="file"
+                id="cimg"
+                value=""
+                placeholder="Upload your company’s logo (JPG, PNG)"
+              />
+              <p id="cologo"></p>
+            </div>
+
+            <div class="post-button">
+              <button onclick="submit()">Submit</button>
+            </div>
+          </div>
+          <div class="last-section" style="display: none;" id="last">
+       <div class="last-flex">
+        <h1 onclick="window.location.href = '/post-job'">Start Posting</h1>
+        <p><i class='bx bx-right-arrow-alt'></i></p>
+       </div>
+            <p>Kick Start Your Hiring Process Now Find the Right Candidates</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      function submit() {
+        const cname = $("#cname").val();
+        const cdesc = $("#cdesc").val();
+        const cloc = $("#cloc").val();
+        const cest = $("#cest").val();
+        const cemail = $("#cemail").val();
+        const ctagline = $("#ctagline").val();
+        const clinkedin = $("#clinkedin").val();
+        const cinstagram = $("#cinstagram").val();
+        const cfacebook = $("#cfacebook").val();
+        const caddress = $("#caddress").val();
+        const ccity = $("#ccity").val();
+        const cstate = $("#cstate").val();
+        const cpincode = $("#cpincode").val();
+        const currentUserId = $("#currentUserId").val();
+        const company_logo = $("#cimg")[0].files[0];
+        if (!clinkedin) {
+          $("#colink")
+            .html("Please Enter Company LinkedIn")
+            .css({ color: "red", fontSize: "13px" });
+
+          return;
+        } else if (!cinstagram) {
+          $("#coinsta")
+            .html("Please Enter Company Instagram")
+            .css({ color: "red", fontSize: "13px" });
+          return;
+        } else if (!cfacebook) {
+          $("#cofacebook")
+            .html("Please Enter Company Facebook")
+            .css({ color: "red", fontSize: "13px" });
+          return;
+        } else if (!company_logo) {
+          $("#cologo")
+            .html("Please Upload Company Logo")
+            .css({ color: "red", fontSize: "13px" });
+          return;
+        }
+        const formdata = new FormData();
+        formdata.append("cname", cname);
+        formdata.append("cdesc", cdesc);
+        formdata.append("cloc", cloc);
+        formdata.append("cest", cest);
+        formdata.append("cemail", cemail);
+        formdata.append("clinkedin", clinkedin);
+        formdata.append("ctagline", ctagline);
+        formdata.append("cinstagram", cinstagram);
+        formdata.append("cfacebook", cfacebook);
+        formdata.append("caddress",caddress );
+        formdata.append("cstate", cstate);
+        formdata.append("ccity", ccity);
+        formdata.append("cpincode", cpincode);
+        formdata.append("currentUserId", currentUserId);
+        formdata.append("company_logo", company_logo);
+        $.ajax({
+          type: "POST",
+          url: "/create_job/",
+          data: formdata,
+          processData: false,
+          contentType: false,
+          success: function (data) {
+            if (data["status"] == "pass") {
+              $("#danger-message").text("Successfully Created Your Account").css('color','#28a475');
+              $("#jobform-2").hide();
+              $("#last").show();
+              
+            } else if(data["status"] == "fail") {
+              $("#danger-message").html("<div class = 'flex-danger'><img class = 'sad-icon' src = {% static 'images/sad.gif' %} /> <p class='flex-text'>Email Already Exists! Try with another One</p></div>").css({'color':'red','font-size':"16px"})
+            }
+          },
+        });
+      }
+      function fetchCountries() {
+    // Call REST Countries API to fetch the list of countries
+    return $.ajax({
+        url: 'https://restcountries.com/v3.1/all',
+        method: 'GET'
+    });
+}
+
+// Populate the select element with countries
+function populateCountrySelect() {
+    const selectElement = $("#cloc");
+
+    // Call the API
+    fetchCountries().done(response => {
+        // Clear existing options
+        selectElement.empty();
+
+        // Add default "Select a Country" option
+        selectElement.append('<option value="">Select The Location</option>');
+
+        // Loop through the response to populate the countries
+        response.forEach(country => {
+            const countryName = country.name.common;
+            selectElement.append(`<option value="${countryName}">${countryName}</option>`);
+        });
+    }).fail(() => {
+        // Handle error if API call fails
+        selectElement.empty();
+        selectElement.append('<option value="">Error loading countries</option>');
+    });
+}
+
+// Call the function when the page is loaded
+$(document).ready(function() {
+    populateCountrySelect();
+});
+      function openNext() {
+        let jobform_1 = $("#jobform-1");
+        let jobform_2 = $("#jobform-2");
+        const cname = $("#cname").val();
+        const cloc = $("#cloc").val();
+        const cest = $("#cest").val();
+        const cemail = $("#cemail").val();
+        const cdesc = $("#cdesc").val();
+        const ctagline = $("#ctagline").val();
+        if (!cname) {
+          $("#coname")
+            .html("Please Enter Company Name")
+            .css({ color: "red", fontSize: "13px" });
+          $("#cname").css("border-color", "red");
+          return;
+        } 
+        else if (!ctagline) { 
+        $("#cocountry")
+            .html("Please Select a Company Tagline")
+            .css({ color: "red", fontSize: "13px" });
+        $("#ctagline").css("border-color", "red");
+        return;
+    }
+        else if (!cloc) { 
+        $("#coloc")
+            .html("Please Select a Company Location")
+            .css({ color: "red", fontSize: "13px" });
+        $("#cloc").css("border-color", "red");
+        return;
+    }
+        else if (!cest) {
+          $("#coest")
+            .html("Please Enter Company Established")
+            .css({ color: "red", fontSize: "13px" });
+          $("#cest").css("border-color", "red");
+          return;
+        } else if (!cemail) {
+          $("#coemail")
+            .html("Please Enter Company Email")
+            .css({ color: "red", fontSize: "13px" });
+          $("#cemail").css("border-color", "red");
+          return;
+        } else if (!cdesc) {
+          $("#codesc")
+            .html("Please Enter Company Description")
+            .css({ color: "red", fontSize: "13px" });
+          $("#cdesc").css("border-color", "red");
+          return;
+        } else {
+          $("#coname").hide();
+          $("#cname").css("border-color", "#007BFF");
+
+          $("#coloc").hide();
+          $("#cloc").css("border-color", "#007BFF");
+
+          $("#coest").hide();
+          $("#cest").css("border-color", "#007BFF");
+
+          $("#coemail").hide();
+          $("#cemail").css("border-color", "#007BFF");
+
+          $("#codesc").hide();
+          $("#cdesc").css("border-color", "#007BFF");
+        }
+        jobform_1.hide();
+        jobform_2.show();
+      }
+      function goback() {
+        let jobform_1 = $("#jobform-1");
+        let jobform_2 = $("#jobform-2");
+        jobform_1.show();
+        jobform_2.hide();
+      }
+      function index() {  
+        window.location.href = '/index/'
+      }
+    </script>
+  </body>
+</html>
+{% endif %}

@@ -2,18 +2,28 @@ from typing import Any
 from django.shortcuts import render
 from rest_framework.views import APIView
 from .models import Customer
-from courses.models import Category
+from courses.models import Category, Course
+from jobportal.models import CompanyProfile
+from adminuse.models import AddTrainers
 from django.http import JsonResponse
 from django.core.mail import send_mail
 from django.views.generic.base import TemplateView
 from django.conf import settings
-
 # Create your views here.
 def signup(request):
     return render(request, 'customer/signup.html')
 def login(request):
     return render(request, 'customer/login.html')
-
+def index2(request):
+    domains = Category.objects.all()
+    user_id = request.session['customer_id']
+    company_data = CompanyProfile.objects.filter(user_id = user_id)
+    allTrainers = AddTrainers.objects.all().order_by('-trainer_created')
+    courses = Course.objects.all()
+    return render(request, 'customer/index2.html',{"currentUser":request.session['user_name'],
+                                                  'currentEmail':request.session['customer_email'],
+                                                  'currentUserId':request.session['customer_id'],'domains':domains,
+                                                  'company_data':company_data,'allTrainers':allTrainers,"courses":courses})
 class CreateUser(APIView):
     def post(self, request):
         name = request.POST.get('username')
@@ -35,7 +45,14 @@ class CreateUser(APIView):
         return JsonResponse({"status":"pass"})
 def index(request):
     domains = Category.objects.all()
-    return render(request, 'customer/index.html',{"currentUser":request.session['user_name'],'currentEmail':request.session['customer_email'],'currentUserId':request.session['customer_id'],'domains':domains})
+    user_id = request.session['customer_id']
+    company_data = CompanyProfile.objects.filter(user_id = user_id)
+    allTrainers = AddTrainers.objects.all().order_by('-trainer_created')
+    courses = Course.objects.all()
+    return render(request, 'customer/index.html',{"currentUser":request.session['user_name'],
+                                                  'currentEmail':request.session['customer_email'],
+                                                  'currentUserId':request.session['customer_id'],'domains':domains,
+                                                  'company_data':company_data,'allTrainers':allTrainers,"courses":courses})
 class LoginCheck(APIView):
     def post(self, request):
         email_1 = request.POST['email'] # Using request.data if POST data is sent as JSON
@@ -50,11 +67,9 @@ class LoginCheck(APIView):
                 return JsonResponse({"status":"pass","name":customer.username,'cid':customer.customer_id,"role":customer.role,'email':customer.email})
             else:
                  return JsonResponse({"status":"fail", "message":"Invalid Credentials"})
-        
         except Customer.DoesNotExist:
             # Handle case when no customer is found with the provided email
             return JsonResponse({"status": "false", "failure": "Account does not exist Please Signup"})
-
         return HttpResponse("Success")
     
 class ViewCustomer(TemplateView):
@@ -64,7 +79,6 @@ class ViewCustomer(TemplateView):
         custdata = Customer.objects.all()
         context['custdata'] = custdata
         return context
-    
 class UpdateUser(APIView):
     def post(self, request):
         id = request.POST.get('id')
@@ -81,12 +95,10 @@ class DeleteUser(APIView):
        id = request.POST.get('id')
        Customer.objects.filter(customer_id = id).delete()
        return JsonResponse({"status":"pass"})
-    
 # Forgot Password View
 class ForgotPassword(APIView):
     def post(self, request):
         email = request.data.get('email')
-
         try:
             customer = Customer.objects.get(email=email)
             reset_link = f"http://127.0.0.1:9000/reset_password/{customer.customer_id}/"
@@ -99,7 +111,6 @@ class ForgotPassword(APIView):
                 fail_silently=False
             )
             return JsonResponse({"status": "pass", "message": "Reset link sent!"})
-
         except Customer.DoesNotExist:
             return JsonResponse({"status": "fail", "message": "Email not found!"})
 def reset_password(request, cid):

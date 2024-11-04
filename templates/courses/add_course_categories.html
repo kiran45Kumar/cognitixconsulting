@@ -1,92 +1,146 @@
+
+{% extends 'adminuse/admin.html' %}
+{% block navbar-sidebar %}
 <head>
     <title>Add Category</title>
 </head>
 <style>
-    .form {
-    background-color: #f4f4f4;
-    border-radius: 8px;
-    padding: 20px;
-    width: 300px;
-    margin: 0 auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    .form{
+        margin: 20px;
+    }
+.form label{
+    font-size: 17px;
+    font-weight: 300;
+    margin: 10px 0;
+    padding: 20px 0;
 }
 
-label {
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 8px;
-    display: block;
-    color: #333;
+.form-class input{
+    padding: 10px 100px;
+    margin: 10px 0;
+    outline: none;
+    border: 1px solid #06d;
+    border-radius: 5px;
 }
-
-input[type="text"], textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 14px;
-    box-sizing: border-box;
+.form-class textarea{
+    outline: none;
+    border: 1px solid #06d;
+    border-radius: 5px;
+    margin: 10px 0;
 }
-
-button {
-    background-color: #4CAF50;
+.form-class textarea::placeholder{
+   padding: 5px 3px;
+}
+.form button{
+    padding: 15px 45px;
+    background: #06d;
     color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    width: 100%;
+    font-size: 1.12rem;
+    border-radius: 5px;
 }
-
-button:hover {
-    background-color: #45a049;
-}
-
-#successMessage, #errorMessage {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 14px;
+#errorMessage{
+    color: #dc3545;
+    font-size: 19px;
+    margin: 10px;
     padding: 10px;
-    border-radius: 4px;
 }
-
-#successMessage {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
+#successMessage{
+    color: #28a475;
+    font-size: 19px;
+    margin: 10px;
+    padding: 10px;
 }
-
-#errorMessage {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
+.display_categories{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
 }
-
+.category1{
+    width: 300px;
+    height: 80px;
+    box-shadow: 0px 3px 2px 3px silver;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    border-radius: 10px;   
+}
+.category1 p{
+    margin: 10px;
+    cursor: pointer;
+}
+.category1 span{
+    margin: 10px;
+    font-size: 30px;
+    cursor: pointer;
+}
 </style>
 <body>
-    <div class="form">
-        <label for="name">Category Name:</label><br>
-        <input type="text" id="name" name="name" maxlength="100" required><br><br>
-        <label for="description">Category Description:</label><br>
-        <textarea id="description" name="description" rows="4" cols="50"></textarea><br><br>
-        <button onclick="createCategory()">Submit</button>
-    
-    </div>
-    
-    <!-- Success Message -->
+    <div id="errorMessage" style="display:none;">There was an error creating the category.</div>
     <div id="successMessage" style="display:none;">Category successfully created!</div>
+
+    <div class="form">
+<div class="form-class">
+    <label for="name">Category Name:</label><br>
+    <input type="text" id="name" name="name" maxlength="100" placeholder="eg: Agile, Project, Programming. etc..." required><br><br>
+</div>
+<div class="form-class">
+    <label for="description">Category Description (optional):</label><br>
+    <textarea id="description" name="description" placeholder="eg: Brief on Category, its Scope" rows="4" cols="50"></textarea><br><br>
+</div>
+        <button onclick="createCategory()" id="btn">Submit</button>
+
+    </div>
+
+    <div class="display_categories">
+        {% for category in categories %}
+        <div class="category1">
+            <p>{{category.name}}</p>
+            <div class="cross"><span onclick="removeCat('{{category.id}}')">&times;</span></div>
+        </div>
+        {% endfor %}
+    </div>
+    <!-- Success Message -->
     
     <!-- Error Message -->
-    <div id="errorMessage" style="display:none;">There was an error creating the category.</div>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script>
+        function removeCat(id) { 
+            $.ajax(
+            {
+                type:"POST",
+                url:"/delete_category/",
+                data:{
+                    "id":id,
+                },
+                success:function(data){
+                    if(data['status'] == 'pass'){
+                        $("#successMessage").show().text('Removed The Category')
+                        setTimeout(() => {
+                            window.location.reload()
+                        }, 2000);
+                    }
+                    else {
+                        $("#errorMessage").show().text("Failed to Remove the Category")
+                    }
+                }
+            }
+            )
+         }
         function createCategory(){
             const name = $("#name").val();
             const description = $("#description").val();
+            if(!name&&!description){
+                $("#errorMessage").show();
+                return;
+            }
+            else if(!name){
+                $("#errorMessage").text("Please Enter Category Name!!");
+                return;
+            }
             $.ajax({
                 type:"POST",
                 url:"/create_category/",
@@ -95,14 +149,19 @@ button:hover {
                     "description":description,
                 },
                 success:function(data){
-                    if(data){
+                    if(data['status'] == 'pass'){
                         $("#successMessage").show()
+                        
                         setTimeout(() => {
                           window.location.reload();  
                         },2000);
+                    }
+                    else if(data['status'] == 'fail'){
+                        $("#errorMessage").show().html(data['message']);
                     }
                 }
             })
         }
     </script>
 </body>
+{% endblock navbar-sidebar %}

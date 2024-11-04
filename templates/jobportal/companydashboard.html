@@ -1,0 +1,111 @@
+<style>
+    .company-view-section {
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.company-view-section img {
+    height: 80px;
+    width: 200px;
+}
+.company-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.company-table th, 
+.company-table td {
+    text-align: left;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+.company-table th {
+    background-color: #f0f0f0;
+    font-weight: bold;
+}
+
+.company-table td a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.company-table td a:hover {
+    text-decoration: underline;
+}
+
+</style>
+    
+{% for company in company_data %}
+    <div class="company-view-section">
+        <img src="{{ company.company_logo.url }}" alt="Company Logo">
+        <table class="company-table">
+            <tr>
+                <th>Company Name</th>
+                <td>{{ company.company_name }}</td>
+            </tr>
+            <tr>
+                <th>Tagline</th>
+                <td>{{ company.company_tagline }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ company.company_desc }}</td>
+            </tr>
+            <tr>
+                <th>Location</th>
+                <td>{{ company.company_location }}</td>
+            </tr>
+            <tr>
+                <th>Established</th>
+                <td>{{ company.estblished }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ company.company_email }}</td>
+            </tr>
+            <tr>
+                <th>LinkedIn</th>
+                <td><a href="#">{{ company.company_linkedin }}</a></td>
+            </tr>
+            <tr>
+                <th>Instagram</th>
+                <td><a href="#">{{ company.company_instagram }}</a></td>
+            </tr>
+            <tr>
+                <th>Facebook</th>
+                <td><a href="#">{{ company.company_facebook }}</a></td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ company.company_address }}</td>
+            </tr>
+            <tr>
+                <th>City</th>
+                <td>{{ company.company_city }}</td>
+            </tr>
+            <tr>
+                <th>State</th>
+                <td>{{ company.company_state }}</td>
+            </tr>
+            <tr>
+                <th>Pincode</th>
+                <td>{{ company.company_pincode }}</td>
+            </tr>
+            <tr>
+                <th>Profile Created At</th>
+                <td>{{ company.company_profile_created_at }}</td>
+            </tr>
+            <tr>
+                <th>Profile Updated At</th>
+                <td>{{ company.company_profile_updated_at }}</td>
+            </tr>
+        </table>
+    </div>
+{% endfor %}
+
+    

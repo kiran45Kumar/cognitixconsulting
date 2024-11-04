@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post a Job</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        .form-group input, 
+        .form-group textarea, 
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-group input[type="time"] {
+            padding: 5px;
+        }
+
+        .form-group select {
+            background-color: #fff;
+        }
+
+        .form-group .error {
+            color: red;
+            font-size: 14px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: #0056b3;
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        .form-footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Post a Job</h2>
+        <form action="/submit-job" method="POST">
+            <!-- Job Title -->
+            <div class="form-group">
+                <label for="job_title">Job Title:</label>
+                <input type="text" id="job_title" name="job_title" required maxlength="30">
+            </div>
+
+            <!-- Job Description -->
+            <div class="form-group">
+                <label for="job_description">Job Description:</label>
+                <textarea id="job_description" name="job_description" required maxlength="200"></textarea>
+            </div>
+
+            <!-- Skills Required -->
+            <div class="form-group">
+                <label for="skills_required">Skills Required:</label>
+                <input type="text" id="skills_required" name="skills_required" required maxlength="200">
+            </div>
+
+            <!-- Timings -->
+            <div class="form-group">
+                <label for="timings">Timings:</label>
+                <input type="time" id="timings" name="timings" required>
+            </div>
+
+            <!-- Shifts -->
+            <div class="form-group">
+                <label for="shifts">Shifts:</label>
+                <select id="shifts" name="shifts" required>
+                    <option value="dayshift">Day Shift</option>
+                    <option value="nightshift">Night Shift</option>
+                </select>
+            </div>
+
+            <!-- Registration Fees -->
+            <div class="form-group">
+                <label for="registration_fees">Registration Fees (in INR):</label>
+                <input type="number" id="registration_fees" name="registration_fees" required>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn-submit">Post Job</button>
+        </form>
+
+        <div class="form-footer">
+            <p>Need help? <a href="#">Contact Support</a></p>
+        </div>
+    </div>
+
+</body>
+</html>

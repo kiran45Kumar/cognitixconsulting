@@ -1,0 +1,171 @@
+{% extends 'adminuse/admin.html' %}
+{% block navbar-sidebar %}
+{% load static %}
+    <title>Trainer Schedule Form</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        /* General styling */
+        /* Form container styling */
+        #scheduleForm {
+            width: 100%;
+            max-width: 400px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Label styling */
+        label {
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: block;
+            color: #333;
+        }
+
+        /* Input styling */
+        input[type="text"],
+        input[type="date"],
+        input[type="time"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        /* Button styling */
+        button[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background-color: #28a745;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #218838;
+        }
+        #scheduleForm h5{
+            font-size: 19px;
+            font-weight: 400;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="scheduleForm">
+        <h5 id="success">Add Schedule For {{trainer.trainer_name}}</h5>
+        <!-- <label for="trainer_id">Trainer ID:</label> foreign key for database -->
+        <input type="hidden" id="trainer_id" name="trainer_id" value="{{trainer.trainer_id}}" required>
+
+        <label for="region">Select the Region</label>
+        <select id="region">
+            <option value="">Select the Region</option>
+             <script>
+                $(document).ready(function(){
+                    fetchRegions('{{course.course_id}}');
+                })
+             </script>
+        </select>
+        <label for="sdate">Start Date:</label>
+        <input type="date" id="sdate" name="sdate" required>
+        <p id="smessage"></p>
+
+        <label for="edate">End Date:</label>
+        <input type="date" id="edate" name="edate" required>
+        <p id="emessage"></p>
+
+
+        <label for="stime">Start Time:</label>
+        <input type="time" id="stime" name="stime" required>
+        <p id="sname"></p>
+
+
+        <label for="stime">End Time:</label>
+        <input type="time" id="etime" name="etime" required>
+        <p id="ename"></p>
+        <button type="submit" onclick="addSchedule()">Add Schedule</button>
+    </div>
+    <script>
+
+const apiKey = 'fe11c7e7c8cf563a60f484f3';
+    // Fetch regions and populate the dropdown
+    function fetchRegions(courseId) {
+        $.ajax({
+            url: 'https://restcountries.com/v3.1/all',
+            method: 'GET',
+            success: function(data) {
+                const regionSelect = $("#region" + courseId);
+                regionSelect.empty();
+                data.forEach(country => {
+                    const currency = country.currencies ? Object.keys(country.currencies)[0] : 'N/A';
+                    const countryName = country.name.common; // You can also use country.name.official
+                    const option = `<option value="${countryName}">${countryName}</option>`;
+                    regionSelect.append(option);
+                });
+            },
+            error: function() {
+                alert("Failed to fetch regions.");
+            }
+        });
+    }
+        function addSchedule() { 
+            let trainer = $("#trainer_id").val();
+            let region = $("#region").val();
+            let start = $("#sdate").val();
+            let end = $("#edate").val();
+            let stime = $("#stime").val();
+            let etime = $("#etime").val();
+            if(!region){
+                $("#smessage").text('Please select the Region').css('color','#dc3545');
+            }
+            else if(!start){
+                $("#smessage").text('Please select the Start Date').css('color','#dc3545');
+            }
+            else if(!end){
+                $("#emessage").text('Please select the End Date').css('color','#dc3545');
+            }
+            else if(!stime){
+                $("#sname").text('Please select the Start Time').css('color','#dc3545');
+            }
+            else if(!etime){
+                $("#ename").text('Please select the End Time').css('color','#dc3545');
+            }
+            $.ajax({
+                type:"POST",
+                url:"/create_schedule/",
+                data:{
+                    "trainer" : trainer,
+                    "start" : start,
+                    "end" : end,
+                    "stime" : stime,
+                    "etime" : etime,
+                    "region":region,
+                },
+                success:function(data){
+                    if(data){
+                        $("#success").text("Added Trainer Schedule").css('color','#28a475');
+                        setTimeout(() => {
+                        window.location.reload()
+                            
+                        }, 2000);
+                    }
+                    else if(!data){
+                        
+                    }
+                }
+            });
+        }
+    </script>
+    {% endblock navbar-sidebar %}
+
+</body>
+</html>

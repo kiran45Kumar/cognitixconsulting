@@ -16,6 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     # path('accounts/',include('django.contrib.auth.urls')),
@@ -23,4 +26,5 @@ urlpatterns = [
     path('',include('customer.urls')),
     path('',include('courses.urls')),
     path('',include('adminuse.urls')),
-]
+    path('',include('jobportal.urls')),
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -4,7 +4,8 @@ from datetime import datetime
 class Customer(models.Model):
     role_choices = [
         ("customer",'Customer'),
-        ("admin","Admin")
+        ("admin","Admin"),
+        ("trainer","Trainer"),
     ]
     customer_id = models.AutoField(primary_key=True)
     username = models.CharField(max_length=200)

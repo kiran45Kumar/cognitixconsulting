@@ -2,11 +2,409 @@
 {% load static %}
 {% block title %}Cognitix Consulting | Driving Business Excellence with Cognitix Consulting{% endblock title %}
 {% block body %}
+<style>
+    /* Style the dropdown and make it initially hidden */
+.drop-down {
+    display: none;
+    position: absolute;
+    background-color: #ffffff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    border-radius: 4px;
+    z-index: 1;
+    width: 150px;
+    top: 100%;
+    right: 30px;
+}
+
+/* List item where the dropdown is triggered */
+.list.links {
+    cursor: pointer;
+    position: relative;
+    list-style: none;
+    display: inline-block;
+    padding: 10px;
+}
+
+/* Hovering over .list.links will display the dropdown */
+.list.links:hover + .drop-down,
+.drop-down:hover {
+    display: block;
+}
+
+/* Dropdown list items */
+.drop-down ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.drop-down ul li {
+    padding: 10px;
+    text-align: left;
+    cursor: pointer;
+}
+
+/* Styling for each item in the dropdown */
+.drop-down ul li:hover {
+    background-color: #f0f0f0;
+}
+.about-us{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.contact-our-expert{
+    display: flex;
+    justify-content: space-around;
+    align-items: start ;
+    margin: 20px 0;
+}
+.contact-left{
+    flex-basis: 25%;
+}
+.c-forms{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.c-forms input,select{
+    padding: 10px 25px;
+    border: 1px solid #06d;
+    outline: none;
+    border-radius: 5px;
+}
+
+.c-forms textarea{
+    padding: 5px 25px;
+    border: 1px solid #06d;
+    border-radius: 5px;
+    outline: none;
+}
+.contact-form{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.contact-right{
+    flex-basis: 30%;
+}
+.expert-text{
+    font-size: 28px;
+    font-weight: 400;
+}
+.c-forms button{
+    margin: 10px 0;
+    padding: 10px 25px;
+    background: #06d;
+    color: white;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+.c-forms label{
+    margin: 10px 0;
+}
+.contact-left h1 {
+    font-size: 2.5em;
+    color: #5cb85c; /* Main color */
+    margin-bottom: 15px;
+    text-align: center;
+}
+.contact-left p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.contact-left h1 {
+    font-size: 2.5em;
+    color: #5cb85c; /* Main color */
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.contact-left h2 {
+    font-size: 1.5em;
+    color: #333;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.contact-left p {
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.contact-left ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.contact-left ul li {
+    margin-bottom: 10px;
+}
+.contact-left a[href*="instagram"] {
+    color: #E1306C; /* Instagram color */
+}
+
+.contact-left a[href*="twitter"] {
+    color: #1DA1F2; /* Twitter color */
+}
+
+.contact-left a[href*="facebook"] {
+    color: #3b5998; /* Facebook color */
+}
+
+.contact-left a[href*="linkedin"] {
+    color: #0077B5; /* LinkedIn color */
+}
+.subscribe-to-newsletter{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+.subscribe-to-newsletter input{
+    border: none;
+    outline: none;
+    margin-left: 20px;
+}
+.subscribe-to-newsletter button{
+    padding: 10px 25px;
+    background: #000;
+    color: white;
+    border: 1px solid #000;
+}
+.flex-container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 50px;
+    gap: 150px;
+}
+.flex-container p:first-child{
+    font-size: 25px;
+    font-weight: bold;
+}
+.trainer-section{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.trainer{
+    width: 300px;
+    height: 450px;
+    box-shadow: 0px 1px 1px 1px silver;
+    border-radius: 5px;
+    margin: 10px;
+}
+.trainer:hover{
+    transition: all 0.3s ease-in;
+ box-shadow: 0px 2px 5px 2px silver
+
+}
+.trainer-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+.trainer-img img{
+    height: 250px;
+    width: 100%;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    /* margin: 5px; */
+    object-fit: cover;
+}
+.trainer-details{
+    text-align: center;
+    margin: 10px;
+}
+.trainer-details .ratings i{
+    color: orangered;
+}
+.trainer-desc p{
+    text-align: justify;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.7;
+    margin: 10px 0;
+}
+.trainer-expertise{
+    text-align: start;
+    margin: 0 20px;
+}
+
+.trainer-expertise ul li{
+    font-size: 14px;
+}
+.tech-stacks {
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 60px 0;
+  background-color: white;
+}
+
+.tech-items {
+  margin-top: 1%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  cursor: pointer;
+}
+.tech-items {
+  display: inline-block;
+  animation: 15s slide infinite linear;
+}
+@keyframes slide {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+.tech-items img {
+  height: 100px;
+  width: 250px;
+  margin: 0 40px;
+  object-fit: contain;
+} 
+.footer-section{
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    align-items: start;
+    background: #f1f1f1;
+    border-bottom: 1px solid gray;
+}
+.footer-left{
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    flex-wrap: wrap;
+    flex-basis:35%;
+    margin: 10px 0;
+    padding: 20px 0;
+    gap: 30px;
+}
+.footer-links h1{
+    font-size: 21px;
+    font-weight: 500;
+}
+.footer-links ul li{
+    list-style: none;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 10px 0;
+    color: #555;
+    cursor: pointer;
+}
+.footer-links ul li:hover{
+    color: black;
+    transition: all 0.3s ease-in;
+}
+.footer-right{
+    padding: 20px;
+}
+.footer-links ul li a{
+    text-decoration: none;;
+    color: #555;
+}
+.footer-links ul li a:hover{
+    color: #000;
+    transition: all 0.3s ease-in;
+}
+.news-letter{
+    margin: 20px 0;
+}
+.news-letter input{
+    padding: 17px 40px;
+    border: 1px solid #0077B5;
+    border-radius: 5px;
+    outline: none;
+}
+.news-letter button{
+    padding: 17px 19px;
+    background: blueviolet;
+    color: white;
+    border: 1px solid  blueviolet;
+    outline: none;
+    border-radius: 5px;
+}
+.footer-right h1{
+    font-size: 17px;
+}
+.flex-icons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.flex-icons img{
+    height: 30px;
+    width: 30px;
+    border-radius: 5px;
+    margin: 10px 0;
+    cursor: pointer;
+}
+.flex-left h4 {
+    font-size: 25px;
+    font-weight: 400;
+}
+footer{
+    background: #f1f1f1;
+    margin: 0;
+    padding: 0;
+}
+.categories h4{
+    font-size: 23px;
+    font-weight: 500;
+    color: #666;
+    margin: 0 20px;
+    padding: 10px 15px;
+}
+.flex-domains{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+.flex-domains p{
+    font-size: 15px;
+    cursor: pointer;
+    color: #555;
+}
+.flex-domains p:hover{
+color: black;
+transition: all 0.3s ease-in;
+}
+.copy-right{
+    text-align: center;
+    margin-top: 20px;
+    padding: 20px;
+    border-top: 1px solid gray;
+
+}
+.copy-right p{
+    font-size: 17px;
+    font-weight: 500;
+    color: #555;
+}
+</style>
 <body>
 <section>
     <div class="navbar-section">
         <div class="nav-logo signup-nav">
-            <h1><span>Cognitix</span>Consulting</h1>
+            <h1 onclick="window.location.href = '/index/'" style="cursor: pointer;"><span>Cognitix</span>Consulting</h1>
             <div class="nav-search">
                 <input type="search" placeholder="Search for courses">
                 <div class="search-icon"><i class='bx bx-search-alt-2'></i></div>
@@ -19,34 +417,47 @@
                 Get Certified<i class='bx bx-chevron-down'></i>
                </li>
                <div class="course-certifications" id="course-certification">
-                <li>Certified ScrumMaster® (CSM)</li>
-                <li>Certified Scrum Product Owner® (CSPO)</li>
-                <li>Certified Scrum Developer® (CSD)</li>
-                <li>Certified Agile Leadership® (CAL E-O-T) </li>
-                <li>Certified Scrum Professional® (CSP) SM-PO</li>
-                <li>Advanced Certified ScrumMaster® (A-CSM)</li>
-                <li>Advanced Certified Scrum Product Owner® (A-CSPO)</li>
+                <li><a href="">Certified ScrumMaster® (CSM)</a></li>
+                <li><a href="">Certified Scrum Product Owner® (CSPO)</a></li>
+                <li><a href="">Certified Scrum Developer® (CSD)</a></li>
+                <li><a href="">Certified Agile Leadership® (CAL E-O-T)</a> </li>
+                <li><a href="">Certified Scrum Professional® (CSP) SM-PO</a></li>
+                <li><a href="">Advanced Certified ScrumMaster® (A-CSM)</a></li>
+                <li><a href="">Advanced Certified Scrum Product Owner® (A-CSPO)</a></li>
                 </div>
+                <li class="links" id="jobs">Jobs <i class='bx bx-chevron-down' ></i></li>
+                <div class="course-certifications job-posts" id="job-certification">
+                 <li><a href="/post_job">Post a Job</a></li>
+                 <li><a href="/all_jobs">Apply for Jobs</a></li>
+                 </div>
+                 <li class="links" onclick="trainer()">Teach on Cognitix</li>
                <li class="links">Ask an Expert</li>
-               <li class="links" onclick="trainer()">Teach on Cognitix</li>
                <div class="user-action">
                 <li class="list links">
                  <span class="user-avatar">{{ currentUser|first }}</span>
-                 <div class="user-info">
-                    <h3>{{currentUser}}</h3>
-                    <p>{{currentEmail}}</p>
-                 </div>
                  <i class='bx bx-chevron-down' ></i>
                 </li>                
+               </div>
+               <div class="drop-down">
+                <ul>
+                    <li>My Profile</li>
+                   {% if company_data %}
+                   <li onclick="window.location.href = '/company_dashboard'">Company Profile</li>
+                   {% endif %}
+                    <li  >My Orders</li>
+                    <li>Cart</li>
+                    <li onclick="window.location.replace('/');">Logout</li>
+                </ul>
                </div>
         </div>
        </div>
 </section>
 
 
+
 <!-- hero - section -->
+{% block navbar %}
 <section>
-     {% block navbar %}
     <div class="hero-section">
         <div class="hero-left">
             <h1 id="animated-text" class="gradient-text"></h1>
@@ -59,7 +470,7 @@
             </div>
         </div>
         <div class="hero-right">
-                <img src="{% static 'images/leftimg.jpg' %}" alt="" >
+                <img src="{% static 'images/leftimg.jpg' %}" loading="lazy" alt="" >
         </div>
     </div>
  </section>
@@ -103,182 +514,297 @@
     </div>
     
     <div class="courses-section">
+        {% for course in courses %}
         <div class="courses">
-            <div class="course-img"><img src="{% static 'images/agile.jpg' %}" alt=""></div>
+            <div class="course-img"><img src="{{course.course_img.url}}" loading="lazy" alt=""></div>
             <div class="classes-text">
                 <p>Live Classes</p>
-                <p>Starts Sat, 05 Oct 2024</p>
+                <p>Starts {{course.start}}</p>
             </div>
-            <h1>Master Agile Project Management</h1>
-            <p><span>Skill you'll gain</span>: Agile frameworks, Scrum methodology</p>
+            <h1>{{course.title}}</h1>
+            <p><span>Skill you'll gain</span>: {{ course.skillsgain|slice:":30" }}... <a href="/course/{{course.course_id}}">ReadMore</a>
+            </p>
             <div class="flex-texts">
-                <p><span><i class='bx bx-calendar'></i> 02 weeks</span> Course</p>
-                <p><span><i class='bx bx-time-five'></i> 20</span> Hrs</p>
+                <p><span><i class='bx bx-calendar'></i> {{ course.completion_of_days }} </span> Course</p>
+                <p><span><i class='bx bx-time-five'></i> {{course.completion_of_hrs}}</span></p>
                 <p><span><i class='bx bxs-user'></i> 75k</span> Learners</p>
             </div>
             <div class="course-buttons">
-                <button>View Course</button>
+                <button onclick="OpenCourse('{{course.course_id}}')">View Course</button>
                 <button>View Schedule</button>
             </div>
         </div>
+        {% endfor %}
+    </div>
     
-        <div class="courses">
-            <div class="course-img"><img src="{% static 'images/datascienceimg.jpg' %}" alt=""></div>
-            <div class="classes-text">
-                <p>Live Classes</p>
-                <p>Starts Mon, 10 Oct 2024</p>
+  
+</section>
+<section>
+    <h1 class="expert-text" style="text-align: center;">Ask Our Expert</h1>
+    <div class="contact-our-expert">
+        <div class="contact-left">
+            <h1>Get In Touch</h1>
+            <p>We'd love to hear from you! Whether you have a question about our services, need assistance, or just want to say hello, feel free to reach out. Your feedback is invaluable to us.</p>
+            <h2 id="email-text">Subscribe to our News letter</h2>
+            <div class="subscribe-to-newsletter">
+                <input type="email" id="subscribeemail" placeholder="Enter Your Email">
+                <button onclick="email()">Subscribe</button>
             </div>
-            <h1>Data Science with Python Bootcamp</h1>
-            <p><span>Skill you'll gain</span>: Data analysis, Machine learning basics</p>
-            <div class="flex-texts">
-                <p><span><i class='bx bx-calendar'></i> 04 weeks</span> Course</p>
-                <p><span><i class='bx bx-time-five'></i> 40</span> Hrs</p>
-                <p><span><i class='bx bxs-user'></i> 120k</span> Learners</p>
-            </div>
-            <div class="course-buttons">
-                <button>View Course</button>
-                <button>View Schedule</button>
-            </div>
+            <h2>Follow Us On</h2>
+            <ul>
+                <li><a href="https://www.instagram.com/yourcompany" target="_blank"><i class='bx bxl-instagram'></i></a></li>
+                <li><a href="https://www.twitter.com/yourcompany" target="_blank"><i class='bx bxl-twitter' ></i></a></li>
+                <li><a href="https://www.facebook.com/yourcompany" target="_blank"><i class='bx bxl-facebook-circle' ></i></a></li>
+                <li><a href="https://www.linkedin.com/company/yourcompany" target="_blank"><i class='bx bxl-linkedin' ></i></a></li>
+            </ul>
+       
         </div>
-    
-        <div class="courses">
-            <div class="course-img"><img src="{% static 'images/webdevimg.jpg' %}" alt=""></div>
-            <div class="classes-text">
-                <p>Live Classes</p>
-                <p>Starts Wed, 15 Oct 2024</p>
-            </div>
-            <h1>Full Stack Web Development</h1>
-            <p><span>Skill you'll gain</span>: HTML, CSS, JavaScript, React, Django</p>
-            <div class="flex-texts">
-                <p><span><i class='bx bx-calendar'></i> 08 weeks</span> Course</p>
-                <p><span><i class='bx bx-time-five'></i> 80</span> Hrs</p>
-                <p><span><i class='bx bxs-user'></i> 150k</span> Learners</p>
-            </div>
-            <div class="course-buttons">
-                <button>View Course</button>
-                <button>View Schedule</button>
-            </div>
-        </div>
-    
-        <div class="courses">
-            <div class="course-img"><img src="{% static 'images/ethical.jpg' %}" alt=""></div>
-            <div class="classes-text">
-                <p>Live Classes</p>
-                <p>Starts Thu, 20 Oct 2024</p>
-            </div>
-            <h1>Certified Ethical Hacker Training</h1>
-            <p><span>Skill you'll gain</span>: Network security, Penetration testing</p>
-            <div class="flex-texts">
-                <p><span><i class='bx bx-calendar'></i> 06 weeks</span> Course</p>
-                <p><span><i class='bx bx-time-five'></i> 60</span> Hrs</p>
-                <p><span><i class='bx bxs-user'></i> 90k</span> Learners</p>
-            </div>
-            <div class="course-buttons">
-                <button>View Course</button>
-                <button>View Schedule</button>
-            </div>
-        </div>
-    
-        <div class="courses">
-            <div class="course-img"><img src="{% static 'images/cloud.jpg' %}" alt=""></div>
-            <div class="classes-text">
-                <p>Live Classes</p>
-                <p>Starts Fri, 25 Oct 2024</p>
-            </div>
-            <h1>Mastering Cloud Computing with AWS</h1>
-            <p><span>Skill you'll gain</span>: Cloud architecture, AWS services and WebHosting</p>
-            <div class="flex-texts">
-                <p><span><i class='bx bx-calendar'></i> 05 weeks</span> Course</p>
-                <p><span><i class='bx bx-time-five'></i> 50</span> Hrs</p>
-                <p><span><i class='bx bxs-user'></i> 80k</span> Learners</p>
-            </div>
-            <div class="course-buttons">
-                <button>View Course</button>
-                <button>View Schedule</button>
-            </div>
-        </div>
-    
-        <div class="courses">
-            <div class="course-img"><img src="{% static 'images/bi.jpg' %}" alt=""></div>
-            <div class="classes-text">
-                <p>Live Classes</p>
-                <p>Starts Sun, 30 Oct 2024</p>
-            </div>
-            <h1>Advanced Excel for Business Analytics</h1>
-            <p><span>Skill you'll gain</span>: Data analysis, Excel automation and SQL</p>
-            <div class="flex-texts">
-                <p><span><i class='bx bx-calendar'></i> 02 weeks</span> Course</p>
-                <p><span><i class='bx bx-time-five'></i> 15</span> Hrs</p>
-                <p><span><i class='bx bxs-user'></i> 50k</span> Learners</p>
-            </div>
-            <div class="course-buttons">
-                <button>View Course</button>
-                <button>View Schedule</button>
-            </div>
-        </div>
-    
-        <div class="courses">
-            <div class="course-img"><img src="{% static 'images/devops.jpg' %}" alt=""></div>
-            <div class="classes-text">
-                <p>Live Classes</p>
-                <p>Starts Tue, 05 Nov 2024</p>
-            </div>
-            <h1>DevOps Fundamentals</h1>
-            <p><span>Skill you'll gain</span>: Continuous integration, Containerization</p>
-            <div class="flex-texts">
-                <p><span><i class='bx bx-calendar'></i> 06 weeks</span> Course</p>
-                <p><span><i class='bx bx-time-five'></i> 60</span> Hrs</p>
-                <p><span><i class='bx bxs-user'></i> 100k</span> Learners</p>
-            </div>
-            <div class="course-buttons">
-                <button>View Course</button>
-                <button>View Schedule</button>
-            </div>
-        </div>
-    
-        <div class="courses">
-            <div class="course-img"><img src="{% static 'images/ml.jpg' %}" alt=""></div>
-            <div class="classes-text">
-                <p>Live Classes</p>
-                <p>Starts Thu, 10 Nov 2024</p>
-            </div>
-            <h1>Introduction to Machine Learning</h1>
-            <p><span>Skill you'll gain</span>: Supervised learning, Model evaluation</p>
-            <div class="flex-texts">
-                <p><span><i class='bx bx-calendar'></i> 04 weeks</span> Course</p>
-                <p><span><i class='bx bx-time-five'></i> 40</span> Hrs</p>
-                <p><span><i class='bx bxs-user'></i> 95k</span> Learners</p>
-            </div>
-            <div class="course-buttons">
-                <button>View Course</button>
-                <button>View Schedule</button>
-            </div>
-        </div>
-    
-        <div class="courses">
-            <div class="course-img"><img src="{% static 'images/powerbi.jpg' %}" alt=""></div>
-            <div class="classes-text">
-                <p>Live Classes</p>
-                <p>Starts Mon, 15 Nov 2024</p>
-            </div>
-            <h1>Business Analysis with Power BI</h1>
-            <p><span>Skill you'll gain</span>: Data visualization, Business insights</p>
-            <div class="flex-texts">
-                <p><span><i class='bx bx-calendar'></i> 03 weeks</span> Course</p>
-                <p><span><i class='bx bx-time-five'></i> 30</span> Hrs</p>
-                <p><span><i class='bx bxs-user'></i> 70k</span> Learners</p>
-            </div>
-            <div class="course-buttons">
-                <button>View Course</button>
-                <button>View Schedule</button>
+        <div class="contact-right">
+            <h1 id="connect">Let's Connect!</h1>
+            <div class="contact-form">
+                <div class="c-forms">
+                    <label for="name">Full Name*</label>
+                    <input type="text" name="name" id="name" placeholder="Enter Your Name">
+                </div>
+                <div class="c-forms">
+                    <label for="name">Email Address*</label>
+                    <input type="email" name="email" id="email" placeholder="Enter your Email">
+                </div>
+                <div class="c-forms">
+                    <label for="name">Mobile Number*</label>
+                    <input type="text" name="name" id="mobile" placeholder="Enter Mobile Number">
+                </div>
+         
+                <div class="c-forms">
+                    <label for="name">Message</label>
+                    <textarea name="message" id="message" placeholder="Enter Your Message"></textarea>
+                </div>
+                <div class="c-forms">
+                    <label for="name">Course*</label>
+                    <select name="course" id="course">
+                        <option value="select">Select the course</option>
+                        <option value="select">React Js</option>
+                        <option value="select">Python Programming</option>
+                        <option value="select">Cloud Computing</option>
+                    </select>
+                </div>
+                <div class="c-forms" style="visibility: hidden;">
+                    <label for="name">Mobile Number*</label>
+                    <input type="text" name="name" id="mobile" placeholder="Enter Mobile Number">
+                </div>
+                <div class="c-forms">
+                 <button type="submit" onclick="contact()">Submit</button>
+                </div>
             </div>
         </div>
     </div>
-    
-    {% endblock %}
 </section>
+<section>
+   <div class="flex-container">
+    <p>Explore Our Trainers</p>
+    <p>View All</p>
+   </div>
+   <div class="trainer-section">
+    {% for trainer in allTrainers %}
+    <div class="trainer">
+        <div class="trainer-img">
+            <img src="{{trainer.trainer_photo.url}}" loading="lazy" alt="trainer-profile">
+        </div>
+        <div class="trainer-details">
+            <h1>{{trainer.trainer_name}}</h1>
+            <div class="ratings">
+                <i class='bx bxs-star'></i>
+                <i class='bx bxs-star'></i>
+                <i class='bx bxs-star'></i>
+                <i class='bx bxs-star'></i>
+                <i class='bx bxs-star-half' ></i>
+                (4.2)
+            </div>
+            <div class="trainer-expertise">
+              
+            </div>
+            <div class="trainer-desc">
+                <p>
+                    {{ trainer.trainer_desc|slice:":100" }}...
+                    <a href="/view_trainer/{{trainer.trainer_id}}" class="read-more">Read More</a>
+                </p>
+            </div>
+            
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+   </div>
+</section>
+<section>
+    <h1 class="expert-text" style="text-align: center;"> Our Clients</h1>
+    <div class="tech-stacks">
+        <div class="tech-items">
+            <img src="{% static 'images/infosys.png' %}" alt="">
+            <img src="{% static 'images/cognizant.png' %}" alt="">
+            <img src="{% static 'images/genpact.png' %}" alt="">
+            <img src="{% static 'images/microsoft.png' %}" alt="">
+            <img src="{% static 'images/google.png' %}" alt="">
+            <img src="{% static 'images/capgemini.png' %}" alt="">
+            <img src="{% static 'images/mindtree.png' %}" alt="">
+        </div>
+        <div class="tech-items">
+            <img src="{% static 'images/infosys.png' %}" alt="">
+            <img src="{% static 'images/cognizant.png' %}" alt="">
+            <img src="{% static 'images/genpact.png' %}" alt="">
+            <img src="{% static 'images/microsoft.png' %}" alt="">
+            <img src="{% static 'images/google.png' %}" alt="">
+            <img src="{% static 'images/capgemini.png' %}" alt="">
+            <img src="{% static 'images/mindtree.png' %}" alt="">
+        </div>
+        </div>
 
+</section>
+{% endblock %}
+<footer>
+    <div class="footer-section">
+        <div class="footer-left">
+            <div class="footer-links">
+                <h1>Company</h1>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Our Team</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h1>Services</h1>
+                <ul>
+                    <li><a href="#">Web Development</a></li>
+                    <li><a href="#">Mobile App Development</a></li>
+                    <li><a href="#">Cloud Solutions</a></li>
+                    <li><a href="#">Consulting</a></li>
+                    <li><a href="#">E-commerce Solutions</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h1>Support</h1>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Community Forum</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h1>Follow Us</h1>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">LinkedIn</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">YouTube</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h1>Get Involved</h1>
+                <ul>
+                    <li><a href="#">Join Our Newsletter</a></li>
+                    <li><a href="#">Partner with Us</a></li>
+                    <li><a href="#">Become a Contributor</a></li>
+                    <li><a href="#">Investor Relations</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-right">
+            <h1>Get Our Weekly Newsletter:</h1>
+            <div class="news-letter">
+                <input type="email" placeholder="Enter Your Email*">
+                <button>Subscribe</button>
+            </div>
+            <div class="footer-flex">
+                <div class="flex-left">
+                    <h4>Connect with us</h4>
+                    <div class="flex-icons">
+                        <img src="{% static 'images/linkedinlogo.png' %}" alt="">
+                        <img src="{% static 'images/instagramlogo.png' %}" alt="">
+                        <img src="{% static 'images/facebooklogo.svg' %}" alt="">
+                        <img src="{% static 'images/twiiter.jpg' %}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="categories">
+        <h4>Top Categories</h4>
+        <div class="flex-domains">
+        {% for domain in domains %}
+            <p>{{domain.name}}</p> 
+            {% endfor %}
+        </div>
+    </div>
+    <div class="categories">
+        <h4>Top Courses</h4>
+        <div class="flex-domains">
+            <p>CSM</p>
+            <p>CSPO</p>
+            <p>A-CSM</p>
+            <p>CAL 1</p>
+            <p>CSD</p>
+            <p>PMP</p>
+            <p>Leading SaFe</p>
+            <p>SAFe POPM</p>
+            <p>SSM</p>
+            <p>SPC</p>
+            <p>CSM</p>
+            <p>SAFe RTE</p>
+            <p>LPM</p>
+            <p>ITIL 4 Foundation</p>
+        </div>
+    </div>
+    <div class="copy-right">
+        <p>&copy;2024, Cognitix Consulting Pvt Ltd. All rights reserved</p>
+    </div>
+</footer>
     <script>
+        function email() { 
+            let subscribeemail = $("#subscribeemail").val();
+            if(subscribeemail){
+                $("#email-text").html('Subscribed! Thanks').css('color','#28a475')
+            }
+            else{
+                $("#email-text").html("Please Enter Your Email").css('color','#dc3545')
+            }
+         }
+function contact(){
+    let name = $("#name").val();
+    let email = $("#email").val();
+    let mobile = $("#mobile").val();
+    let message = $("#message").val();
+    let course = $("#course").val();
+    if(name && email && email && mobile && message && course){
+        $("#connect").html("Sent Successfully").css('color','#28a475');
+        return;
+    }
+    else{
+        $("#connect").html("Please fill all the fields").css('color','#dc3545')
+    }
+}
+$(document).ready(function() {
+    // Show the dropdown on mouse enter
+    $('.list.links').on('mouseenter', function() {
+        $('.drop-down').stop(true, true).fadeIn(200);
+    });
+
+    // Hide the dropdown on mouse leave
+    $('.drop-down').on('mouseleave', function() {
+        $(this).stop(true, true).fadeOut(200);
+    });
+
+    // Also hide the dropdown when the user leaves the list
+    $('.drop-down').on('mouseleave', function() {
+        $('.drop-down').stop(true, true).fadeOut(200);
+    });
+});
+
         $(document).ready(function(){
             $(".slider-container p:first").addClass('active'); // for children we should use :first, not first-child.
         })
@@ -298,50 +824,6 @@ const sliderContainer = document.querySelector('.slider-container');
 const sliderItems = document.querySelectorAll('.slider-container p');
 const prevButton = document.getElementById('prev');
 const nextButton = document.getElementById('next');
-
-let index = 0;
-const itemsToShow = 5; // Number of items to show
-
-function showSlide() {
-    const itemWidth = sliderItems[0].clientWidth; // Width of a single item
-    const totalWidth = itemWidth * sliderItems.length; // Total width of all items
-    const maxIndex = Math.ceil(sliderItems.length / itemsToShow) - 1; // Calculate max index for sliding
-
-    // Adjust index to loop correctly
-    index = index < 0 ? maxIndex : index > maxIndex ? 0 : index;
-
-    // Apply translation to the slider container
-    sliderContainer.style.transform = `translateX(${-itemWidth * index}px)`;
-}
-
-// // Update the button event listeners
-// nextButton.addEventListener('click', () => {
-//     if (index < sliderItems.length - itemsToShow) {
-//         index += 1; // Increment index by 1 to show the next item
-//     }
-//     showSlide();
-// });
-
-// prevButton.addEventListener('click', () => {
-//     if (index > 0) {
-//         index -= 1; // Decrement index by 1 to show the previous item
-//     }
-//     showSlide();
-// });
-
-// Initial display
-showSlide();
-
-
-        let currentIndex = 0;
-        const images = document.querySelectorAll('.slider img');
-function showNextImage() {
-    images[currentIndex].classList.remove('active'); 
-    currentIndex = (currentIndex + 1) % images.length; 
-    images[currentIndex].classList.add('active');
-}
-setInterval(showNextImage, 5000);
-
 $(document).ready(function(){
     $(".links").hover(function(){
         $(this).find(".bx-chevron-down").css('transform', 'rotate(180deg)');
@@ -381,7 +863,24 @@ $("#certified").mouseleave(function(){
 $("#course-certification").mouseleave(function(){
     $(this).fadeOut();
 });
+ $("#jobs").mouseenter(function(){
+    $("#job-certification").stop(true, true).fadeIn();
+});
 
+$("#jobs").mouseleave(function(){
+    setTimeout(function(){
+        if (!$("#job-certification").is(":hover")) {
+            $("#job-certification").fadeOut();
+        }
+    }, 100);  // Adjust the delay to suit your needs
+});
+
+$("#job-certification").mouseleave(function(){
+    $(this).fadeOut();
+});
+function OpenCourse(id) { 
+    window.location.href = '/course/'+encodeURIComponent(id)
+ }
     </script>
  </body>
  </html>

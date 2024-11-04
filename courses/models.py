@@ -6,6 +6,8 @@ from adminuse.models import AddTrainers
 class Category(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     def __str__(self):
         return self.name
 
@@ -18,7 +20,6 @@ class Trainer(models.Model):
     contact_email = models.EmailField(blank=True, null=True)
     def __str__(self):
         return f"{self.Customer.username} - {self.expertise}"
-    
 class Course(models.Model):
     course_id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=200)
@@ -26,17 +27,28 @@ class Course(models.Model):
     price = models.IntegerField()
     course_gst = models.IntegerField(default=18.00)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='courses')
-    course_img = models.ImageField(upload_to="course_images/",default="")
-    trainer = models.ForeignKey(AddTrainers, on_delete=models.CASCADE)
+    course_img = models.ImageField(upload_to='course_images/', default="")
+    course_video = models.FileField(upload_to="course_videos/", default="")
+    course_sample_certificate = models.ImageField(upload_to="sample_certificates", default="")
+    course_brochure = models.FileField(upload_to="brochures/", default="")
+    trainers = models.ManyToManyField(AddTrainers)
     skillsgain = models.CharField(max_length=500, default="")
     total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
-    started_at = models.DateField(default=now)
-    ended_at = models.DateField(default=now)
+    completion_of_days = models.CharField(max_length=200, default="2days")
+    completion_of_hrs = models.CharField(max_length=200, default="20hrs")
+    start = models.DateField(default=now)
+    end = models.DateField(default=now)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.title
+    def get_duration_days(self):
+        return (self.ended_at - self.started_at).days
+    def get_duration_hours(self):
+        duration = self.ended_at - self.started_at  # This will give a timedelta object
+        total_hours = duration.total_seconds() // 3600  # Convert total seconds to hours
+        return total_hours
 
 class Enrollment(models.Model):
     enrollment_id = models.AutoField(primary_key=True)
@@ -58,6 +70,27 @@ class Lesson(models.Model):
 
     def __str__(self):
         return self.title
+from django.utils.timezone import now
+
+from django.utils import timezone
+
+class CourseSchedule(models.Model):
+    trainer = models.ForeignKey(AddTrainers, default="", on_delete=models.CASCADE)
+    region = models.CharField(max_length=200, default="")
+    start_date = models.DateField(default=timezone.now)
+    end_date = models.DateField(default=timezone.now)
+    schedule_start_time = models.TimeField()  # Start time of the schedule
+    schedule_end_time = models.TimeField()    # End time of the schedule
+    notes = models.TextField(blank=True, null=True) #optional 
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now= True)
+
+    def __str__(self):
+        return f"{self.trainer.name} ({self.start_date} - {self.end_date})"
+
+    def get_duration_days(self):
+        return (self.end_date - self.start_date).days
+
 
 class Review(models.Model):
     review_id = models.AutoField(primary_key=True)

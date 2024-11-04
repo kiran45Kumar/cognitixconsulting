@@ -1,0 +1,175 @@
+<style>
+    body {
+        background-color: #f9f9f9
+    }
+
+    .job-details {
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        color: #333;
+        line-height: 1.6;
+    }
+
+    h2 {
+        color: #2c3e50;
+        font-size: 24px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    h3 {
+        color: #34495e;
+        font-size: 20px;
+        border-bottom: 2px solid #ecf0f1;
+        padding-bottom: 5px;
+        margin-top: 25px;
+    }
+
+    p {
+        margin: 10px 0;
+        font-size: 16px;
+    }
+
+    strong {
+        color: #2980b9;
+    }
+
+    ul {
+        margin: 10px 0;
+        padding-left: 20px;
+    }
+
+    ul li {
+        list-style-type: disc;
+        margin-bottom: 10px;
+        font-size: 16px;
+        color: #7f8c8d;
+    }
+
+    .job-details ul li::before {
+        content: "✔"; /* Customize bullet style */
+        color: #27ae60;
+        margin-right: 10px;
+        font-weight: bold;
+    }
+
+    .job-details p, .job-details li {
+        line-height: 1.8;
+    }
+
+    .job-details p:last-child {
+        margin-bottom: 0;
+    }
+
+    .job-details p strong {
+        font-weight: bold;
+        color: #2c3e50;
+    }
+
+    .job-details a {
+        color: #2980b9;
+        text-decoration: none;
+    }
+
+    .job-details a:hover {
+        text-decoration: underline;
+    }
+    .apply-button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .apply-button button{
+        padding: 15px 80px;
+        background: #06d306;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+        outline: none;
+        font-size: 22px;
+    }
+    @media (max-width: 768px) {
+        .job-details {
+            padding: 15px;
+            margin: 20px;
+        }
+
+        h2 {
+            font-size: 20px;
+        }
+
+        h3 {
+            font-size: 18px;
+        }
+
+        p, li {
+            font-size: 14px;
+        }
+    }
+</style>
+
+<div class="job-details">
+    <h2>{{ job.title }} at {{ job.company_posted_by.company_name }}</h2>
+    <p><strong>Location:</strong> {{ job.location }}</p>
+    <p><strong>Job Type:</strong> {{ job.get_job_type_display }}</p>
+    <p><strong>Reports To:</strong> {{ job.reports_to }}</p>
+
+    <h3>Job Summary</h3>
+    <p>{{ job.summary }}</p>
+
+    <h3>Key Responsibilities</h3>
+    <ul>
+        <li>{{ job.responsibilities|linebreaks }}</li>
+    </ul>
+
+    <h3>Qualifications</h3>
+    <p><strong>Required:</strong></p>
+    <ul>
+        <li>{{ job.qualifications|linebreaks }}</li>
+    </ul>
+
+    {% if job.preferred_qualifications %}
+        <p><strong>Preferred:</strong></p>
+        <ul>
+            <li>{{ job.preferred_qualifications|linebreaks }}</li>
+        </ul>
+    {% endif %}
+
+    <h3>Skills</h3>
+    <ul>
+        <li>{{ job.skills|linebreaks }}</li>
+    </ul>
+
+    {% if job.benefits %}
+        <h3>Benefits</h3>
+        <ul>
+            <li>{{ job.benefits|linebreaks }}</li>
+        </ul>
+    {% endif %}
+
+    {% if job.salary %}
+        <p><strong>Salary:</strong> ₹{{ job.salary }}</p>
+    {% endif %}
+
+    {% if job.timings %}
+        <p><strong>Work Timings:</strong> {{ job.timings }}</p>
+    {% endif %}
+
+    <p><strong>Posted On:</strong> {{ job.posted_on|date:"d M, Y" }}</p>
+    {% if job.last_date_to_apply %}
+        <p><strong>Last Date to Apply:</strong> {{ job.last_date_to_apply|date:"d M, Y" }}</p>
+    {% endif %}
+    <div class="apply-button">
+        <button onclick="applyJob('{{job.job_id}}')"> Apply Now </button>
+    </div>
+</div>
+<script>
+    function applyJob(id){
+        window.location.href = '/apply_job/'+encodeURIComponent(id)
+    }
+</script>

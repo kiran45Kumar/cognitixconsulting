@@ -1,0 +1,96 @@
+<style>
+    .trainer-profile {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.trainer-name {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.trainer-section {
+    margin-bottom: 20px;
+}
+
+.trainer-section h3 {
+    font-size: 22px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.trainer-section p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+}
+
+.read-more {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}
+@media (max-width: 600px) {
+    .trainer-profile {
+        padding: 10px;
+        margin: 10px;
+    }
+
+    .trainer-name {
+        font-size: 24px;
+    }
+
+    .trainer-section h3 {
+        font-size: 18px;
+    }
+
+    .trainer-section p {
+        font-size: 14px;
+    }
+}
+.trainer-logo img{
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+</style>
+<div class="trainer-profile">
+    <!-- Trainer Name -->
+     <div class="trainer-logo">
+        <img src="{{trainer.trainer_photo.url}}" alt="">
+     </div>
+    <h2 class="trainer-name">{{ trainer.trainer_name }}</h2>
+
+    <!-- Trainer Description -->
+    <div class="trainer-section">
+        <h3>Description</h3>
+        <p>{{ trainer.trainer_desc }}
+        </p>
+    </div>
+
+    <!-- Trainer Bio -->
+    <div class="trainer-section">
+        <h3>Bio</h3>
+        <p>{{ trainer.trainer_bio }}</p>
+    </div>
+
+    <!-- Trainer Expertise -->
+    <div class="trainer-section">
+        <h3>Expertise</h3>
+        <p>{{ trainer.trainer_expertise|linebreaks }}</p>
+    </div>
+
+    <!-- Trainer Experience -->
+    <div class="trainer-section">
+        <h3>Experience</h3>
+        <p>{{ trainer.trainer_experience }}</p>
+    </div>
+</div>
