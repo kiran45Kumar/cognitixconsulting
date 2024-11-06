@@ -26,5 +26,7 @@ urlpatterns = [
     path('remove_schedule/',views.RemoveScheduleAdmin.as_view(), name="remove_schedule"),
     path('download_brochure/<int:course_id>/', views.download_brochure, name='download_brochure'),
     path('trainer/<int:trainer_id>/schedule/', trainer_schedule, name='trainer_schedule'),
-    path('filter_by/',views.FilterBy.as_view(), name='filter_by')
+    path('filter_by/',views.FilterBy.as_view(), name='filter_by'),
+    path("remove_trainer/",views.RemoveTrainer.as_view(),name='remove_trainer' ),
+    path('payment_page/<int:id>',views.payment_page, name='payment_page')
 ]

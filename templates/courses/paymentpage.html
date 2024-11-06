@@ -1,0 +1,83 @@
+{% extends 'customer/index2.html' %} 
+{% block navbar-aside %}
+{% load static %}
+
+<div class="flex items-center justify-between gap-10 mx-10 my-11 shadow-lg p-8 flex-wrap">
+    <div class="course-section">
+        <h1 class="text-md font-extrabold dark:text-white">Course Details</h1>
+        <b>Course Title</b>: <p class="text-2xl font-300 dark:text-white"> {{course.title}}</p>
+        <input type="hidden" name="" id="course_id" value="{{course.course_id}}" />
+    <p class="text-xl font-300 dark:text-white"><b>User Name</b>: {{currentUser}}</p>
+        <input type="hidden" name="" id="user_id" value="{{currentUserId}}" />
+        <input type="hidden" name="" id="user_email" value="{{currentEmail}}" />
+          <p><b>Course Price: </b> {{course.price}}</p>
+          <p><b>Gst: </b> {{course.course_gst}}% </p>
+          <p><b>Total Price:</b> {{course.total_price}}</p>
+        <input type="hidden" name="" id="amount" value="{{course.total_price}}" />
+      </div>
+      
+      <div class="account-detals">
+        <h1 class="text-md font-extrabold dark:text-white">Account Details</h1>
+          <h1>Bank Details</h1>
+          <h3>Name: Cognitix Consulting</h3>
+          <h4>Bank Name: Axis Bank</h4>
+          <h4>Account number: 924020013076206</h4>
+          <h4>IFSC CODE: UTIB0003199</h4>
+      </div>
+      
+      
+      <div class="steps-section">
+        <h1 class="text-md font-extrabold dark:text-white">Precautions To Be Followed</h1>
+
+          <ul class="space-y-4 text-gray-500 list-disc list-inside dark:text-gray-400">
+              <li>
+                Steps To Be Followed
+                <ol class="ps-5 mt-2 space-y-1 list-disc list-inside">
+                  <li>Open your preferred payment app or software.</li>
+                  <li>Pay the course amount shown for your selected course</li>
+                  <li>After the payment Please upload the screenshot of the Payment</li>
+                  <li>You'll Recieve an email shortly of payment approval.</li>
+                  <li>For any questions, please feel free to contact us.</li>
+                </ol>
+              </li>
+            </ul>
+      </div>
+</div>
+
+<div class="payment-form-section">
+    <section class="bg-gray-50 dark:bg-gray-900">
+        <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+            <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
+                <img class="w-8 h-8 mr-2 rounded" src="{% static 'images/MainLogo.jpg' %}" alt="logo">
+                CognitixConsulting
+            </a>
+            <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+                <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+                    <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                        Create an account
+                    </h1>
+                    <div class="space-y-4 md:space-y-6" >
+                        <div>
+                            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Transaction Id</label>
+                            <input type="email" name="email" id="transaction_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="TXN-3F5A7B1C" required="">
+                        </div>
+                        <div>
+                            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Payment Proof/ScreenShot</label>
+                            <input type="file" name="password" id="payment_img" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
+                        </div>
+                        <div class="flex items-start">
+                            <div class="flex items-center h-5">
+                              <input id="terms" aria-describedby="terms" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required="">
+                            </div>
+                            <div class="ml-3 text-sm">
+                              <label for="terms" class="font-light text-gray-500 dark:text-gray-300">I accept the <a class="font-medium text-primary-600 hover:underline dark:text-primary-500" href="#">Terms and Conditions</a></label>
+                            </div>
+                        </div>
+                        <button type="button" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </section>
+</div>
+{% endblock navbar-aside %}

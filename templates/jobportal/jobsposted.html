@@ -1,0 +1,181 @@
+{% extends 'jobportal/companydashboard.html' %}
+{% block aside %}
+    
+<head>
+  <link
+    href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css"
+    rel="stylesheet"
+  />
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<style>
+    /* toast CSS */
+.toast {
+    position: fixed;
+    top: 20px; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%); /* Offset by half its own width and height */
+    background-color: white; /* Green */
+    padding: 20px 50px;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+}
+
+.toast.show {
+    opacity: 1;
+}
+
+</style>
+<body>
+    <div class="relative overflow-x-auto">
+        <table
+          class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+        >
+          <thead
+            class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+          >
+            <tr>
+              <th scope="col" class="px-6 py-3">Job Title</th>
+              <th scope="col" class="px-6 py-3">Job Location</th>
+              <th scope="col" class="px-6 py-3">Posted By</th>
+              <th scope="col" class="px-6 py-3">Job Type</th>
+              <th scope="col" class="px-6 py-3">Job Reports To</th>
+              <th scope="col" class="px-6 py-3">Job salary</th>
+              <th scope="col" class="px-6 py-3">Update</th>
+              <th scope="col" class="px-6 py-3">Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for job in  alljobs %}
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+              <th
+                scope="row"
+                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+              >
+              <input type="text"  value=" {{job.title}}" name="title" id="job_title{{job.job_id}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required="">
+               
+              </th>
+              <td class="px-6 py-4">
+              <input type="text"  value=" {{job.location}}" name="location" id="job_location{{job.job_id}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required="">
+                  
+              </td>
+              <td class="px-6 py-4">
+              <input type="text"  value=" {{job.company_posted_by.company_name}}" name="company_name" id="company_name{{job.job_id}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required="">
+              </td>
+              <td class="px-6 py-4">
+              <input type="text"  value=" {{job.get_job_type_display}}" name="job_type" id="job_type{{job.job_id}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required="">
+              </td>
+              <td class="px-6 py-4">
+              <input type="text"  value=" {{job.reports_to}}" name="job_reports" id="job_reports{{job.job_id}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required="">
+              </td>
+              <td class="px-6 py-4">
+              <input type="text"  value=" {{job.salary}}" name="job_salary" id="job_salary{{job.job_id}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required="">
+              </td>
+              <td class="px-6 py-4">
+                  <button onclick="JobEdit('{{job.job_id}}')" type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Update</button>
+              </td>
+              <td class="px-6 py-4">
+                  <button onclick="JobDelete('{{job.job_id}}')" type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        <div id="toast" class="toast"></div>      
+</body>
+  <script>
+    function JobEdit(id){
+        let job_title = $("#job_title"+id).val()
+        let job_location = $("#job_location"+id).val()
+        let company_name = $("#company_name"+id).val()
+        let job_type = $("#job_type"+id).val()
+        let job_reports = $("#job_reports"+id).val()
+        let job_category = $("#job_category"+id).val()
+        let job_industry = $("#job_industry"+id).val()
+        let job_timings = $("#job_timings"+id).val()
+        let last_date_to_apply = $("#last_date_to_apply"+id).val()
+        let job_salary = $("#job_salary"+id).val()
+        $.ajax({
+            type:"POST",
+            url:"/job_update/",
+            data:{
+                'job_id':id,
+                "job_title":job_title,
+                "job_location":job_location,
+                "company_name":company_name,
+                "job_reports":job_reports,
+                "job_category":job_category,
+                "job_industry":job_industry,
+                "last_date_to_apply":last_date_to_apply,
+                "job_timings":job_timings,  
+                "job_salary":job_salary,  
+                "job_type":job_type,  
+            },
+            success:function(data){
+                if(data){
+                    $("#toast").text('Changes Saved').addClass('show').css('color','#28a475');
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000)
+                }
+                else{
+                    $("#toast").text('Failed To Remove').addClass('show').css('color','#dc3545');
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000)
+                
+            }
+        
+           
+        },
+        error:function(error){
+            if(error){
+                $("#toast").text('Oops!Something went Wrong').addClass('show').css('color','#dc3545');
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000)
+            }
+        }
+    })
+        }
+    function JobDelete(id){
+        $.ajax({
+            type:'POST',
+            url:"/job_delete/",
+            data:{
+                "id":id,
+            },
+            success:function(data){
+                if(data){
+                    $("#toast").text('Job Removed').addClass('show').css('color','#28a475');
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000)
+                }
+                else{
+                    $("#toast").text('Failed to Remove').addClass('show').css('color','#dc3545');
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000)
+                }
+            },
+            error:function(error){
+                if(error){
+                    $("#toast").text('Something went wrong').addClass('show').css('color','#dc3545');
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000)
+                }
+            }
+        })
+    }
+  </script>
+{% endblock aside %}
+</div>

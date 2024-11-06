@@ -1,5 +1,5 @@
 from typing import Any
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from rest_framework.views import APIView
 from .models import Customer
 from courses.models import Category, Course
@@ -14,6 +14,11 @@ def signup(request):
     return render(request, 'customer/signup.html')
 def login(request):
     return render(request, 'customer/login.html')
+def logout(request):
+    request.session.pop('user_name',None)
+    request.session.pop('customer_email',None)
+    request.session.pop('customer_id',None)
+    return redirect('login')
 def index2(request):
     domains = Category.objects.all()
     user_id = request.session['customer_id']

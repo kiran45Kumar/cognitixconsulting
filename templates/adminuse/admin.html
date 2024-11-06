@@ -63,6 +63,18 @@
           </li>
           <li>
             <div class="admin-text-flex">
+              <i class="bx bx-shopping-bag"></i>
+              <p onclick="navigate('jobs')">Jobs</p>
+            </div>
+          </li>
+          <li>
+            <div class="admin-text-flex">
+              <i class="bx bx-shopping-bag"></i>
+              <p onclick="navigate('companies')">Companies</p>
+            </div>
+          </li>
+          <li>
+            <div class="admin-text-flex">
               <i class="bx bx-money-withdraw"></i>
               <p>Payments</p>
             </div>
@@ -76,7 +88,7 @@
           <li>
             <div class="admin-text-flex">
               <i class="bx bx-user-plus"></i>
-              <p>Customers</p>
+              <p onclick="navigate('customer')">Customers</p>
             </div>
           </li>
         </ul>
@@ -85,6 +97,8 @@
           <ul class="category">
             {% for category in categories %}
             <p>{{category.name}}</p>
+            {% empty %}
+            <p>No Categories Found</p>
             {% endfor %}
             <div class="add-category" onclick="addCategory()">
               <div class="icon-plus">
@@ -258,6 +272,15 @@
         }
         else if(page == 'admin'){
           window.location.href = "/admin_dashboard/";
+        }
+        else if(page == 'jobs'){
+          window.location.href = "/view_all_jobs/";
+        }
+        else if(page == 'companies'){
+          window.location.href = "/view_all_companies/";
+        }
+        else if(page == 'customer'){
+          window.location.href = "/view_all_customers/";
         }
       }
     </script>

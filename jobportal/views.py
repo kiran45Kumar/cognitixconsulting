@@ -137,6 +137,11 @@ class CompanyDashboard(TemplateView):
         context = super().get_context_data(**kwargs)
         user_id = self.request.session['customer_id']
         company_data = CompanyProfile.objects.filter(user_id = user_id)
+        company = CompanyProfile.objects.get(user_id = user_id)
+        jobsposted = PostJob.objects.filter(company_posted_by = company)
+        jobscount = jobsposted.count()
+        context['alljobs'] = jobsposted
+        context['jobscount'] = jobscount
         context['company_data'] = company_data
         return context
 class JobView(TemplateView):
@@ -170,4 +175,78 @@ class ApplyToJob(APIView):
         application.user = user
         application.job = job
         application.save()
+        return JsonResponse({"status":"pass"})
+def company_jobs(request, id):
+    company = CompanyProfile.objects.get(company_id = id)
+    jobsposted = PostJob.objects.filter(company_posted_by = company)
+    jobscount = jobsposted.count()
+    user_id = request.session['customer_id']
+    company_data = CompanyProfile.objects.filter(user_id = user_id)
+    return render(request, 'jobportal/jobsposted.html',{'alljobs':jobsposted,"jobscount":jobscount,'company_data':company_data})
+class JobUpdate(APIView):
+    def post(self, request):
+        job_id = request.POST.get('job_id')
+        job_title = request.POST.get('job_title')
+        job_location = request.POST.get('job_location')
+        job_reports = request.POST.get('job_reports')
+        job_category = request.POST.get('job_category')
+        job_industry = request.POST.get('job_industry')
+        last_date_to_apply = request.POST.get('last_date_to_apply')
+        job_timings = request.POST.get('job_timings')
+        job_salary = request.POST.get('job_salary')
+        job_type = request.POST.get('job_type')
+        PostJob.objects.filter(job_id = job_id).update(
+            title = job_title,
+            location = job_location,
+            reports_to = job_reports,
+            job_type = job_type,
+            salary = job_salary,
+        )
+        return JsonResponse({"status":"pass"})
+
+class DeleteJobs(APIView):
+    def post(self, request):
+        id = request.POST.get('id')
+        PostJob.objects.filter(job_id = id).delete()
+        return JsonResponse({"status":"pass"})
+class RemoveAccount(APIView):
+    def post(self, request):
+        id = request.POST.get('id')
+        CompanyProfile.objects.filter(company_id = id).delete()
+        return JsonResponse({"status":"pass"})
+def view_company_form(request,id):
+    company = CompanyProfile.objects.get(company_id = id)
+    jobsposted = PostJob.objects.filter(company_posted_by = company)
+    jobscount = jobsposted.count()
+    user_id = request.session['customer_id']
+    company_data = CompanyProfile.objects.filter(user_id = user_id)
+    return render(request, 'jobportal/companyupdate.html',{'alljobs':jobsposted,"jobscount":jobscount,'company_data':company_data})
+class UpdateCompany(APIView):
+    def post(self,request):
+        company_id = request.POST.get('company_id')
+        company_name  = request.POST.get('company_name')
+        company_tagline  = request.POST.get('company_tagline')
+        company_location  = request.POST.get('location')
+        company_desc  = request.POST.get('company_description')
+        company_email  = request.POST.get('company_email')
+        company_address  = request.POST.get('company_address')
+        company_state  = request.POST.get('company_state')
+        company_city  = request.POST.get('company_city')
+        company_pincode  = request.POST.get('company_pincode')
+        CompanyProfile.objects.filter(company_id = company_id).update(
+            company_name=company_name,
+            company_tagline=company_tagline,
+            company_location=company_location,
+            company_desc=company_desc,
+            company_email=company_email,
+            company_address=company_address,
+            company_city=company_city,
+            company_pincode=company_pincode,
+            company_state=company_state
+        )
+        return JsonResponse({"status":"pass"})
+class CompanyDelete(APIView):
+    def post(self, request):
+        id = request.POST.get('id')
+        CompanyProfile.objects.filter(company_id = id).delete()
         return JsonResponse({"status":"pass"})

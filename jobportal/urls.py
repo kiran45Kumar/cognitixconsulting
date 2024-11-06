@@ -12,4 +12,11 @@ urlpatterns = [
     path('job/<int:id>/',job_by_id,name='all_jobs'),
     path('apply_job/<int:id>',apply_job,name='all_jobs'),
     path('company_dashboard/',CompanyDashboard.as_view(),name='company_dashboard'),
+    path('company_jobs/<int:id>', views.company_jobs, name='company_jobs'),
+    path("job_update/", views.JobUpdate.as_view(), name="job_update"),
+    path("job_delete/",views.DeleteJobs.as_view(), name='delete_jobs'),
+    path('remove_company/',views.RemoveAccount.as_view(), name="remove_account"),
+    path('company_update/<int:id>/',views.view_company_form, name='company_update'),
+    path('company_update/', views.UpdateCompany.as_view(), name='company_update_view'),
+    path("company_delete/", views.CompanyDelete.as_view(), name='company_delete')
 ]

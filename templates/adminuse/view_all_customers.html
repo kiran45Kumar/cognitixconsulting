@@ -1,0 +1,125 @@
+{% extends 'adminuse/admin.html' %}
+{% block navbar-sidebar %}
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+</head>
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Username
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Email
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Phone
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Password
+                </th>
+                <th scope="col" class="px-6 py-3">
+                   Confirm Password
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Role
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Update
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Delete
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in allcustomers %}
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <input type="email" id="username{{user.customer_id}}" value="{{user.username}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com" required />
+                </th>
+                <td class="px-6 py-4">
+                    <input type="email" id="email{{user.customer_id}}" value="{{user.email}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com" required />
+                </td>
+                <td class="px-6 py-4">
+                    <input type="text" id="phone{{user.customer_id}}" value="{{user.phone}}"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com" required />
+                </td>
+                <td class="px-6 py-4">
+                    <input type="text" id="password{{user.customer_id}}" value="{{user.password}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com" required />
+                </td>
+                <td class="px-6 py-4">
+                    <input type="text" id="confirm_password{{user.customer_id}}" value="{{user.confirm_password}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com" required />
+                </td>
+                <td class="px-6 py-4">
+                    <input type="text" id="role{{user.customer_id}}" value="{{user.role}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@flowbite.com" required />
+                </td>
+                <td class="px-6 py-4">
+                    <button onclick="update('{{user.customer_id}}')" type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Update</button>
+                </td>
+                <td class="px-6 py-4">
+                    <button onclick="delete_user('{{user.customer_id}}')" type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Delete</button>
+                </td>
+            </tr>
+            {% empty %}
+            <h1>No Customers Found</h1>
+            {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+<script>
+    function update(id){
+        const username = $("#username"+id).val();
+        const email = $("#email"+id).val();
+        const phone = $("#phone"+id).val();
+        const password = $("#password"+id).val();
+        const confirm_password = $("#confirm_password"+id).val();
+        const role = $("#role"+id).val();
+        $.ajax({
+            type:"POST",
+            url:"/update_user_admin/",
+            data:
+            {    "id":id,
+                "username":username,
+                "email":email,
+                "phone":phone,
+                "password":password,
+                "confirm_password":confirm_password,
+                "role":role,
+            },
+            success:function(data){
+                if(data){
+                    window.location.reload();
+                }
+                else{
+                    alert('failed')
+                }
+            },
+            error:function(xhr, status, error) { 
+                if(error){
+                    alert(error.message)
+                }
+             }
+        })
+    }
+    function delete_user(id) { 
+        $.ajax({
+            type:"POST",
+            url:"/delete_user_admin/",
+            data:{
+                "id":id,
+            },
+            success:function(data){
+                if(data){
+                    window.location.reload();   
+                }
+                else{
+                    alert("Failed")
+                }
+            }
+        })
+     }
+</script>
+{% endblock navbar-sidebar %}

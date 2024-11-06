@@ -52,14 +52,17 @@ class Course(models.Model):
 
 class Enrollment(models.Model):
     enrollment_id = models.AutoField(primary_key=True)
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE) 
-    course = models.ForeignKey(Course, on_delete=models.CASCADE) 
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
     enrolled_at = models.DateTimeField(auto_now_add=True)
+    access_granted = models.BooleanField(default=False)  # New field to manage access
 
     class Meta:
-        unique_together = ('customer', 'course') 
+        unique_together = ('customer', 'course')
+
     def __str__(self):
         return f"{self.customer.username} enrolled in {self.course.title}"
+
 
 class Lesson(models.Model):
     lesson_id = models.AutoField(primary_key=True)
@@ -102,3 +105,26 @@ class Review(models.Model):
 
     def __str__(self):
         return f"Review by {self.user.username} for {self.course.title}"
+
+
+class Payment(models.Model):
+    PENDING = 'Pending'
+    CONFIRMED = 'Confirmed'
+    REJECTED = 'Rejected'
+    
+    PAYMENT_STATUS_CHOICES = [
+        (PENDING, 'Pending'),
+        (CONFIRMED, 'Confirmed'),
+        (REJECTED, 'Rejected'),
+    ]
+
+    user = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    transaction_id = models.CharField(max_length=100, blank=True, null=True)
+    payment_proof = models.ImageField(upload_to='payment_proofs/', blank=True, null=True)  # User uploads screenshot
+    status = models.CharField(max_length=20, choices=PAYMENT_STATUS_CHOICES, default=PENDING)
+    payment_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Payment for {self.course.title} by {self.user.username} - {self.status}"

@@ -119,6 +119,8 @@
                 <td><button class="button" onclick="updateCourse('{{course.course_id}}')">Update</button></td>
                 <td><button class="button" onclick="delete_course('{{course.course_id}}')">Delete</button></td>
             </tr>
+            {% empty %}
+            <h1>No Courses Found</h1>
             {% endfor %}
         </tbody>
     </table>

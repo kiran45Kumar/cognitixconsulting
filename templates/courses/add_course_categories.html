@@ -99,6 +99,8 @@
             <p>{{category.name}}</p>
             <div class="cross"><span onclick="removeCat('{{category.id}}')">&times;</span></div>
         </div>
+        {% empty %}
+        <h1>No Categories Found</h1>
         {% endfor %}
     </div>
     <!-- Success Message -->

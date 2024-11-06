@@ -180,6 +180,10 @@ video {
                     <span>Hours</span>
                     <p>{{course_by_id.completion_of_hrs }}</p>
            </div>
+           <div class="course-duration">
+                    <span>Starts</span>
+                    <p>{{course_by_id.start}}</p>
+           </div>
         </div>
         <div class="course-view-buttons">
                     <button onclick="scrollToElement('trainer')">View Schedules</button>
@@ -215,6 +219,7 @@ video {
             <div class="trainer-card">
                 <img src="{{trainer.trainer_photo.url}}" alt="">
                 <p>{{ trainer.trainer_name }}</p>
+                <button onclick="enrollUser('{{course_by_id.course_id}}')">Enroll</button>
             </div>
         {% endfor %}
         </div>
@@ -323,5 +328,8 @@ $(document).ready(function() {
         filterBy();  // Call filter function when either field changes
     });
 });
+function enrollUser(id){
+    window.location.href = '/payment_page/'+encodeURIComponent(id);
+}
 </script>
 {% endblock navbar %}

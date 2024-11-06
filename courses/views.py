@@ -6,6 +6,7 @@ from adminuse.models import AddTrainers
 from django.http import JsonResponse, HttpResponse, Http404
 from django.views.generic import TemplateView
 from .models import Course,Enrollment, CourseSchedule
+from jobportal.models import CompanyProfile, PostJob
 import json
 # Create your views here.
 def trainer(request):
@@ -322,6 +323,14 @@ class FilterBy(APIView):
         ))
         
         return JsonResponse({'data': results})
-
-
-        
+class RemoveTrainer(APIView):
+    def post(self, request):
+        id = request.POST.get('id')
+        AddTrainers.objects.filter(trainer_id = id).delete()
+        return JsonResponse({"status":"pass"})
+def payment_page(request, id):
+    course = Course.objects.get(course_id = id)
+    domains = Category.objects.all()
+    user_id = request.session['customer_id']
+    company_data = CompanyProfile.objects.filter(user_id = user_id)
+    return render(request, 'courses/paymentpage.html',{'currentEmail':request.session['customer_email'],'course':course,"currentUser":request.session['user_name'],'currentUserId':request.session['customer_id'],'company_data':company_data,})

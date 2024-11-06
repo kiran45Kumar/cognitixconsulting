@@ -1,0 +1,266 @@
+{% extends 'jobportal/companydashboard.html' %} {% block aside %}
+<body>
+  <section class="bg-white dark:bg-gray-900">
+    <div class="max-w-2xl px-4 py-8 mx-auto lg:py-16">
+      <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">
+        Update Company Details
+      </h2>
+      <div action="#">
+        <div class="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5">
+          {% for company in company_data %}
+          <div class="sm:col-span-2">
+            <label
+              for="company_name"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >Company Name</label
+            >
+            <input
+              type="text"
+              name="name"
+              id="company_name{{company.company_id}}"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+              value="{{company.company_name}}"
+              placeholder="Company name"
+              required=""
+            />
+          </div>
+          <div class="tagline">
+            <label
+              for="brand"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >Company Tagline</label
+            >
+            <input
+              type="tagline"
+              name="brand"
+              id="company_tagline{{company.company_id}}"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+              value="{{company.company_tagline}}"
+              placeholder="Company Tagline"
+              required=""
+            />
+          </div>
+          <div class="location">
+            <label
+              for="price"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >Company Location</label
+            >
+            <input
+              type="text"
+              name="location"
+              id="location{{company.company_id}}"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+              value="{{company.company_location}}"
+              placeholder="$299"
+              required=""
+            />
+          </div>
+          <div>
+            <label
+              for="category"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >Company Address</label
+            >
+            <input
+              type="text"
+              name="company_address"
+              id="company_address{{company.company_id}}"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+              value="{{company.company_address}}"
+              placeholder="$299"
+              required=""
+            />
+          </div>
+          <div>
+            <label
+              for="item-weight"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >State</label
+            >
+            <input
+              type="text"
+              name="company_state"
+              id="company_state{{company.company_id}}"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+              value="{{company.company_state}}"
+              placeholder="Ex. 12"
+              required=""
+            />
+          </div>
+          <div>
+            <label
+              for="category"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >City</label
+            >
+            <input
+              type="text"
+              name="company_city"
+              id="company_city{{company.company_id}}"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+              value="{{company.company_city}}"
+              placeholder="$299"
+              required=""
+            />
+          </div>
+          <div>
+            <label
+              for="item-weight"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >Pincode</label
+            >
+            <input
+              type="number"
+              name="company_pincode"
+              id="company_pincode{{company.company_id}}"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+              value="{{company.company_pincode}}"
+              placeholder="Ex. 12"
+              required=""
+            />
+          </div>
+          <div class="sm:col-span-2">
+            <label
+              for="company_email"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >Company Email</label
+            >
+            <input
+              type="email"
+              name="company_email"
+              id="company_email{{company.company_id}}"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+              value="{{company.company_email}}"
+              placeholder="Ex. 12"
+              required=""
+            />
+          </div>
+          <div class="sm:col-span-2">
+            <label
+              for="description"
+              class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >Description</label
+            >
+            <textarea
+              id="description{{company.company_id}}"
+              rows="8"
+              class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+              placeholder="Write a product description here..."
+            >
+                       {{company.company_desc}} </textarea
+            >
+          </div>
+
+        </div>
+        <div class="flex items-center space-x-4">
+          <button
+            onclick="UpdateCompany('{{company.company_id}}')"
+            type="button"
+            class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+          >
+            Update
+          </button>
+          <button
+            type="button"
+            class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+
+      
+      {% endfor %}
+    </div>
+    <div id="toast" class="toast"></div>
+  </section>
+  <script>
+    function UpdateCompany(id) {
+      let company_name = $("#company_name" + id).val();
+      let company_tagline = $("#company_tagline" + id).val();
+      let company_address = $("#company_address" + id).val();
+      let location = $("#location" + id).val();
+      let company_state = $("#company_state" + id).val();
+      let company_city = $("#company_city" + id).val();
+      let company_pincode = $("#company_pincode" + id).val();
+      let company_description = $("#description" + id).val();
+      let company_email = $("#company_email" + id).val();
+      $.ajax({
+        type: "POST",
+        url: "/company_update/",
+        data: {
+          "company_id": id,
+          "company_name": company_name,
+          "company_tagline": company_tagline,
+          "company_address": company_address,
+          "location": location,
+          "company_state": company_state,
+          "company_city": company_city,
+          "company_description": company_description,
+          "company_email": company_email,
+          "company_pincode": company_pincode,
+        },
+        success: function (data) {
+          if (data) {
+            $("#toast")
+              .text("Your Account Have been updated")
+              .addClass("show")
+              .css("color", "#28a475");
+            setTimeout(() => {
+              window.location.reload();
+            }, 2000);
+          } else {
+            $("#toast")
+              .text("Something Went Wrong")
+              .addClass("show")
+              .css("color", "#28a475");
+            setTimeout(() => {
+              window.location.reload();
+            }, 2000);
+          }
+        },
+        error: function (xhr, status, error) {
+          console.error("Error occurred:", error);
+          $("#toast")
+            .text("Oops Something went wrong")
+            .addClass("show")
+            .css("color", "#e74c3c");
+        },
+      });
+    }
+    function CompanyDelete(id){
+        $.ajax({
+            type:'POST',
+            url:'/company_delete/',
+            data:{
+                "id":id
+            },
+            success:function(data){
+                if(data){
+                    $("#toast")
+              .text("Your Account is Deleted")
+              .addClass("show")
+              .css("color", "#28a475");
+            setTimeout(() => {
+              window.location.reload();
+            }, 2000);
+                }
+                else{
+                    $("#toast")
+            .text("Oops Something went wrong")
+            .addClass("show")
+            .css("color", "#e74c3c");
+                }
+            },
+            error:function(xhr, status, error){
+                $("#toast")
+            .text("Something went wrong! Try Again Later")
+            .addClass("show")
+            .css("color", "#e74c3c");
+            }
+        })
+    }
+  </script>
+</body>
+{% endblock aside %}
