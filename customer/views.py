@@ -21,14 +21,9 @@ def logout(request):
     return redirect('login')
 def index2(request):
     domains = Category.objects.all()
-    user_id = request.session['customer_id']
-    company_data = CompanyProfile.objects.filter(user_id = user_id)
     allTrainers = AddTrainers.objects.all().order_by('-trainer_created')
     courses = Course.objects.all()
-    return render(request, 'customer/index2.html',{"currentUser":request.session['user_name'],
-                                                  'currentEmail':request.session['customer_email'],
-                                                  'currentUserId':request.session['customer_id'],'domains':domains,
-                                                  'company_data':company_data,'allTrainers':allTrainers,"courses":courses})
+    return render(request, 'customer/index2.html',{'currentUser':request.session.get('user_name',''),'domains':domains,'allTrainers':allTrainers,"courses":courses})
 class CreateUser(APIView):
     def post(self, request):
         name = request.POST.get('username')
