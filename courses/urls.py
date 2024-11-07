@@ -28,5 +28,6 @@ urlpatterns = [
     path('trainer/<int:trainer_id>/schedule/', trainer_schedule, name='trainer_schedule'),
     path('filter_by/',views.FilterBy.as_view(), name='filter_by'),
     path("remove_trainer/",views.RemoveTrainer.as_view(),name='remove_trainer' ),
-    path('payment_page/<int:id>',views.payment_page, name='payment_page')
+    path('payment_page/<int:id>',views.payment_page, name='payment_page'),
+    path('start_payment/',views.StartPayment.as_view(), name='start_payment'),
 ]

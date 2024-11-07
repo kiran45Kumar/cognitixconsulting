@@ -17,4 +17,34 @@ class AddTrainers(models.Model):
     trainer_updated = models.DateTimeField(auto_now=True)
     def __str__(self) -> str:
         return f'{self.trainer_name}'
-    
+from django.db import models
+
+class Subscription(models.Model):
+    BASIC = 'Basic'
+    STANDARD = 'Standard'
+    PREMIUM = 'Premium'
+
+    SUBSCRIPTION_CHOICES = [
+        (BASIC, 'Basic'),
+        (STANDARD, 'Standard'),
+        (PREMIUM, 'Premium'),
+    ]
+    DURATION_CHOICES = [
+        ('monthly', 'Monthly'),
+        ('yearly', 'Yearly'),
+    ]
+    subscription_id = models.AutoField(primary_key=True)
+    subscription_name = models.CharField(max_length=50, choices=SUBSCRIPTION_CHOICES, unique=True)
+    subscription_features = models.TextField()
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    duration = models.CharField(max_length=10, choices=DURATION_CHOICES, default='monthly')
+    is_active = models.BooleanField(default=True)
+    discount = models.DecimalField(max_digits=5, decimal_places=2, default=0.00)
+    start_date = models.DateField(null=True, blank=True)
+    end_date = models.DateField(null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
+    max_users = models.IntegerField(default=1)
+
+    def __str__(self):
+        return f"{self.subscription_name} - ${self.amount}"
+

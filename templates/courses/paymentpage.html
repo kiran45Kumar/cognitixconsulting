@@ -1,49 +1,158 @@
 {% extends 'customer/index2.html' %} 
 {% block navbar-aside %}
 {% load static %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<nav class="flex mx-10" aria-label="Breadcrumb">
+  <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+    <li class="inline-flex items-center">
+      <a href="#" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+        <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+          <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z"/>
+        </svg>
+        Home
+      </a>
+    </li>
+    <li>
+      <div class="flex items-center">
+        <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+        </svg>
+        <a href="#" class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">Courses</a>
+      </div>
+    </li>
+    <li aria-current="page">
+      <div class="flex items-center">
+        <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+        </svg>
+        <span class="ms-1 text-sm font-medium text-gray-500 md:ms-2 dark:text-gray-400">Payments</span>
+      </div>
+    </li>
+  </ol>
+</nav>
 
-<div class="flex items-center justify-between gap-10 mx-10 my-11 shadow-lg p-8 flex-wrap">
-    <div class="course-section">
-        <h1 class="text-md font-extrabold dark:text-white">Course Details</h1>
-        <b>Course Title</b>: <p class="text-2xl font-300 dark:text-white"> {{course.title}}</p>
-        <input type="hidden" name="" id="course_id" value="{{course.course_id}}" />
-    <p class="text-xl font-300 dark:text-white"><b>User Name</b>: {{currentUser}}</p>
-        <input type="hidden" name="" id="user_id" value="{{currentUserId}}" />
-        <input type="hidden" name="" id="user_email" value="{{currentEmail}}" />
-          <p><b>Course Price: </b> {{course.price}}</p>
-          <p><b>Gst: </b> {{course.course_gst}}% </p>
-          <p><b>Total Price:</b> {{course.total_price}}</p>
-        <input type="hidden" name="" id="amount" value="{{course.total_price}}" />
-      </div>
-      
-      <div class="account-detals">
-        <h1 class="text-md font-extrabold dark:text-white">Account Details</h1>
-          <h1>Bank Details</h1>
-          <h3>Name: Cognitix Consulting</h3>
-          <h4>Bank Name: Axis Bank</h4>
-          <h4>Account number: 924020013076206</h4>
-          <h4>IFSC CODE: UTIB0003199</h4>
-      </div>
-      
-      
-      <div class="steps-section">
-        <h1 class="text-md font-extrabold dark:text-white">Precautions To Be Followed</h1>
-
-          <ul class="space-y-4 text-gray-500 list-disc list-inside dark:text-gray-400">
-              <li>
-                Steps To Be Followed
-                <ol class="ps-5 mt-2 space-y-1 list-disc list-inside">
-                  <li>Open your preferred payment app or software.</li>
-                  <li>Pay the course amount shown for your selected course</li>
-                  <li>After the payment Please upload the screenshot of the Payment</li>
-                  <li>You'll Recieve an email shortly of payment approval.</li>
-                  <li>For any questions, please feel free to contact us.</li>
-                </ol>
-              </li>
-            </ul>
-      </div>
+<div class="flex items-center justify-evenly">
+  <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <a href="#">
+        <img class="p-8 rounded-lg" src="{{course.course_img.url}}" alt="product image" />
+    </a>
+    <div class="px-5 pb-5">
+        <a>
+            <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{{course.title}}</h5>
+        </a>
+        <div class="flex items-center mt-2.5 mb-5">
+            <div class="flex items-center space-x-1 rtl:space-x-reverse">
+                <svg class="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                </svg>
+                <svg class="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                </svg>
+                <svg class="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                </svg>
+                <svg class="w-4 h-4 text-yellow-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                </svg>
+                <svg class="w-4 h-4 text-gray-200 dark:text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                    <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z"/>
+                </svg>
+            </div>
+            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-3">5.0</span>
+        </div>
+        <div class="flex items-center justify-between">
+            <span class="text-3xl font-bold text-gray-900 dark:text-white">&#8377; {{course.price}}</span>
+          
+        </div>
+    </div>
+  </div> 
 </div>
 
+
+
+<section class="bg-white py-8 antialiased dark:bg-gray-900 md:py-16">
+    <div class="mx-auto max-w-screen-xl px-4 2xl:px-0">
+      <div class="mx-auto max-w-5xl">
+      <h2 class="text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl">Payment</h2>  
+      <h5 class="text-sm font-semibold text-gray-900 dark:text-white sm:text-2xl">Bank Details</h5>  
+      
+        <div class="mt-6 sm:mt-8 lg:flex lg:items-start lg:gap-12">
+          <div  class="w-full rounded-lg border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-800 sm:p-6 lg:max-w-xl lg:p-8">
+            <div class="mb-6 grid grid-cols-2 gap-4">
+              <div class="col-span-2 sm:col-span-1">
+                <label for="full_name" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"> Recipeint name </label>
+                <input type="text" value="Cognitix Consulting" id="recipient_name" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500" placeholder="Cognitix Consulting" required />
+              </div>
+  
+              <div class="col-span-2 sm:col-span-1">
+                <label for="card-number-input" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"> Bank Name </label>
+                <input type="text" value="Axis Bank" id="bank_name" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 pe-10 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500  dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500" placeholder="xxxx-xxxx-xxxx-xxxx" pattern="^4[0-9]{12}(?:[0-9]{3})?$" required />
+              </div>
+  
+              <div>
+                <label for="card-expiration-input" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Acc Number </label>
+                <div class="relative">
+                  <div class="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3.5">
+                    <svg class="h-4 w-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                      <path
+                        fill-rule="evenodd"
+                        d="M5 5a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1h1a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1h1a1 1 0 0 0 1-1 1 1 0 1 1 2 0 1 1 0 0 0 1 1 2 2 0 0 1 2 2v1a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a2 2 0 0 1 2-2ZM3 19v-7a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Zm6.01-6a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm2 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm6 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm-10 4a1 1 0 1 1 2 0 1 1 0 0 1-2 0Zm6 0a1 1 0 1 0-2 0 1 1 0 0 0 2 0Zm2 0a1 1 0 1 1 2 0 1 1 0 0 1-2 0Z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                  </div>
+                  <input value="924020013076206" id="acc_no" type="text" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 ps-9 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500" placeholder="12/23" required />
+                </div>
+              </div>
+              <div>
+                <label for="cvv-input" class="mb-2 flex items-center gap-1 text-sm font-medium text-gray-900 dark:text-white">
+                  IFSC*
+                  <button hidden data-tooltip-target="cvv-desc" data-tooltip-trigger="hover" class="text-gray-400 hover:text-gray-900 dark:text-gray-500 dark:hover:text-white">
+                    <svg class="h-4 w-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                      <path fill-rule="evenodd" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm9.408-5.5a1 1 0 1 0 0 2h.01a1 1 0 1 0 0-2h-.01ZM10 10a1 1 0 1 0 0 2h1v3h-1a1 1 0 1 0 0 2h4a1 1 0 1 0 0-2h-1v-4a1 1 0 0 0-1-1h-2Z" clip-rule="evenodd" />
+                    </svg>
+                  </button>
+                  <div id="cvv-desc" role="tooltip" class="tooltip invisible absolute z-10 inline-block rounded-lg bg-gray-900 px-3 py-2 text-sm font-medium text-white opacity-0 shadow-sm transition-opacity duration-300 dark:bg-gray-700">
+                    The last 3 digits on back of card
+                    <div class="tooltip-arrow" data-popper-arrow></div>
+                  </div>
+                </label>
+                <input type="text" value="UTIB0003199" id="" aria-describedby="helper-text-explanation" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500" placeholder="•••" required />
+              </div>
+            </div>
+          </div>
+  
+          <div class="mt-6 grow sm:mt-8 lg:mt-0">
+
+            <div class="space-y-4 rounded-lg border border-gray-100 bg-gray-50 p-6 dark:border-gray-700 dark:bg-gray-800">
+              <div class="space-y-2">
+                <dl class="flex items-center justify-between gap-4">
+                  <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Original price</dt>
+                  <dd class="text-base font-medium text-gray-900 dark:text-white">{{course.price}}</dd>
+                </dl>
+  
+                <dl class="flex items-center justify-between gap-4">
+                  <dt class="text-base font-normal text-gray-500 dark:text-gray-400">Gst</dt>
+                  <dd class="text-base font-medium text-green-500">&#8377;{{course.course_gst}}%</dd>
+                </dl>
+              </div>
+  
+              <dl class="flex items-center justify-between gap-4 border-t border-gray-200 pt-2 dark:border-gray-700">
+                <dt class="text-base font-bold text-gray-900 dark:text-white">Total</dt>
+                <dd class="text-base font-bold text-gray-900 dark:text-white">&#8377;{{course.total_price}}</dd>
+              </dl>
+        
+              <div class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
+                <span class="font-medium">Please Open any Payment app In your mobile and Pay amount {{course.total_price}}</span> 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
 <div class="payment-form-section">
     <section class="bg-gray-50 dark:bg-gray-900">
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -53,17 +162,19 @@
             </a>
             <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                 <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-                    <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                        Create an account
-                    </h1>
+
                     <div class="space-y-4 md:space-y-6" >
+                      <input type="hidden" name="course_id" id="course_id" value="{{course.course_id}}" >
+                      <input type="hidden" name="user_id" id="user_id" value="{{currentUserId}}" >
+                      <input type="hidden" name="user_email" id="user_email" value="{{currentEmail}}" >
+                      <input type="hidden" name="total_price" id="total_price" value="{{course.total_price}}" >
                         <div>
                             <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Transaction Id</label>
-                            <input type="email" name="email" id="transaction_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="TXN-3F5A7B1C" required="">
+                            <input type="text" name="transaction_id" id="transaction_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="TXN-3F5A7B1C" required="">
                         </div>
                         <div>
                             <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Payment Proof/ScreenShot</label>
-                            <input type="file" name="password" id="payment_img" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
+                            <input type="file" name="password" id="payment_img" placeholder="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
                         </div>
                         <div class="flex items-start">
                             <div class="flex items-center h-5">
@@ -73,11 +184,55 @@
                               <label for="terms" class="font-light text-gray-500 dark:text-gray-300">I accept the <a class="font-medium text-primary-600 hover:underline dark:text-primary-500" href="#">Terms and Conditions</a></label>
                             </div>
                         </div>
-                        <button type="button" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Submit</button>
+                        <button onclick="Payment()" type="button" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Submit</button>
                     </div>
                 </div>
             </div>
         </div>
       </section>
 </div>
+
+<script>
+  function Payment(){
+    let user = $("#user_id").val();
+    let user_email = $("#user_email").val();
+    let course = $("#course_id").val();
+    let transaction_id = $("#transaction_id").val();
+    let total_price = $("#total_price").val();
+    let payment_img = $("#payment_img")[0].files[0];
+    if(!transaction_id){
+      alert("Please Enter the transaction Id");
+      return;
+    }
+    else if(!payment_img){
+      alert('Please Enter the Proof of Payment');
+      return;
+    }
+    const formdata = new FormData();
+    formdata.append("user", user);
+    formdata.append("course", course);
+    formdata.append("user_email", user_email);
+    formdata.append("transaction_id", transaction_id);
+    formdata.append("total_price", total_price);
+    formdata.append("payment_img", payment_img);
+    $.ajax({
+      type:"POST",
+      url:"/start_payment/",
+      data:formdata,
+      processData:false,
+      contentType:false,
+      success:function(data){
+        if(data['status'] == 'pass'){
+          alert("Success");
+          window.location.reload();
+        }
+        else if(data['status'] == 'transaction_id_exists'){
+          alert(data['message'])
+          window.location.reload();
+
+        }
+      }
+    })
+  }
+</script>
 {% endblock navbar-aside %}

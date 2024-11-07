@@ -89,7 +89,7 @@
                 <div id="mega-menu-full" class="items-center justify-between font-medium hidden w-full md:flex md:w-auto md:order-1">
                     <ul class="flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                         <li>
-                            <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700" aria-current="page">Home</a>
+                            <a href="/index2/" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700" aria-current="page">Home</a>
                         </li>
                         <li>
                             <button id="mega-menu-full-dropdown-button" data-collapse-toggle="mega-menu-full-dropdown" class="flex items-center justify-between w-full py-2 px-3 text-gray-900 rounded md:w-auto hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-600 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-blue-500 md:dark:hover:bg-transparent dark:border-gray-700">Courses
@@ -374,23 +374,33 @@
                     </div>
                 </div>
             </section>
+
+            <!-- category slider -->
+          
             <!-- course cards -section -->
             <h1 class="mb-4 mx-10 text-xl font-extrabold text-gray-900 dark:text-white md:text-5xl lg:text-6xl">
                 <span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">Explore Our</span> Training Programs.
             </h1>
-            <div class="flex flex-wrap items-center justify-evenly gap-10">
+
+            <div class="flex items-center justify-evenly my-6 shadow-lg p-5 gap-5">
+                {% for domain in domains %}
+                    <!-- Add onclick to trigger filtering function -->
+                    <p class="cursor-pointer text-sm hover:text-blue-500" onclick="filterCourses('{{ domain.id }}')">{{ domain.name }}</p>
+                {% endfor %}
+            </div>
+            <div class="flex flex-wrap items-center justify-evenly gap-10" id="courses-container">
                 {% for course in courses %}
-                <div>
+                <div class="course-card" data-domain-id="{{ course.category.id }}">
                     <div class="relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-96">
                         <div class="relative h-56 m-2.5 overflow-hidden text-white rounded-md">
-                            <img src="{{course.course_img.url}}" alt="card-image">
+                            <img src="{{ course.course_img.url }}" alt="card-image">
                         </div>
                         <div class="p-4">
                             <div class="mb-4 rounded-full bg-cyan-600 py-0.5 px-2.5 border border-transparent text-xs text-white transition-all shadow-sm w-20 text-center">
                                 POPULAR
                             </div>
-                            <h6 class="mb-2 text-slate-800 text-xl font-semibold">
-                               {{course.title}}
+                            <h6 class="mb-2 text-slate-800 text-sm font-semibold">
+                               {{ course.title }}
                             </h6>
                             <p class="text-slate-600 leading-normal font-light">
                                 <span>Skill you'll gain</span>: {{ course.skillsgain|slice:":30" }}...
@@ -398,10 +408,14 @@
                         </div>
                         <div class="flex items-center justify-between p-4">
                             <div class="flex items-center">
-                                <button onclick="OpenCourse('{{course.course_id}}')" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">View Course <i class='bx bx-right-arrow-alt'></i></button>
+                                <button onclick="OpenCourse('{{ course.course_id }}')" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                                    View Course <i class='bx bx-right-arrow-alt'></i>
+                                </button>
                             </div>
                             <div class="flex items-center">
-                                <button  type="button" class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">View Schedules</button>
+                                <button type="button" class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                                    View Schedules
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -1061,5 +1075,18 @@
         },
       },
     });
+    function filterCourses(domainId) {
+        // Get all course elements
+        const courseCards = document.querySelectorAll('.course-card');
+
+        // Loop through each course and filter based on domain
+        courseCards.forEach(card => {
+            if (card.getAttribute('data-domain-id') === domainId || domainId === "all") {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
             </script>
         </body>

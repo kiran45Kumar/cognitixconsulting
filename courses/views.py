@@ -5,7 +5,7 @@ from .models import Trainer, Category
 from adminuse.models import AddTrainers
 from django.http import JsonResponse, HttpResponse, Http404
 from django.views.generic import TemplateView
-from .models import Course,Enrollment, CourseSchedule
+from .models import Course,Enrollment, CourseSchedule, Payment
 from jobportal.models import CompanyProfile, PostJob
 import json
 # Create your views here.
@@ -334,3 +334,51 @@ def payment_page(request, id):
     user_id = request.session['customer_id']
     company_data = CompanyProfile.objects.filter(user_id = user_id)
     return render(request, 'courses/paymentpage.html',{'currentEmail':request.session['customer_email'],'course':course,"currentUser":request.session['user_name'],'currentUserId':request.session['customer_id'],'company_data':company_data,})
+from django.core.mail import send_mail
+from django.http import JsonResponse
+from django.views import View
+from rest_framework.views import APIView
+from .models import Customer, Course, Payment  # Assuming these are your models
+from django.conf import settings
+
+from django.contrib import messages
+from django.core.mail import send_mail
+from django.http import JsonResponse
+from rest_framework.views import APIView
+from django.conf import settings
+from .models import Customer, Course, Payment
+
+class StartPayment(APIView):
+    def post(self, request):
+        user_id = request.POST.get('user')
+        course_id = request.POST.get('course')
+        transaction_id = request.POST.get('transaction_id')
+        payment_img = request.FILES.get('payment_img')
+        total_price = request.POST.get('total_price')
+        user = Customer.objects.get(customer_id=user_id)
+        course = Course.objects.get(course_id=course_id)
+        if Payment.objects.filter(transaction_id = transaction_id).exists():
+            return JsonResponse({"status":"transaction_id_exists","message":"This Transaction already Exists!"})
+        payment = Payment()
+        payment.user = user
+        payment.course = course
+        payment.amount = total_price
+        payment.transaction_id = transaction_id
+        payment.payment_proof = payment_img
+        payment.save()
+        user_email = user.email  
+        course_name = course.title    
+        subject = "Payment Confirmation"
+        message = f"Dear {user.username},\n\nThank you for your payment for the course '{course_name}'.\nTransaction ID: {transaction_id}\n\nBest regards,\nYour Team"
+        send_mail(
+            subject,
+            message,
+            settings.DEFAULT_FROM_EMAIL,
+            [user_email],                 
+            fail_silently=False,
+        )
+        messages.success(request, f'New payment uploaded by {user.username} for the course {course_name}.')
+
+        return JsonResponse({"status": "pass"})
+
+

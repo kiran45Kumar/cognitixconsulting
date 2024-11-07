@@ -1,0 +1,177 @@
+{% extends 'adminuse/admin.html' %}
+{% block navbar-sidebar %}
+
+<link
+  href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css"
+  rel="stylesheet"
+/>
+<script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+  <table
+    class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+  >
+    <thead
+      class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+    >
+      <tr>
+        <th scope="col" class="px-6 py-3">Username</th>
+        <th scope="col" class="px-6 py-3">Course Title</th>
+        <th scope="col" class="px-6 py-3">Payment Id</th>
+        <th scope="col" class="px-6 py-3">Payment Image</th>
+        <th scope="col" class="px-6 py-3">Total Amount</th>
+        <th scope="col" class="px-6 py-3">Payment Status</th>
+        <th scope="col" class="px-6 py-3">Approve</th>
+        <th scope="col" class="px-6 py-3">Reject</th>
+        <th scope="col" class="px-6 py-3">Remove</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for payment in payments %}
+      <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+        <th
+          scope="row"
+          class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+        >
+          {{payment.user.username}}
+        </th>
+        <td class="px-6 py-4 text-xs">{{payment.course.title}}</td>
+        <td class="px-6 py-4">{{payment.transaction_id}}</td>
+        <td class="px-6 py-4">
+          <div
+            class="relative flex h-10 w-10 cursor-pointer flex-col overflow-hidden rounded-lg bg-white bg-clip-border shadow-sm transition-opacity hover:opacity-90"
+            data-dialog-target="image-dialog"
+          >
+            <img
+              alt="nature"
+              class="h-full w-full object-cover object-center"
+              src="{{payment.payment_proof.url}}"
+            />
+          </div>
+          <div
+  data-dialog-backdrop="image-dialog"
+  data-dialog-backdrop-close="true"
+  class="pointer-events-none fixed inset-0 z-[999] grid h-screen w-screen place-items-center bg-black bg-opacity-60 opacity-0 backdrop-blur-sm transition-opacity duration-300"
+>
+  <div
+    class="relative m-4 w-2/4 rounded-lg bg-white shadow-sm"
+    role="dialog"
+    data-dialog="image-dialog"
+  >
+    <div class="relative border-b border-t border-b-blue-gray-100 border-t-blue-gray-100 p-0 font-sans text-base font-light leading-relaxed text-blue-gray-500 antialiased">
+      <img
+        alt="nature"
+        class="h-[30rem] w-full object-cover object-center"
+        src="{{payment.payment_proof.url}}"
+      />
+  </div>
+</div>
+        </td>
+        <td class="px-6 py-4">{{payment.amount}}</td>
+        <td class="px-6 py-4">
+          
+            <input type="text" value="{{payment.status}}" id="status{{payment.id}}" role="heading" disabled readonly class="border-0 outline-0 text-gray-900 text-sm rounded-lg block w-full" required />
+            {% if payment.status == 'Confirmed' %}
+            <script>
+                RemovePayment('{{payment.id}}')
+            </script>
+        {% endif %}
+        </td>
+        <td class="px-6 py-4">
+          <button
+          onclick="ApprovePayment('{{payment.id}}')"
+            type="button"
+            class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+          >
+            accept
+          </button>
+        </td>
+        <td class="px-6 py-4">
+          <button
+            type="button"
+            onclick="RejectPayment('{{payment.id}}')"
+            class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2"
+          >
+            Reject
+          </button>
+        </td>
+        <td class="px-6 py-4">
+            <button class="none" onclick="RemovePayment('{{payment.id}}')">
+                <svg onclick="" class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+                  </svg>    
+            </button>          
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<script>
+function ApprovePayment(id){
+    $.ajax({
+        type: "POST",
+        url: "/update-status/",
+        data: {
+            "status": "Confirmed",
+            "id": id
+        },
+        success: function (response) {
+            if(response.status == 'pass'){
+                alert("Payment Approved");
+                $("#status" + id).text("Confirmed");
+                window.location.reload();
+            } else {
+                alert("Payment update failed");
+            }
+        },
+        error: function(xhr, status, error){
+            alert("Something went wrong");
+        }
+    });
+}
+function RejectPayment(id){
+    $.ajax({
+        type: "POST",
+        url: "/reject-payment/",
+        data: {
+            "status": "Rejected",
+            "id": id
+        },
+        success: function (response) {
+            if(response.status == 'pass'){
+                alert("Payment Rejected");
+                $("#status" + id).text("Rejected");
+                window.location.reload();
+            } else {
+                alert("Payment Rejection failed");
+            }
+        },
+        error: function(xhr, status, error){
+            alert("Something went wrong");
+        }
+    });
+}
+function RemovePayment(id){
+    $.ajax({
+        type: "POST",
+        url: "/remove-payment/",
+        data: {
+            "id":id
+        },
+        success: function (response) {
+            if(response){
+                alert('Success')
+                window.location.reload()
+            }
+            else{
+                alert('Failed')
+                window.location.reload()
+
+            }
+        }
+    });
+}
+
+</script>
+
+{% endblock navbar-sidebar %}

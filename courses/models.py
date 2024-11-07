@@ -3,6 +3,7 @@ from django.utils.timezone import now
 from customer.models import Customer
 from adminuse.models import AddTrainers
 
+
 class Category(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
@@ -55,7 +56,7 @@ class Enrollment(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     enrolled_at = models.DateTimeField(auto_now_add=True)
-    access_granted = models.BooleanField(default=False)  # New field to manage access
+    access_granted = models.BooleanField(default=False)
 
     class Meta:
         unique_together = ('customer', 'course')
@@ -121,7 +122,7 @@ class Payment(models.Model):
     user = models.ForeignKey(Customer, on_delete=models.CASCADE)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
-    transaction_id = models.CharField(max_length=100, blank=True, null=True)
+    transaction_id = models.CharField(max_length=100, blank=True, null=True,unique=True)
     payment_proof = models.ImageField(upload_to='payment_proofs/', blank=True, null=True)  # User uploads screenshot
     status = models.CharField(max_length=20, choices=PAYMENT_STATUS_CHOICES, default=PENDING)
     payment_date = models.DateTimeField(auto_now_add=True)

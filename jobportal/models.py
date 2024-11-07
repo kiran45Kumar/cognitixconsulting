@@ -1,6 +1,7 @@
 from django.db import models
 from customer.models import Customer
 from datetime import time
+from adminuse.models import Subscription
 
 # Create your models here.
 class CompanyProfile(models.Model):
@@ -117,3 +118,8 @@ class JobApplications(models.Model):
 
     def __str__(self):
         return f"{self.applicant_name} applied for {self.job}"
+    
+class PaymentforCompanies(models.Model):
+    payment_id = models.AutoField(primary_key=True)
+    company = models.ForeignKey(CompanyProfile, on_delete=models.CASCADE)
+    plan = models.ForeignKey(Subscription, on_delete=models.CASCADE)
