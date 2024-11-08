@@ -28,6 +28,10 @@ SECRET_KEY = 'django-insecure-3n*7a&5c4!l)y82ni59pa5@0n#&h&n32jz#r=hu48c6)-=)qj!
 DEBUG = False
 
 ALLOWED_HOSTS = ['cognitixconsulting.com', 'www.cognitixconsulting.com']
+<<<<<<< HEAD
+=======
+
+>>>>>>> 062a88165fc1f545748c6e31ef32373452bd94da
 # ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1, localhost").split(",")
 
 # Application definition
