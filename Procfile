@@ -1,1 +1,1 @@
-web: daphne -b 0.0.0.0 -p $PORT cognitixconsulting.asgi:application
+web: gunicorn cognitixconsulting.wsgi --log-file -

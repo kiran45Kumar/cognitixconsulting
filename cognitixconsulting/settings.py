@@ -26,7 +26,10 @@ SECRET_KEY = 'django-insecure-3n*7a&5c4!l)y82ni59pa5@0n#&h&n32jz#r=hu48c6)-=)qj!
 DEBUG = False
 
 # ALLOWED_HOSTS = []
-ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "smart-jacquenetta-jussuretechnologies-823fed8c.koyeb.app").split(",")
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1, localhost").split(",")
+
+
+
 
 # Application definition
 
@@ -135,7 +138,7 @@ MEDIA_URL = "/media/"
 
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
 # STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
