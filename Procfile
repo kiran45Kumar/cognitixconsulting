@@ -1,1 +1,2 @@
-web: gunicorn cognitixconsulting.wsgi:application --log-file
+web: gunicorn cognitixconsulting.wsgi:application --workers 3 --bind 0.0.0.0:8000 --log-file -
+
