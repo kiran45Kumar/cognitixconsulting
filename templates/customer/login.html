@@ -35,7 +35,7 @@
 
             <!-- Forgot Password Section -->
             <div id="forgotPasswordSection" class="hidden">
-                <h2>Forgot Password</h2>
+                <h2 id="text-message">Forgot Password</h2>
                 <p>Enter your email to send a password reset link</p>
                 <label for="forgotEmail">Email</label>
                 <div class="signup-forms">
@@ -167,9 +167,11 @@ function forgotPassword() {
     .then(response => response.json())
     .then(data => {
         if (data.status === "pass") {
-            alert("Reset link sent successfully!");
+            setTimeout(() => {
+                $("#text-message").text("Reset Link Sent To "+email).css('color','#28a475');
+            }, 2000);
         } else {
-            alert(data.message);
+            $("#text-message").text('Failed To Send the link').css('color','red');
         }
     });
 }

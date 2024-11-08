@@ -7,10 +7,26 @@ from customer.models import Customer
 from django.views.generic.base import TemplateView
 from jobportal.models import JobApplications
 # Create your views here.
+from django.shortcuts import redirect
+
 def form_job(request):
-    customer_id = request.session['customer_id']
-    company_data = CompanyProfile.objects.filter(user_id =  customer_id)
-    return render(request, 'jobportal/job_form.html',{'currentUserId':customer_id,"company_data":company_data})
+    customer_id = request.session.get('customer_id', '')
+
+    # Check if the customer_id is valid (assuming it's an integer)
+    if not customer_id:
+        # Redirect or handle the case where customer_id is invalid
+        return redirect('login')  # Or any other relevant URL for your app
+
+    customer_id = int(customer_id)  # Convert to integer after validation
+
+    # Now you can safely query the CompanyProfile model
+    company_data = CompanyProfile.objects.filter(user_id=customer_id)
+
+    return render(request, 'jobportal/job_form.html', {
+        'currentUserId': customer_id,
+        "company_data": company_data
+    })
+
 class CreateJobs(APIView):
     def post(self, request):
         customer_id = request.POST.get('currentUserId')

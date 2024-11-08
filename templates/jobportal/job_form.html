@@ -80,7 +80,12 @@
       </div>
       <div class="company-profile">
         <div class="job-form-section">
+          {% if currentUserId  %}
           <input type="hidden" value="{{currentUserId}}" id="currentUserId" />
+          {% else %}
+          <input type="hidden"/>
+
+          {% endif %}
           <div class="job-main-company" id="jobform-1">
             <div class="section-design">
               <p>Let's get started   <i class='bx bx-happy animated-icon'></i></p>
@@ -456,7 +461,7 @@ $(document).ready(function() {
         jobform_2.hide();
       }
       function index2() {  
-        window.location.href = '/index2/'
+        window.location.href = '/'
       }
     </script>
   </body>
