@@ -128,9 +128,6 @@ EMAIL_HOST_USER = 'kirankiccha2003@gmail.com'
 EMAIL_HOST_PASSWORD = 'yvby pugy wlyp skdc' 
 DEFAULT_FROM_EMAIL = 'kirankiccha2003@gmail.com'
 
-
-
-
 MEDIA_ROOT = BASE_DIR / "media"
 MEDIA_URL = "/media/"
 # Static files (CSS, JavaScript, Images)
@@ -138,8 +135,9 @@ MEDIA_URL = "/media/"
 
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
-
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
