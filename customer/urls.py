@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import signup,login,CreateUser,LoginCheck,index,ViewCustomer,UpdateUser,DeleteUser,ForgotPassword,UpdatePassword,reset_password
-from .views import index2,logout
-
+from .views import index2,logout, courses,aboutus,privacy
+from . import views
 urlpatterns = [
     path('signup/',signup,name='signup'),
     path('login/',login,name='login'),
@@ -15,5 +15,10 @@ urlpatterns = [
     path('update_password/',UpdatePassword.as_view(),name='update_password'),
     path('reset_password/<int:cid>/',reset_password,name='reset_password'),
     path('',index2, name='index2'),
-    path('logout/',logout,name='logout')
+    path('logout/',logout,name='logout'),
+    path('courses/',courses,name='courses'),
+    path('aboutus/',aboutus,name='about_us'),
+    path('privacy/',privacy,name='privacy'),
+    path('contactus/',views.contactus,name='contactus'),
+    path('refund/',views.refund,name='refund'),
 ]

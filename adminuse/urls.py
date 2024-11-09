@@ -17,5 +17,6 @@ urlpatterns = [
     path('reject-payment/',views.RejectPayment.as_view(), name='reject-payment'),
     path('remove-payment/',views.RemovePayment.as_view(), name='remove-payment'),
     path('add-subscription/',views.AddSubscription.as_view(), name='add_subscription'),
-    path('subscription/',views.subscription_html, name='subscription')
+    path('subscription/',views.subscription_html, name='subscription'),
+    path('admin_dash/',views.adminDash, name='admin_dash')
 ]

@@ -1,0 +1,1353 @@
+{% load static %}
+<!DOCTYPE html>
+<html class="no-js" lang="ZXX">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <meta name="thumbnail" content="{% static 'assets/images/Cognitix Consulting-page-thumbnail.png' %}" />
+        <meta name="description" content="Cognitix Consulting - Online Education Courses HTML5 Template" />
+        <meta name="keywords" content="Online Education Courses HTML5 Template" />
+        <meta name="author" content="BizanTheme" />
+
+        <title>Cognitix Consulting | Driving Business Excellence with Cognitix Consulting</title>
+        <link rel="shortcut icon" href="{% static 'assets/images/logo2.png' %}" />
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="{% static 'assets/plugins/css/bootstrap.min.css' %}" />
+        <!-- Animate CSS -->
+        <link rel="stylesheet" href="{% static 'assets/plugins/css/animate.min.css' %}" />
+        <!-- Owl Carousel CSS -->
+        <link rel="stylesheet" href="{% static 'assets/plugins/css/owl.carousel.min.css' %}" />
+        <!-- Swiper Slider CSS -->
+        <link rel="stylesheet" href="{% static 'assets/plugins/css/swiper-bundle.min.css' %}" />
+        <!-- Maginific Popup CSS -->
+        <link rel="stylesheet" href="{% static 'assets/plugins/css/maginific-popup.min.css' %}" />
+        <!-- Nice Select CSS -->
+        <link rel="stylesheet" href="{% static 'assets/plugins/css/nice-select.min.css' %}" />
+        <!-- Icofont -->
+        <link rel="stylesheet" href="{% static 'assets/plugins/css/icofont.css' %}" />
+        <!-- Uicons -->
+        <link rel="stylesheet" href="{% static 'assets/plugins/css/uicons.css' %}" />
+        <!-- Main CSS -->
+        <!-- <link rel="stylesheet" href="{% static 'css/style.css' %}" /> -->
+        <link rel="stylesheet" href="{% static 'assets/section-css/reset.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/section-css/contact.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/section-css/mobile-menu.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/section-css/header.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/section-css/hero.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/section-css/about.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/section-css/category.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/section-css/features.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/section-css/course.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/section-css/why-choose.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/section-css/funfact.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/section-css/partner.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/section-css/testimonial.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/section-css/blog.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/section-css/call-action.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/section-css/video.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/section-css/team.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/section-css/faq.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/section-css/breadcrumbs.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/section-css/apply.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/section-css/event.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/section-css/product.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/section-css/error.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/section-css/checkout.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/section-css/sidebars.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/section-css/auth-pages.css' %}" />
+        <link rel="stylesheet" href="{% static 'assets/section-css/footer.css' %}" />
+    </head>
+
+    <body class="element-wrapper">
+        <!-- Start Preloader  -->
+        <div id="preloader">
+            <div id="ed-preloader" class="ed-preloader">
+                <div class="animation-preloader">
+                    <div class="spinner">
+                        <img src="{% static 'assets/images/logo2.png' %}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Preloader -->
+
+        <!-- Custom Cursor Start -->
+        <div id="ed-mouse">
+            <div id="cursor-ball"></div>
+        </div>
+        <!-- Custom Cursor End -->
+
+        <!-- Start Mobile Menu Offcanvas -->
+        <div class="modal mobile-menu-modal offcanvas-modal fade" id="offcanvas-modal">
+            <div class="modal-dialog offcanvas-dialog">
+                <div class="modal-content">
+                    <div class="modal-header offcanvas-header">
+                        <!-- Mobile Menu Logo -->
+                        <div class="offcanvas-logo">
+                            <a href="/"><img src="{% static 'assets/images/logo2.png' %}" alt="#" /></a>
+                        </div>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                            <i class="fi fi-ss-cross"></i>
+                        </button>
+                    </div>
+                    <div class="mobile-menu-modal-main-body">
+                        <!-- Mobile Menu Navigation -->
+                        <nav class="offcanvas__menu">
+                            <ul class="offcanvas__menu_ul">
+                                <li class="offcanvas__menu_li">
+                                    <a class="offcanvas__menu_item active" href="/">Home</a>
+                                </li>
+                                <li class="offcanvas__menu_li">
+                                    <a class="offcanvas__menu_item" href="/courses/">Courses</a>
+                                </li>
+                                <li class="offcanvas__menu_li">
+                                    <a class="offcanvas__menu_item" href="#">Jobs</a>
+                                    <ul class="offcanvas__sub_menu">
+                                        <li class="offcanvas__sub_menu_li">
+                                            <a href="#" class="offcanvas__sub_menu_item">Post a Job</a>
+                                        </li>
+                                        <li class="offcanvas__sub_menu_li">
+                                            <a href="blog-details.html" class="offcanvas__sub_menu_item">Apply for Jobs</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="offcanvas__menu_li">
+                                    <a class="offcanvas__menu_item" href="/aboutus/">About</a>
+                                </li>
+                                <li class="offcanvas__menu_li">
+                                    <a class="offcanvas__menu_item" href="/contactus/">Contact</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Mobile Menu Offcanvas -->
+
+        <!-- Start Header Area -->
+        <header class="ed-header ed-header--style2 ed-header--style3">
+            <div class="container ed-container-expand">
+                <div class="ed-header__inner">
+                    <div class="row align-items-center">
+                        <div class="col-lg-8 col-6">
+                            <div class="ed-header__left--style2">
+                                <div class="ed-header__left-widget--style2">
+                                    <!-- Logo  -->
+                                    <div class="ed-topbar__logo">
+                                        <a href="/">
+                                            <img src="{% static 'assets/images/logo2.png' %}" alt="white-logo" />
+                                            <img src="{% static 'assets/images/cognitixlogomain.png' %}" alt="white-logo" />
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!-- Navigation Menu -->
+                                <nav class="ed-header__navigation">
+                                    <ul class="ed-header__menu">
+                                        <li class="active">
+                                            <a href="/">Home</a>
+                                        </li>
+                                        <li>
+                                            <a href="/courses/">Courses</a>
+                                        </li>
+                                        <li>
+                                            <a href="javascript:void(0)">Jobs<i class="fi fi-ss-angle-small-down"></i></a>
+                                            <ul class="sub-menu">
+                                                <li><a href="#">Post a Job </a></li>
+                                                <li><a href="#">Apply For Jobs</a></li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="/aboutus/">About</a>
+                                        </li>
+                                        <li>
+                                            <a href="/contactus/">Contact</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-6">
+                            <!-- Header Right -->
+                            <div class="ed-header__right">
+                                <ul class="ed-topbar__info-social">
+                                    <li>
+                                        <a href="https://www.facebook.com/" target="_blank"><img src="{% static 'assets/images/icons/icon-white-facebook.svg' %}" alt="icon-white-facebook" /></a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.twitter.com/" target="_blank"><img src="{% static 'assets/images/icons/icon-white-twitter.svg' %}" alt="icon-white-twitter" /></a>
+                                    </li>
+                                    <li>
+                                        <a href="https://www.instagram.com/" target="_blank"><img src="{% static 'assets/images/icons/icon-white-instagram.svg' %}" alt="icon-white-instagram" /></a>
+                                    </li>
+                                </ul>
+
+                                <div class="ed-header__action">
+                                    <div class="ed-header__cart" hidden>
+                                        <button type="button" data-bs-toggle="offcanvas" data-bs-target="#edSidebarCart" aria-controls="offcanvasRight" class="ed-topbar__action-icon">
+                                            <img src="{% static 'assets/images/icons/icon-white-bag.svg' %}" alt="icon-white-bag" />
+                                            <span>3</span>
+                                        </button>
+                                    </div>
+                                    <div class="ed-topbar__info-buttons">
+                                        <button type="button" class="register-btn" data-bs-toggle="modal" data-bs-target="#registerModal">
+                                            Register
+                                        </button>
+                                        <button type="button" class="login-btn" data-bs-toggle="modal" data-bs-target="#loginModal">
+                                            Log In
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Mobile Menu Button -->
+                                <button type="button" class="mobile-menu-offcanvas-toggler" data-bs-toggle="modal" data-bs-target="#offcanvas-modal">
+                                    <span class="line"></span>
+                                    <span class="line"></span>
+                                    <span class="line"></span>
+                                </button>
+                                <!-- End Mobile Menu Button -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- End Header Area -->
+{% block main-content %}
+        <div id="smooth-wrapper">
+            <div id="smooth-content">
+                <main>
+                    <!-- Start Hero Area -->
+                    <section class="ed-hero ed-hero--style3">
+                        <div class="owl-carousel ed-hero__slider">
+                            <!-- Single Slider  -->
+                            <div class="ed-hero__slider-item">
+                                <img src="{% static 'assets/images/slideimg1.jpg' %}" alt="hero-img-1" />
+                            </div>
+                            <!-- Single Slider  -->
+                            <div class="ed-hero__slider-item">
+                                <img src="{% static  'assets/images/slideimg2.jpg' %}" alt="hero-img-2" />
+                            </div>
+                            <!-- Single Slider  -->
+                            <div class="ed-hero__slider-item">
+                                <img src="{% static 'assets/images/slideimg3.jpg' %}" alt="hero-img-3" />
+                            </div>
+                        </div>
+
+                        <div class="container ed-container-expand">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-7 col-12">
+                                    <!-- Hero Content -->
+                                    <div class="ed-hero__content text-center">
+                                        <h1 class="ed-hero__content-title text-white ed-split-text left">
+                                            Start Your Learning <br />
+                                            Journey Now
+                                        </h1>
+                                        <div class="ed-hero__search p-0">
+                                            <form action="#" method="post" class="ed-hero__search-form">
+                                                <input type="search" name="search" placeholder="Search your courses" required />
+                                                <button type="submit">Search<i class="fi-rr-search"></i></button>
+                                            </form>
+                                            <ul class="ed-hero__tags justify-content-center">
+                                                <li><a href="/courses/">CSM</a></li>
+                                                <li><a href="/courses/">CSPO</a></li>
+                                                <li><a href="/courses/">PMP</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- End Hero Area -->
+
+                    <!-- Start Partner Area -->
+                    <section class="ed-partner section-gap section-bg-color-1">
+                        <div class="container ed-container">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="ed-partner__section-head">
+                                        <h3 class="ed-partner__section-head-title">Get in touch with the <span>250+</span> companies who Collaboration us</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="owl-carousel ed-partner__slider">
+                                        <!-- Single Slider  -->
+                                        <a href="#" target="_blank" class="ed-parnet__brand-logo">
+                                            <img src="{% static 'assets/images/partner/partner-1/1.svg' %}" alt="brand-logo" />
+                                        </a>
+                                        <!-- Single Slider  -->
+                                        <a href="#" target="_blank" class="ed-parnet__brand-logo">
+                                            <img src="{% static 'assets/images/partner/partner-1/2.svg' %}" alt="brand-logo" />
+                                        </a>
+                                        <!-- Single Slider  -->
+                                        <a href="#" target="_blank" class="ed-parnet__brand-logo">
+                                            <img src="{% static 'assets/images/partner/partner-1/3.svg' %}" alt="brand-logo" />
+                                        </a>
+                                        <!-- Single Slider  -->
+                                        <a href="#" target="_blank" class="ed-parnet__brand-logo">
+                                            <img src="{% static 'assets/images/partner/partner-1/4.svg' %}" alt="brand-logo" />
+                                        </a>
+                                        <!-- Single Slider  -->
+                                        <a href="#" target="_blank" class="ed-parnet__brand-logo">
+                                            <img src="{% static 'assets/images/partner/partner-1/5.svg' %}" alt="brand-logo" />
+                                        </a>
+                                        <!-- Single Slider  -->
+                                        <a href="#" target="_blank" class="ed-parnet__brand-logo">
+                                            <img src="{% static 'assets/images/partner/partner-1/6.svg' %}" alt="brand-logo" />
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- End Partner Area -->
+
+                    <!-- Start Why Choose Area -->
+                    <section class="ed-why-choose ed-why-choose--style3 section-gap position-relative">
+                        <img class="ed-w-choose__shape-3" src="{% static 'assets/images/why-choose/why-choose-3/shape-2.svg' %}" alt="pattern-3" />
+                        <div class="container ed-container">
+                            <div class="row">
+                                <div class="col-lg-6 col-12">
+                                    <div class="ed-w-choose__content">
+                                        <div class="ed-section-head">
+                                            <span class="ed-section-head__sm-title">WHO WE ARE</span>
+                                            <h3 class="ed-section-head__title ed-split-text left">
+                                                Transform Your Best Practice <br />
+                                                with Our Online Course
+                                            </h3>
+                                            <p class="ed-section-head__text">
+                                                Empower Your Learning Journey: Flexible, Engaging, and Expert-Led Online Classes Designed for Success Anywhere, Anytime!
+                                            </p>
+                                        </div>
+
+                                        <div class="ed-w-choose__info">
+                                            <!-- Single Info  -->
+                                            <div class="ed-w-choose__info-single">
+                                                <div class="ed-w-choose__info-head">
+                                                    <div class="ed-w-choose__info-icon bg-1">
+                                                        <img src="{% static 'assets/images/why-choose/why-choose-1/icon-1.svg' %}" alt="icon" />
+                                                    </div>
+                                                    <h5>Face-to-face Teaching</h5>
+                                                </div>
+                                                <div class="ed-w-choose__info-bottom">
+                                                    <p>
+                                                        Personalized Learning through Face-to-Face Teaching: Connect, Engage, and Thrive with Expert Guidance in Every Session!
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <!-- Single Info  -->
+                                            <div class="ed-w-choose__info-single">
+                                                <div class="ed-w-choose__info-head">
+                                                    <div class="ed-w-choose__info-icon bg-2">
+                                                        <img src="{% static 'assets/images/why-choose/why-choose-1/icon-2.svg' %}" alt="icon" />
+                                                    </div>
+                                                    <h5>24/7 Support Available</h5>
+                                                </div>
+                                                <div class="ed-w-choose__info-bottom">
+                                                    <p>
+                                                        Round-the-Clock Assistance: 24/7 Support Available to Keep You Moving Forward Anytime, Anywhere!
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6 col-12">
+                                    <div class="ed-w-choose__images ed-w-choose__images--style3 position-relative">
+                                        <!-- Why Choose Image  -->
+                                        <div class="ed-w-choose__main-img--style2 position-relative">
+                                            <img class="why-choose-img-1" src="{% static 'assets/images/slide5.jpg' %}" alt="why-choose-img-1" />
+                                            <img class="why-choose-img-2" src="{% static 'assets/images/slideimg4.jpg' %}" alt="why-choose-img-2" />
+                                        </div>
+                                        <!-- Counter Card -->
+                                        <div class="counter-card updown-ani">
+                                            <div class="counter-card__icon">
+                                                <i class="fi fi-rr-graduation-cap"></i>
+                                            </div>
+                                            <div class="counter-card__info">
+                                                <h4><span class="counter">9394</span>+</h4>
+                                                <p>Enrolled Learners</p>
+                                            </div>
+                                        </div>
+                                        <!-- Shapes Elements -->
+                                        <div class="ed-w-choose__shapes">
+                                            <img class="ed-w-choose__shape-1 rotate-ani" src="{% static 'assets/images/why-choose/why-choose-3/shape-1.svg' %}" alt="shape-1" />
+                                            <img class="ed-w-choose__shape-2" src="{% static 'assets/images/why-choose/why-choose-3/shape-2.svg' %}" alt="pattern-2" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- End Why Choose Area -->
+
+                    <!-- Start Funfact Area -->
+                    <section class="ed-funfact ed-funfact--style2">
+                        <div class="container ed-container position-relative">
+                            <div class="ed-funfact__inner">
+                                <div class="row g-0 justify-content-between">
+                                    <!-- Single Counter  -->
+                                    <div class="col-xl-auto col-lg-3 col-md-6 col-6">
+                                        <div class="ed-funfact__counter wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1s">
+                                            <h4 class="color-text-1"><span class="counter">534</span>+</h4>
+                                            <p>Student enrolled</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Single Counter  -->
+                                    <div class="col-xl-auto col-lg-3 col-md-6 col-6">
+                                        <div class="ed-funfact__counter wow fadeInUp" data-wow-delay=".5s" data-wow-duration="1s">
+                                            <h4 class="color-text-2"><span class="counter">643</span>+</h4>
+                                            <p>Classes completed</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Single Counter  -->
+                                    <div class="col-xl-auto col-lg-3 col-md-6 col-6">
+                                        <div class="ed-funfact__counter wow fadeInUp" data-wow-delay=".7s" data-wow-duration="1s">
+                                            <h4 class="color-text-3"><span class="counter">744</span>+</h4>
+                                            <p>Top instructors</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Single Counter  -->
+                                    <div class="col-xl-auto col-lg-3 col-md-6 col-6">
+                                        <div class="ed-funfact__counter wow fadeInUp" data-wow-delay=".9s" data-wow-duration="1s">
+                                            <h4 class="color-text-4"><span class="counter">922</span>+</h4>
+                                            <p>Learners report</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- End Funfact Area -->
+
+                    <!-- Start Category Area -->
+                    <section class="ed-category ed-category--style2 section-gap overflow-hidden">
+                        <div class="container ed-container">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="ed-section-head text-center">
+                                        <span class="ed-section-head__sm-title">COURSE CATEGORIES</span>
+                                        <h3 class="ed-section-head__title m-0 ed-split-text left">
+                                            Top Categories You Want to Learn
+                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="swiper ed-category__slider">
+                                    <div class="swiper-wrapper">
+                                        <!-- Single Coure Card  -->
+                                    {% for domain in domains %}
+                                        <div class="swiper-slide">
+                                            <div class="ed-category__card ed-category__card--style2">
+                                                <a href="/courses/" class="ed-category__content">
+                                                    <div class="ed-category__icon">
+                                                        <img src="{% static 'assets/images/category/category-1/1.svg' %}" alt="icon" />
+                                                    </div>
+                                                    <div class="ed-category__info">
+                                                        <h4>{{domain.name}}</h4>
+                                                        <!-- <p>04 Courses</p> -->
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                    </div>
+                                    <div class="swiper-pagination"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- End Category Area -->
+
+                    <!-- Start Course Area -->
+                    <section class="ed-course section-gap position-relative background-image" style="background-image: url('{% static "assets/images/section-bg-9.png" %}');">
+                        <div class="container ed-container">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="ed-section-head d-flex-between">
+                                        <div class="ed-section-head__info">
+                                            <span class="ed-section-head__sm-title">ONLINE COURSES</span>
+                                            <h3 class="ed-section-head__title m-0 ed-split-text left">
+                                                Get Your Course With Us
+                                            </h3>
+                                        </div>
+                                        <div class="ed-section-head__btn">
+                                            <a href="/courses/" class="ed-btn">View All Courses<i class="fi fi-rr-arrow-small-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <!-- Single Course Card -->
+                                 {% for course in courses %}
+                                <div class="col-lg-6 col-xl-4 col-md-6 col-12">
+                                    <div class="ed-course__card ed-course__card--style3 ed-course__card--style4 wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1s">
+                                        <div class="ed-course__cover">
+                                            <a href="course-details.html" class="ed-course__img">
+                                                <img src="{{course.course_img.url}}" alt="course-img" />
+                                            </a>
+                                        </div>
+                                        <div class="ed-course__body">
+                                            <div class="ed-course__rattings mg-btm-10">
+                                                <ul>
+                                                    <li><i class="icofont-star"></i></li>
+                                                    <li><i class="icofont-star"></i></li>
+                                                    <li><i class="icofont-star"></i></li>
+                                                    <li><i class="icofont-star"></i></li>
+                                                    <li><i class="icofont-star"></i></li>
+                                                    <li><span>(45 Reviews)</span></li>
+                                                </ul>
+                                            </div>
+                                            <a href="course-details.html" class="ed-course__title">
+                                                <h5>
+                                                    {{course.title}}
+                                                </h5>
+                                            </a>
+                                            <div class="ed-course__lesson m-0">
+                                                <div class="ed-course__part">
+                                                    <i class="fi-rr-book"></i>
+                                                    <p>96 Lessons</p>
+                                                </div>
+                                                <div class="ed-course__students">
+                                                    <i class="fi fi-rr-graduation-cap"></i>
+                                                    <p>234 Students</p>
+                                                </div>
+                                            </div>
+                                            <div class="ed-course__bottom">
+                                                <span class="ed-course__price">{{course.price}}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </section>
+                    <!-- End Course Area -->
+
+                    <!-- Start Call Action Area -->
+                    <section class="ed-call-action ed-call-action--style2 position-relative overflow-hidden">
+                        <div class="container ed-container">
+                            <div class="ed-call-action__inner ed-call-action__inner--style2">
+                                <div class="ed-call-action__shapes">
+                                    <img class="ed-call-action__shape-1" src="{% static 'assets/images/abstracts/abstract-element-regular.svg' %}" alt="abstract-element-regular" />
+                                    <img class="ed-call-action__shape-2" src="{% static 'assets/images/abstracts/abstract-dot-4.svg' %}" alt="abstract-dot-4" />
+                                    <img class="ed-call-action__shape-3" src="{% static 'assets/images/abstracts/abstract-element-regular.svg' %}" alt="abstract-element-regular" />
+                                    <img class="ed-call-action__shape-4" src="{% static 'assets/images/abstracts/abstract-orange-plus-1.svg' %}" alt="abstract-orange-plus-1" />
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-12">
+                                        <div class="ed-call-action__img">
+                                            <img src="{% static 'assets/images/careerimg.jpg' %}" alt="call-action-img" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-12 order-class">
+                                        <div class="ed-call-action__content">
+                                            <div class="ed-section-head">
+                                                <span class="ed-section-head__sm-title">ONLINE COURSES</span>
+                                                <h3 class="ed-section-head__title ed-split-text left">
+                                                    Find Your Right Learning Path <br />
+                                                    For Your Future
+                                                </h3>
+                                                <p class="ed-section-head__text">
+                                                    Experience learning without limits, crafted to inspire and <br> empower you at every step—where excellence meets dedication
+                                                </p>
+                                            </div>
+                                            <div class="ed-call-action__content-btn">
+                                                <a href="/courses/" class="ed-btn"> Start Learning Today<i class="fi fi-rr-arrow-small-right"></i> </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- End Call Action Area -->
+
+                    <!-- Start Features Area -->
+                    <section class="ed-features position-relative">
+                        <div class="ed-category__shapes">
+                            <img class="ed-category__shape-1 updown-ani" src="{% static 'assets/images/features/features-1/shape-1.svg' %}" alt="shape-1" />
+                            <img class="ed-category__shape-2 rotate-ani" src="{% static 'assets/images/features/features-1/shape-2.svg' %}" alt="shape-2" />
+                        </div>
+                        <div class="container ed-container">
+                            <div class="row">
+                                <!-- Single Features Card  -->
+                                <div class="col-lg-4 col-md-6 col-12">
+                                    <div class="ed-features__card wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1s">
+                                        <div class="ed-features__icon icon-bg bg-1">
+                                            <img src="{% static 'assets/images/features/features-1/1.svg' %}" alt="icon" />
+                                        </div>
+                                        <div class="ed-features__info">
+                                            <h4>Educator Support</h4>
+                                            <p>
+                                                Dedicated Educator Support: Guidance and Expertise to Help You Succeed Every Step of the Way!
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Single Features Card  -->
+                                <div class="col-lg-4 col-md-6 col-12">
+                                    <div class="ed-features__card wow fadeInUp" data-wow-delay=".5s" data-wow-duration="1s">
+                                        <div class="ed-features__icon icon-bg bg-2">
+                                            <img src="{% static 'assets/images/features/features-1/2.svg' %}" alt="icon" />
+                                        </div>
+                                        <div class="ed-features__info">
+                                            <h4>Top Instructor</h4>
+                                            <p>
+                                                Learn from Top Instructors: Expert Guidance from the Best in the Field!
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Single Features Card  -->
+                                <div class="col-lg-4 col-md-6 col-12">
+                                    <div class="ed-features__card wow fadeInUp" data-wow-delay=".7s" data-wow-duration="1s">
+                                        <div class="ed-features__icon icon-bg bg-3">
+                                            <img src="{% static 'assets/images/features/features-1/3.svg' %}" alt="icon" />
+                                        </div>
+                                        <div class="ed-features__info">
+                                            <h4>Award Wining</h4>
+                                            <p>
+                                                Award-Winning Excellence: Recognized for Delivering Outstanding Learning Experiences!
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- End Features Area -->
+
+                    <!-- Start About Area -->
+                    <section class="ed-about section-gap position-relative">
+                        <div class="container ed-container">
+                            <div class="row align-items-center">
+                                <div class="col-lg-6 col-12">
+                                    <!-- About Content  -->
+                                    <div class="ed-about__content p-0">
+                                        <div class="ed-section-head">
+                                            <span class="ed-section-head__sm-title">WHY CHOOSE Cognitix Consulting</span>
+                                            <h3 class="ed-section-head__title ed-split-text left">
+                                                Digital Online Academy: Your <br />
+                                                Path to Creative Excellence
+                                            </h3>
+                                            <p class="ed-section-head__text">
+                                                Unlock your potential with seamless, high-quality learning designed for your success.
+                                            </p>
+                                        </div>
+                                        <div class="ed-about__feature">
+                                            <ul class="ed-about__features-list">
+                                                <li><img src="{% static 'assets/images/icons/icon-check-blue.svg' %}" alt="icon-check-blue" />Our Expert Trainers</li>
+                                                <li><img src="{% static 'assets/images/icons/icon-check-blue.svg' %}" alt="icon-check-blue" />Online Remote Learning</li>
+                                                <li><img src="{% static 'assets/images/icons/icon-check-blue.svg' %}" alt="icon-check-blue" />Easy to follow curriculum</li>
+                                                <!-- <li><img src="{% static 'assets/images/icons/icon-check-blue.svg' %}" alt="icon-check-blue" />Lifetime Access</li> -->
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-12">
+                                    <!-- About Images  -->
+                                    <div class="ed-about__images">
+                                        <div class="ed-about__main-img">
+                                            <img src="{% static 'assets/images/rightpicture.jpg' %}" alt="about-img" />
+                                        </div>
+                                        <div class="counter-card updown-ani">
+                                            <div class="counter-card__icon">
+                                                <i class="fi fi-rr-graduation-cap"></i>
+                                            </div>
+                                            <div class="counter-card__info">
+                                                <h4><span class="counter">3458</span>+</h4>
+                                                <p>Satisfied Students</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="ed-about__shapes">
+                                            <img class="ed-about__shape-1" src="{% static 'assets/images/about/about-1/shape-1.svg' %}" alt="shape-1" />
+                                            <img class="ed-about__shape-2" src="{% static 'assets/images/about/about-1/shape-2.svg' %}" alt="shape-2" />
+                                            <img class="ed-about__shape-3 rotate-ani" src="{% static 'assets/images/about/about-1/shape-3.svg' %}" alt="shape-3" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- End About Area -->
+
+                    <!-- Start Testimonial Area -->
+                    <section class="ed-testimonial ed-testimonial--style3 section-gap pt-0 overflow-hidden">
+                        <div class="container ed-container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8 col-12">
+                                    <div class="ed-section-head text-center">
+                                        <span class="ed-section-head__sm-title">OUR TESTIMONIAL</span>
+                                        <h3 class="ed-section-head__title ed-split-text left">
+                                            Student Thinking About Us
+                                        </h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="swiper ed-testimonial__slider-2">
+                                    <div class="swiper-wrapper">
+                                        <!-- Single Testimonial  -->
+                                        <div class="swiper-slide">
+                                            <div class="ed-testimonial__slider-item bg-color-1">
+                                                <ul class="ed-testimonial__rattings">
+                                                    <li><i class="icofont-star"></i></li>
+                                                    <li><i class="icofont-star"></i></li>
+                                                    <li><i class="icofont-star"></i></li>
+                                                    <li><i class="icofont-star"></i></li>
+                                                    <li><i class="icofont-star"></i></li>
+                                                </ul>
+                                                <p class="ed-testimonial__text">
+                                                    “ Attending Cognitix Consulting was one of the best decisions I've ever made. The curriculum was practical and industry-focused, allowing me to apply what I learned in real-world scenarios.”
+                                                </p>
+                                                <div class="ed-testimonial__author">
+                                                    <div class="ed-testimonial__author-img">
+                                                        <img src="{% static 'assets/images/testimonial/testimonial-1/author-1.png' %}" alt="author-img" />
+                                                    </div>
+                                                    <div class="ed-testimonial__author-info">
+                                                        <h5>John Smith</h5>
+                                                        <p>Science Student</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Single Testimonial  -->
+                                        <div class="swiper-slide">
+                                            <div class="ed-testimonial__slider-item bg-color-2">
+                                                <ul class="ed-testimonial__rattings">
+                                                    <li><i class="icofont-star"></i></li>
+                                                    <li><i class="icofont-star"></i></li>
+                                                    <li><i class="icofont-star"></i></li>
+                                                    <li><i class="icofont-star"></i></li>
+                                                    <li><i class="icofont-star"></i></li>
+                                                </ul>
+                                                <p class="ed-testimonial__text">
+                                                    “ Enrolling at Cognitix Consulting was the best decision I made for my career. The blend of theoretical knowledge and practical experience set me up for success in the industry.”
+                                                </p>
+                                                <div class="ed-testimonial__author">
+                                                    <div class="ed-testimonial__author-img">
+                                                        <img src="{% static 'assets/images/testimonial/testimonial-1/author-3.png' %}" alt="author-img" />
+                                                    </div>
+                                                    <div class="ed-testimonial__author-info">
+                                                        <h5>Franklin Chen</h5>
+                                                        <p>Art Student</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Single Testimonial  -->
+                                        <div class="swiper-slide">
+                                            <div class="ed-testimonial__slider-item bg-color-3">
+                                                <ul class="ed-testimonial__rattings">
+                                                    <li><i class="icofont-star"></i></li>
+                                                    <li><i class="icofont-star"></i></li>
+                                                    <li><i class="icofont-star"></i></li>
+                                                    <li><i class="icofont-star"></i></li>
+                                                    <li><i class="icofont-star"></i></li>
+                                                </ul>
+                                                <p class="ed-testimonial__text">
+                                                    “ Cognitix Consulting provided me with invaluable insights and real-world applications. The comprehensive courses helped me grow professionally and achieve my goals.”
+                                                </p>
+                                                <div class="ed-testimonial__author">
+                                                    <div class="ed-testimonial__author-img">
+                                                        <img src="{% static 'assets/images/testimonial/testimonial-1/author-3.png' %}" alt="author-img" />
+                                                    </div>
+                                                    <div class="ed-testimonial__author-info">
+                                                        <h5>James Parker</h5>
+                                                        <p>Math Student</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Single Testimonial  -->
+                                        <div class="swiper-slide">
+                                            <div class="ed-testimonial__slider-item bg-color-4">
+                                                <ul class="ed-testimonial__rattings">
+                                                    <li><i class="icofont-star"></i></li>
+                                                    <li><i class="icofont-star"></i></li>
+                                                    <li><i class="icofont-star"></i></li>
+                                                    <li><i class="icofont-star"></i></li>
+                                                    <li><i class="icofont-star"></i></li>
+                                                </ul>
+                                                <p class="ed-testimonial__text">
+                                                    “ Choosing Cognitix Consulting was a transformative experience. The practical curriculum and expert-led training gave me the tools I needed to thrive in my career.”
+                                                </p>
+                                                <div class="ed-testimonial__author">
+                                                    <div class="ed-testimonial__author-img">
+                                                        <img src="{% static 'assets/images/testimonial/testimonial-1/author-4.png' %}" alt="author-img" />
+                                                    </div>
+                                                    <div class="ed-testimonial__author-info">
+                                                        <h5>Charles Morgan</h5>
+                                                        <p>Globe Student</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Single Testimonial  -->
+                                        <div class="swiper-slide">
+                                            <div class="ed-testimonial__slider-item bg-color-2">
+                                                <ul class="ed-testimonial__rattings">
+                                                    <li><i class="icofont-star"></i></li>
+                                                    <li><i class="icofont-star"></i></li>
+                                                    <li><i class="icofont-star"></i></li>
+                                                    <li><i class="icofont-star"></i></li>
+                                                    <li><i class="icofont-star"></i></li>
+                                                </ul>
+                                                <p class="ed-testimonial__text">
+                                                    “ Joining Cognitix Consulting was a game-changer for me. The hands-on approach and industry-driven curriculum equipped me with the skills and knowledge to excel in the real world.”
+                                                </p>
+                                                <div class="ed-testimonial__author">
+                                                    <div class="ed-testimonial__author-img">
+                                                        <img src="{% static 'assets/images/testimonial/testimonial-1/author-2.png' %}" alt="author-img" />
+                                                    </div>
+                                                    <div class="ed-testimonial__author-info">
+                                                        <h5>Franklin Chen</h5>
+                                                        <p>Art Student</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="swiper-pagination"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- End Testimonial Area -->
+
+                    <!-- Start Contact Area -->
+                    <section class="ed-contact section-gap position-relative pb-0">
+                        <div class="ed-contact__bg">
+                            <img src="{% static 'assets/images/contact.jpg' %}" alt="contact-bg" />
+                        </div>
+                        <div class="ed-contact__shapes">
+                            <img class="ed-contact__shape-1 rotate-ani" src="{% static 'assets/images/contact/shape-1.svg' %}" alt="shape-1" />
+                            <img class="ed-contact__shape-2" src="{% static 'assets/images/contact/shape-2.svg' %}" alt="shape-1" />
+                            <img class="ed-contact__shape-3" src="{% static 'assets/images/contact/shape-3.svg' %}" alt="shape-1" />
+                        </div>
+                        <div class="container ed-container">
+                            <div class="row align-items-end">
+                                <div class="col-lg-3 col-12">
+                                    <div class="ed-contact__info-wrapper">
+                                        <h4 class="ed-contact__info-title">Contact</h4>
+
+                                        <!-- Sigle Info  -->
+                                        <div class="ed-contact__info-item">
+                                            <div class="ed-contact__info-icon">
+                                                <img src="{% static 'assets/images/icons/icon-phone-blue.svg' %}" alt="icon-phone-blue" />
+                                            </div>
+                                            <div class="ed-contact__info-content">
+                                                <span>24/7 Support</span>
+                                                <a href="tel:+532 321 33 33">+532 321 33 33</a>
+                                            </div>
+                                        </div>
+                                        <!-- Sigle Info  -->
+                                        <div class="ed-contact__info-item">
+                                            <div class="ed-contact__info-icon">
+                                                <img src="{% static 'assets/images/icons/icon-envelope-blue.svg' %}" alt="icon-envelope-blue" />
+                                            </div>
+                                            <div class="ed-contact__info-content">
+                                                <span>Send Message</span>
+                                                <a href="mailto:Cognitix Consulting@gmail.com">info@cognitixconsulting.com</a>
+                                            </div>
+                                        </div>
+
+                                        <!-- Sigle Info  -->
+                                        <div class="ed-contact__info-item">
+                                            <div class="ed-contact__info-icon">
+                                                <img src="{% static 'assets/images/icons/icon-location-blue.svg' %}" alt="icon-location-blue" />
+                                            </div>
+                                            <div class="ed-contact__info-content">
+                                                <span>Our Locati0n</span>
+                                                <a href="#">1207 /343 , 9th MAIN, 7th SECTOR, HSR LAYOUT, BANGALORE, KARNATAKA 560102</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-8 offset-lg-1 col-12 order-class">
+                                    <!-- Contact Form -->
+                                    <div class="ed-contact__form wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1s">
+                                        <div class="ed-contact__form-head">
+                                            <span class="ed-contact__form-sm-title">GET IN TOUCH</span>
+                                            <h3 class="ed-contact__form-big-title">
+                                                Have Any Questions About Cognitix Consulting? Contact With Us Today
+                                            </h3>
+                                        </div>
+                                        <form action="#" method="post" class="ed-contact__form-main">
+                                            <div class="row">
+                                                <div class="col-lg-6 col-12">
+                                                    <div class="form-group">
+                                                        <input type="text" id="name" name="name" placeholder="Full name" required />
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-12">
+                                                    <div class="form-group">
+                                                        <input type="tel" id="number" name="number" placeholder="Your phone" required />
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <input type="text" id="website" name="website" placeholder="Your website" required />
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <input type="email" id="email" name="email" placeholder="Enter your email" required />
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                        <textarea id="message" name="message" placeholder="How can we help you? Feel free to get in touch!" required></textarea>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <div class="form-check">
+                                                        <label class="form-check-label" for="flexCheckDefault"> <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />I agree to the Privacy Policy. </label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <div class="ed-contact__form-btn">
+                                                        <button type="submit" class="ed-btn">Send Your Message<i class="fi fi-rr-arrow-small-right"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- End Contact Area -->
+                </main>
+
+                <div class="footer-bg position-relative">
+                    <div class="footer-bg__img">
+                        <img src="{% static 'assets/images/footer/footer-2/footer-bg.png' %}" alt="footer-bg-img" />
+                    </div>
+
+                    <!-- Start Call Action Area -->
+                    <section class="ed-call-action position-relative">
+                        <div class="container ed-container">
+                            <div class="ed-call-action__inner position-relative">
+                                <div class="ed-call-action__shapes">
+                                    <img class="ed-call-action__shape-1 rotate-ani" src="{% static 'assets/images/call-action/call-action-1/shape-1.svg' %}" alt="shape-1" />
+                                    <img class="ed-call-action__shape-2" src="{% static 'assets/images/call-action/call-action-1/shape-2.svg' %}" alt="shape-2" />
+                                    <img class="ed-call-action__shape-3 updown-ani" src="{% static 'assets/images/call-action/call-action-1/shape-3.svg' %}" alt="shape-3" />
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-6 col-12">
+                                        <div class="ed-call-action__img">
+                                            <img src="{% static 'assets/images/call-action/call-action-1/call-action-img.png' %}" alt="call-action-img" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-12 order-class">
+                                        <div class="ed-call-action__content">
+                                            <div class="ed-section-head">
+                                                <span class="ed-section-head__sm-title">GET STARTED NOW</span>
+                                                <h3 class="ed-section-head__title">
+                                                    Affordable Your Online Courses <br />
+                                                    & Learning Opportunities
+                                                </h3>
+                                                <p class="ed-section-head__text">
+                                                    Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit. Excepteur sint occaecat.
+                                                </p>
+                                            </div>
+                                            <div class="ed-call-action__content-btn">
+                                                <a href="/courses/" class="ed-btn"> Start Learning Today<i class="fi fi-rr-arrow-small-right"></i> </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- End Call Action Area -->
+                    {% endblock main-content %}
+
+                    <!-- Start Footer Area -->
+                    <footer class="ed-footer position-relative">
+                        <!-- Footer Top -->
+                        <div class="ed-footer__top position-relative">
+                            <div class="ed-footer__shapes">
+                                <img class="ed-footer__shape-1" src="{% static 'assets/images/footer/footer-1/shape-1.svg' %}" alt="shape-1" />
+                                <img class="ed-footer__shape-2 rotate-ani" src="{% static 'assets/images/footer/footer-1/shape-2.svg' %}" alt="shape-2" />
+                                <img class="ed-footer__shape-3" src="{% static 'assets/images/footer/footer-1/shape-3.svg' %}" alt="shape-3" />
+                            </div>
+                            <div class="container ed-container">
+                                <div class="row g-0">
+                                    <div class="col-lg-4 col-md-6 col-12">
+                                        <div class="ed-footer__widget ed-footer__about">
+                                            <a href="index.html" class="ed-footer__logo">
+                                                <img src="{% static 'assets/images/logo2.png' %}" alt="footer-logo" />
+                                            </a>
+                                            <a href="index.html" class="ed-footer__logo">
+                                                <img src="{% static 'assets/images/finallogo2.jpg' %}" alt="footer-logo" />
+                                            </a>
+                                            <p class="ed-footer__about-text">
+                                                Empower Your Journey with Cognitix Consulting – Where Learning Meets Excellence.
+                                            </p>
+                                            <ul class="ed-footer__about-social">
+                                                <li>
+                                                    <a href="https://www.facebook.com/" target="_blank"><img src="{% static 'assets/images/icons/icon-dark-facebook.svg' %}" alt="icon-dark-facebook" /></a>
+                                                </li>
+                                                <li>
+                                                    <a href="https://www.twitter.com/" target="_blank"><img src="{% static 'assets/images/icons/icon-dark-twitter.svg' %}" alt="icon-dark-twitter" /></a>
+                                                </li>
+                                                <li>
+                                                    <a href="https://www.dribbble.com/" target="_blank"><img src="{% static 'assets/images/icons/icon-dark-dribbble.svg' %}" alt="icon-dark-dribbble" /></a>
+                                                </li>
+                                                <li>
+                                                    <a href="https://www.instagram.com/" target="_blank"><img src="{% static 'assets/images/icons/icon-dark-instagram.svg' %}" alt="icon-dark-instagram" /></a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-2 col-md-6 col-12">
+                                        <div class="ed-footer__widget">
+                                            <h4 class="ed-footer__widget-title">Links</h4>
+                                            <ul class="ed-footer__widget-links">
+                                                <li><a href="/aboutus/">About Us</a></li>
+                                                <li><a href="/courses/">Our Courses</a></li>
+                                                <li><a href="/privacy/">Privacy Policy</a></li>
+                                                <li><a href="/refund/">Refund</a></li>
+                                                <li><a href="/contactus/">Contact Us</a></li>
+                                               
+                                                <!-- <li><a href="/faq/">FAQ’s</a></li> -->
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-6 col-12">
+                                        <div class="ed-footer__widget contact-widget">
+                                            <h4 class="ed-footer__widget-title">Contact</h4>
+                                            <!-- Single Info  -->
+                                            <div class="ed-footer__contact">
+                                                <div class="ed-footer__contact-icon">
+                                                    <img src="{% static 'assets/images/icons/icon-phone-blue.svg' %}" alt="icon-phone-blue" />
+                                                </div>
+                                                <div class="ed-footer__contact-info">
+                                                    <span>24/7 Support</span>
+                                                    <a href="tel:+91 63609 97345">+91 63609 97345</a>
+                                                </div>
+                                            </div>
+                                            <!-- Single Info  -->
+                                            <div class="ed-footer__contact">
+                                                <div class="ed-footer__contact-icon">
+                                                    <img src="{% static 'assets/images/icons/icon-envelope-blue.svg' %}" alt="icon-envelope-blue" />
+                                                </div>
+                                                <div class="ed-footer__contact-info">
+                                                    <span>Send Message</span>
+                                                    <a href="mailto:info@cognitixconsulting.com">info@cognitixconsulting.com</a>
+                                                </div>
+                                            </div>
+
+                                            <!-- Single Info  -->
+                                            <div class="ed-footer__contact">
+                                                <div class="ed-footer__contact-icon">
+                                                    <img src="{% static 'assets/images/icons/icon-location-blue.svg' %}" alt="icon-location-blue" />
+                                                </div>
+                                                <div class="ed-footer__contact-info">
+                                                    <span>Our Location</span>
+                                                    <a href="#" target="_blank">1207 /343,9th MAIN, 7th SECTOR, HSR LAYOUT, BANGALORE, KARNATAKA 560102</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Footer Bottom -->
+                        <div class="ed-footer__bottom">
+                            <div class="container ed-container">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p class="ed-footer__copyright-text">
+                                            Copyright 2024 Cognitix Consutling All Rights Reserved
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </footer>
+                    <!-- End Footer Area  -->
+                </div>
+            </div>
+        </div>
+        <!-- Start Login Modal -->
+        <div class="modal fade ed-auth__modal" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="ed-auth__modal-content modal-content">
+                    <button type="button" class="ed-auth__modal-close" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fi-rr-cross"></i>
+                    </button>
+
+                    <!-- Auth Head  -->
+                    <div class="ed-auth__modal-head">
+                        <a href="index.html" class="ed-auth__modal-logo">
+                            <img src="{% static 'assets/images/logo2.png' %}" alt="logo" />
+                        </a>
+                        <h3 class="ed-auth__modal-title">Sign In Now</h3>
+                        <p class="ed-auth__modal-text">
+                            Didn’t Create an account?
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#registerModal">
+                                Sign Up
+                            </button>
+                        </p>
+                    </div>
+
+                    <!-- Auth Body  -->
+                    <div class="ed-auth__modal-body">
+                        <form action="#" method="post" class="ed-auth__modal-form">
+                            <div class="form-group">
+                                <input type="text" name="name" placeholder="Enter user name" required />
+                            </div>
+
+                            <div class="form-group">
+                                <input type="password" name="password" placeholder="Enter password" required />
+                            </div>
+
+                            <div class="form-check">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                    Remember me
+                                </label>
+                            </div>
+                            <div class="ed-auth__form-btn">
+                                <button type="submit" class="ed-btn">Sign In<i class="fi fi-rr-arrow-small-right"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Auth Footer  -->
+                    <div class="ed-auth__modal-footer">
+                        <div class="ed-auth__modal-third-party">
+                            <p>Or Sign In with</p>
+                            <ul class="ed-auth__modal-third-party-list">
+                                <li>
+                                    <a class="google-login" href="https://www.google.com/"><img src="{% static 'assets/images/icons/icon-color-google.svg' %}" alt="icon-color-google" /></a>
+                                </li>
+
+                                <li>
+                                    <a class="facebook-login" href="https://facebook.com/"><img src="{% static 'assets/images/icons/icon-color-facebook.svg' %}" alt="icon-color-facebook" /></a>
+                                </li>
+                                <li>
+                                    <a class="linkedin-login" href="https://www.linkedin.com/"><img src="{% static 'assets/images/icons/icon-color-linkedin.svg' %}" alt="icon-color-linkedin" /></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Login Modal -->
+
+        <!-- Start Register Modal -->
+        <div class="modal fade ed-auth__modal" id="registerModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="ed-auth__modal-content modal-content">
+                    <button type="button" class="ed-auth__modal-close" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fi-rr-cross"></i>
+                    </button>
+
+                    <!-- Auth Head  -->
+                    <div class="ed-auth__modal-head">
+                        <a href="index.html" class="ed-auth__modal-logo">
+                            <img src="{% static 'assets/images/logo2.png' %}" alt="logo" />
+                        </a>
+                        <h3 class="ed-auth__modal-title">Sign Up Now</h3>
+                        <p class="ed-auth__modal-text">
+                            already have an account?
+                            <button type="button" data-bs-toggle="modal" data-bs-target="#loginModal">
+                                Sign In
+                            </button>
+                        </p>
+                    </div>
+
+                    <!-- Auth Body  -->
+                    <div class="ed-auth__modal-body">
+                        <form action="#" method="post" class="ed-auth__modal-form">
+                            <div class="form-group">
+                                <input type="text" name="name" placeholder="Enter name" required />
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" name="user name" placeholder="Enter user name" required />
+                            </div>
+
+                            <div class="form-group">
+                                <input type="email" name="email" placeholder="Enter email" required />
+                            </div>
+
+                            <div class="form-group">
+                                <input type="password" name="password" placeholder="Enter password" required />
+                            </div>
+
+                            <div class="form-check">
+                                <label class="form-check-label" for="flexCheckDefault2">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2" />
+                                    I agree with your <strong>Privacy Policy</strong>
+                                </label>
+                            </div>
+                            <div class="ed-auth__form-btn">
+                                <button type="submit" class="ed-btn">Register Now<i class="fi fi-rr-arrow-small-right"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Auth Footer  -->
+                    <div class="ed-auth__modal-footer">
+                        <div class="ed-auth__modal-third-party">
+                            <p>Or Sign Up with</p>
+                            <ul class="ed-auth__modal-third-party-list">
+                                <li>
+                                    <a class="google-login" href="https://www.google.com/"><img src="{% static 'assets/images/icons/icon-color-google.svg' %}" alt="icon-color-google" /></a>
+                                </li>
+
+                                <li>
+                                    <a class="facebook-login" href="https://facebook.com/"><img src="{% static 'assets/images/icons/icon-color-facebook.svg' %}" alt="icon-color-facebook" /></a>
+                                </li>
+                                <li>
+                                    <a class="linkedin-login" href="https://www.linkedin.com/"><img src="{% static 'assets/images/icons/icon-color-linkedin.svg' %}" alt="icon-color-linkedin" /></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Register Modal -->
+
+        <!-- Start Sidebar Cart -->
+        <div class="offcanvas offcanvas-end ed-sidebar ed-sidebar-cart" tabindex="-1" id="edSidebarCart" aria-labelledby="offcanvasRightLabel">
+            <div class="ed-sidebar-header">
+                <h3 class="ed-sidebar-header-title">Add to cart</h3>
+                <button type="button" class="text-reset" data-bs-dismiss="offcanvas" aria-label="Close">
+                    <i class="fi fi-rr-cross"></i>
+                </button>
+            </div>
+            <div class="ed-sidebar-body">
+                <!-- Single Cart Item  -->
+                <div class="ed-sidebar-cart-item">
+                    <div class="ed-sidebar-cart-main">
+                        <div class="ed-sidebar-cart-img">
+                            <img src="{% static 'assets/images/product/cart-1.png' %}" alt="cart-1" />
+                        </div>
+                        <div class="ed-sidebar-cart-info">
+                            <span>1 x <strong>$64</strong></span>
+                            <a href="product-details.html">Digital marketing demo</a>
+                        </div>
+                    </div>
+                    <div class="ed-sidebar-cart-remove">
+                        <button type="button"><i class="fi-rr-cross"></i></button>
+                    </div>
+                </div>
+
+                <!-- Single Cart Item  -->
+                <div class="ed-sidebar-cart-item">
+                    <div class="ed-sidebar-cart-main">
+                        <div class="ed-sidebar-cart-img">
+                            <img src="{% static 'assets/images/product/cart-2.png' %}" alt="cart-2" />
+                        </div>
+                        <div class="ed-sidebar-cart-info">
+                            <span>1 x <strong>$74</strong></span>
+                            <a href="product-details.html">Business solution book</a>
+                        </div>
+                    </div>
+                    <div class="ed-sidebar-cart-remove">
+                        <button type="button"><i class="fi-rr-cross"></i></button>
+                    </div>
+                </div>
+
+                <!-- Single Cart Item  -->
+                <div class="ed-sidebar-cart-item">
+                    <div class="ed-sidebar-cart-main">
+                        <div class="ed-sidebar-cart-img">
+                            <img src="{% static 'assets/images/product/cart-3.png' %}" alt="cart-3" />
+                        </div>
+                        <div class="ed-sidebar-cart-info">
+                            <span>1 x <strong>$94</strong></span>
+                            <a href="product-details.html">Business type</a>
+                        </div>
+                    </div>
+                    <div class="ed-sidebar-cart-remove">
+                        <button type="button"><i class="fi-rr-cross"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ed-sidebar-footer">
+                <div class="ed-sidebar-cart-subtotal">
+                    <p>Subtotal:<span> $224</span></p>
+                    <a href="checkout.html" class="ed-sidebar-cart-btn">Checkout</a>
+                </div>
+            </div>
+        </div>
+        <!-- End Sidebar Cart -->
+
+        <!-- Start Back To Top  -->
+        <div class="progress-wrap">
+            <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98" />
+            </svg>
+        </div>
+        <!-- End Back To Top -->
+
+        <!-- Jquery JS -->
+        <script src="{% static 'assets/plugins/js/jquery.min.js' %}"></script>
+        <script src="{% static 'assets/plugins/js/jquery-migrate.js' %}"></script>
+        <!-- Bootstrap JS -->
+        <script src="{% static 'assets/plugins/js/bootstrap.min.js' %}"></script>
+
+        <!-- Gsap JS -->
+        <script src="{% static 'assets/plugins/js/gsap/gsap.js' %}"></script>
+        <script src="{% static 'assets/plugins/js/gsap/gsap-scroll-to-plugin.js' %}"></script>
+        <script src="{% static 'assets/plugins/js/gsap/gsap-scroll-smoother.js' %}"></script>
+        <script src="{% static 'assets/plugins/js/gsap/gsap-scroll-trigger.js' %}"></script>
+        <script src="{% static 'assets/plugins/js/gsap/gsap-split-text.js' %}"></script>
+
+        <!-- Wow JS -->
+        <script src="{% static 'assets/plugins/js/wow.min.js' %}"></script>
+        <!-- Owl Carousel JS -->
+        <script src="{% static 'assets/plugins/js/owl.carousel.min.js' %}"></script>
+        <!-- Swiper Slider JS -->
+        <script src="{% static 'assets/plugins/js/swiper-bundle.min.js' %}"></script>
+        <!-- Magnific Popup JS -->
+        <script src="{% static 'assets/plugins/js/magnific-popup.min.js' %}"></script>
+        <!-- CounterUp  JS -->
+        <script src="{% static 'assets/plugins/js/jquery.counterup.min.js' %}"></script>
+        <script src="{% static 'assets/plugins/js/waypoints.min.js' %}"></script>
+        <!-- Nice Select JS -->
+        <script src="{% static 'assets/plugins/js/nice-select.min.js' %}"></script>
+        <!-- Back To Top JS -->
+        <script src="{% static 'assets/plugins/js/backToTop.js' %}"></script>
+
+        <!-- Main JS -->
+        <script src="{% static 'assets/plugins/js/active.js' %}"></script>
+    </body>
+</html>

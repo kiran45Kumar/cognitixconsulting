@@ -32,7 +32,7 @@ class Course(models.Model):
     course_video = models.FileField(upload_to="course_videos/", default="")
     course_sample_certificate = models.ImageField(upload_to="sample_certificates", default="")
     course_brochure = models.FileField(upload_to="brochures/", default="")
-    trainers = models.ManyToManyField(AddTrainers)
+    trainers = models.ManyToManyField(AddTrainers, blank=True)
     skillsgain = models.CharField(max_length=500, default="")
     total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     completion_of_days = models.CharField(max_length=200, default="2days")

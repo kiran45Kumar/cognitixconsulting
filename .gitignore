@@ -5,6 +5,7 @@ __pycache__/
 venv/
 # C extensions
 *.so
+
 node_modules/
 # Distribution / packaging
 .Python
@@ -50,7 +51,7 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 cover/
-
+package-lock.json
 # Translations
 *.mo
 *.pot

@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'courses',
     'adminuse',
     'rest_framework',
-    'jobportal'
+    'jobportal',
+    'compressor'
 ]
 
 MIDDLEWARE = [

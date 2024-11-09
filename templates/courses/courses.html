@@ -1,0 +1,141 @@
+{% extends 'customer/index-3.html' %}
+{% block main-content %}
+{% load static %}
+<div id="smooth-wrapper">
+    <div id="smooth-content">
+        <main>
+            <div class="section-bg hero-bg">
+                <!-- Start Bredcrumbs Area -->
+                <section class="ed-breadcrumbs background-image" style="background-image: url('{% static "assets/images/breadcrumbs-bg.png" %}');">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <div class="ed-breadcrumbs__content">
+                                    <h3 class="ed-breadcrumbs__title">Our Courses</h3>
+                                    <ul class="ed-breadcrumbs__menu">
+                                        <li class="active"><a href="/">Home</a></li>
+                                        <li>/</li>
+                                        <li>Our Courses</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- End Bredcrumbs Area -->
+            </div>
+
+            <!-- Start Course Area -->
+            <section class="ed-course section-gap position-relative">
+                <div class="container ed-container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="ed-course__filter">
+                                <div class="ed-course__filter-search">
+                                    <form action="#" method="post" class="ed-hero__search-form">
+                                        <input type="search" name="search" placeholder="Search your courses..." required />
+                                        <button type="submit">Search<i class="fi-rr-search"></i></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- Single Course Card -->
+                         {% for course in courses %}
+                            
+                        <div class="col-lg-6 col-xl-4 col-md-6 col-12">
+                            <div class="ed-course__card wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1s">
+                                <a href="/course/{{course.course_id}}" class="ed-course__img">
+                                    <img src="{{course.course_img.url}}" alt="course-img" />
+                                </a>
+
+                                <a href="course-1.html" class="ed-course__tag">{{course.category}}</a>
+
+                                <div class="ed-course__body">
+                                    <div class="ed-course__lesson">
+                                        <div class="ed-course__part">
+                                            <i class="fi-rr-book"></i>
+                                            <p>23 Lessons</p>
+                                        </div>
+                                        <div class="ed-course__teacher">
+                                            <i class="fi-rr-user"></i>
+                                            <p><b>Starts</b> {{course.start}}</p>
+                                        </div>
+                                    </div>
+
+                                    <a href="/course/{{course.course_id}}" class="ed-course__title">
+                                        <h5>
+                                            {{course.title}}
+                                        </h5>
+                                    </a>
+
+                                    <div class="ed-course__rattings">
+                                        <ul>
+                                            <li><i class="icofont-star"></i></li>
+                                            <li><i class="icofont-star"></i></li>
+                                            <li><i class="icofont-star"></i></li>
+                                            <li><i class="icofont-star"></i></li>
+                                            <li><i class="icofont-star"></i></li>
+                                            <li><span>(09 Reviews)</span></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="ed-course__bottom">
+                                        <span class="ed-course__price">$674.00</span>
+                                        <div class="ed-course__students">
+                                            <i class="fi fi-rr-graduation-cap"></i>
+                                            <p>673 Students</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+            <!-- End Course Area -->
+
+            <!-- Start Call Action Area -->
+            <section class="ed-call-action position-relative">
+                <div class="container ed-container">
+                    <div class="ed-call-action__inner position-relative">
+                        <div class="ed-call-action__shapes">
+                            <img class="ed-call-action__shape-1 rotate-ani" src="{% static 'assets/images/call-action/call-action-1/shape-1.svg' %}" alt="shape-1" />
+                            <img class="ed-call-action__shape-2" src="{% static 'assets/images/call-action/call-action-1/shape-2.svg' %}" alt="shape-2" />
+                            <img class="ed-call-action__shape-3 updown-ani" src="{% static 'assets/images/call-action/call-action-1/shape-3.svg' %}"  alt="shape-3" />
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-12">
+                                <div class="ed-call-action__img">
+                                    <img src="assets/images/call-action/call-action-1/call-action-img.png" alt="call-action-img" />
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-12 order-class">
+                                <div class="ed-call-action__content">
+                                    <div class="ed-section-head">
+                                        <span class="ed-section-head__sm-title">GET STARTED NOW</span>
+                                        <h3 class="ed-section-head__title">
+                                            Affordable Your Online Courses <br />
+                                            & Learning Opportunities
+                                        </h3>
+                                        <p class="ed-section-head__text">
+                                            Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit. Excepteur sint occaecat.
+                                        </p>
+                                    </div>
+                                    <div class="ed-call-action__content-btn">
+                                        <a href="course-1.html" class="ed-btn"> Start Learning Today<i class="fi fi-rr-arrow-small-right"></i> </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- End Call Action Area -->
+        </main>
+    {% endblock main-content %}
+        <!-- End Footer Area  -->
+    </div>
+</div>

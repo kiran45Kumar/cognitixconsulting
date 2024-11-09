@@ -217,7 +217,7 @@ def enrolledUsers(request):
 def viewCourseById(request, id):
     course_by_id = Course.objects.get(course_id=id)
     domains = Category.objects.all()
-    return render(request, 'courses/viewcoursebyid.html',{'course_by_id':course_by_id,"currentUser":request.session['user_name'],'domains':domains})
+    return render(request, 'courses/coursedetails.html',{'course_by_id':course_by_id,"currentUser":request.session.get('user_name',''),'domains':domains})
 class ViewAllTrainer(TemplateView):
     template_name = 'courses/trainerview.html'
     def get_context_data(self, **kwargs) :

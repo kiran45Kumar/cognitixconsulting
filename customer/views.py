@@ -23,7 +23,34 @@ def index2(request):
     domains = Category.objects.all()
     allTrainers = AddTrainers.objects.all().order_by('-trainer_created')
     courses = Course.objects.all()
-    return render(request, 'customer/index2.html',{'currentUser':request.session.get('user_name',''),'domains':domains,'allTrainers':allTrainers,"courses":courses})
+    return render(request, 'customer/index-3.html',{'currentUser':request.session.get('user_name',''),'domains':domains,'allTrainers':allTrainers,"courses":courses})
+def courses(request):
+    domains = Category.objects.all()
+    allTrainers = AddTrainers.objects.all().order_by('-trainer_created')
+    courses = Course.objects.all()
+    return render(request, 'courses/courses.html',{'currentUser':request.session.get('user_name',''),'domains':domains,'allTrainers':allTrainers,"courses":courses})
+
+def aboutus(request):
+    domains = Category.objects.all()
+    allTrainers = AddTrainers.objects.all().order_by('-trainer_created')
+    courses = Course.objects.all()
+    return render(request, 'customer/about-01.html',{'currentUser':request.session.get('user_name',''),'domains':domains,'allTrainers':allTrainers,"courses":courses})
+def index2(request):
+    domains = Category.objects.all()
+    allTrainers = AddTrainers.objects.all().order_by('-trainer_created')
+    courses = Course.objects.all()
+    return render(request, 'customer/index-3.html',{'currentUser':request.session.get('user_name',''),'domains':domains,'allTrainers':allTrainers,"courses":courses})
+def index2(request):
+    domains = Category.objects.all()
+    allTrainers = AddTrainers.objects.all().order_by('-trainer_created')
+    courses = Course.objects.all()
+    return render(request, 'customer/index-3.html',{'currentUser':request.session.get('user_name',''),'domains':domains,'allTrainers':allTrainers,"courses":courses})
+def privacy(request):
+    return render(request, 'customer/privacy.html')
+def contactus(request):
+    return render(request, 'customer/contact-01.html')
+def refund(request):
+    return render(request, 'customer/refund.html')
 class CreateUser(APIView):
     def post(self, request):
         name = request.POST.get('username')

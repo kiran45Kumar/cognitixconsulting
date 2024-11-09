@@ -1,0 +1,430 @@
+{% extends 'customer/index-3.html' %}
+{% block main-content %}
+{% load static %}
+<div id="smooth-wrapper">
+    <div id="smooth-content">
+        <main>
+            <div class="section-bg hero-bg">
+                <!-- Start Bredcrumbs Area -->
+                <section class="ed-breadcrumbs background-image" style="background-image: url('{% static "assets/images/breadcrumbs-bg.png" %}');">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <div class="ed-breadcrumbs__content">
+                                    <h3 class="ed-breadcrumbs__title">About Us</h3>
+                                    <ul class="ed-breadcrumbs__menu">
+                                        <li class="active"><a href="/">Home</a></li>
+                                        <li>/</li>
+                                        <li>ABOUT US</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- End Bredcrumbs Area -->
+            </div>
+
+            <!-- Start About Area -->
+            <section class="ed-about ed-about__page section-gap position-relative">
+                <div class="container ed-container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 col-12">
+                            <!-- About Images  -->
+                            <div class="ed-about__images">
+                                <div class="ed-about__main-img">
+                                    <img src="{% static 'assets/images/leftpicture.jpg' %}" alt="about-img" />
+                                </div>
+                                <div class="counter-card updown-ani">
+                                    <div class="counter-card__icon">
+                                        <i class="fi fi-rr-graduation-cap"></i>
+                                    </div>
+                                    <div class="counter-card__info">
+                                        <h4><span class="counter">9394</span>+</h4>
+                                        <p>Enrolled Learners</p>
+                                    </div>
+                                </div>
+
+                                <div class="ed-about__shapes">
+                                    <img class="ed-about__shape-1" src="{% static 'assets/images/about/about-1/shape-1.svg' %}" alt="shape-1" />
+                                    <img class="ed-about__shape-2" src="{% static 'assets/images/about/about-1/shape-2.svg' %}" alt="shape-2" />
+                                    <img class="ed-about__shape-3 rotate-ani" src="{% static 'assets/images/about/about-1/shape-3.svg' %}" alt="shape-3" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-12">
+                            <!-- About Content  -->
+                            <div class="ed-about__content">
+                                <div class="ed-section-head">
+                                    <span class="ed-section-head__sm-title">WELCOME TO Cognitix Conuslting</span>
+                                    <h3 class="ed-section-head__title ed-split-text right">
+                                        Digital Online Academy: Your <br />
+                                        Path to Creative Excellence
+                                    </h3>
+                                    <p class="ed-section-head__text">
+                                        Dedicated to delivering excellence, we offer a seamless learning experience that motivates and empowers every step of the way.
+                                    </p>
+                                </div>
+                                <div class="ed-about__feature">
+                                    <ul class="ed-about__features-list">
+                                        <li><img src="{% static 'assets/images/icons/icon-check-blue.svg' %}" alt="icon-check-blue" />Our Expert Trainers</li>
+                                        <li><img src="{% static 'assets/images/icons/icon-check-blue.svg' %}" alt="icon-check-blue" />Online Remote Learning</li>
+                                        <li><img src="{% static 'assets/images/icons/icon-check-blue.svg' %}" alt="icon-check-blue" />Easy to follow curriculum</li>
+                                        <li><img src="{% static 'assets/images/icons/icon-check-blue.svg' %}" alt="icon-check-blue" />Lifetime Access</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <img class="ed-about__shape-4" src="{% static 'assets/images/abstracts/abstract-element-regular.svg' %}" alt="shape-4" />
+            </section>
+            <!-- End About Area -->
+
+            <!-- Start Features Area -->
+            <section class="ed-features position-relative">
+                <div class="ed-category__shapes">
+                    <img class="ed-category__shape-1 updown-ani" src="{% static 'assets/images/features/features-1/shape-1.svg' %}" alt="shape-1" />
+                    <img class="ed-category__shape-2 rotate-ani" src="{% static 'assets/images/features/features-1/shape-2.svg' %}" alt="shape-2" />
+                </div>
+                <div class="container ed-container">
+                    <div class="row">
+                        <!-- Single Features Card  -->
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div class="ed-features__card wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1s">
+                                <div class="ed-features__icon icon-bg bg-1">
+                                    <img src="{% static 'assets/images/features/features-1/1.svg' %}" alt="icon" />
+                                </div>
+                                <div class="ed-features__info">
+                                    <h4>Educator Support</h4>
+                                    <p>
+                                        Dedicated Educator Support: Guidance and Expertise to Help You Succeed Every Step of the Way!
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Single Features Card  -->
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div class="ed-features__card wow fadeInUp" data-wow-delay=".5s" data-wow-duration="1s">
+                                <div class="ed-features__icon icon-bg bg-2">
+                                    <img src="{% static 'assets/images/features/features-1/2.svg' %}" alt="icon" />
+                                </div>
+                                <div class="ed-features__info">
+                                    <h4>Top Instructor</h4>
+                                    <p>
+                                        Learn from Top Instructors: Expert Guidance from the Best in the Field!
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Single Features Card  -->
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div class="ed-features__card wow fadeInUp" data-wow-delay=".7s" data-wow-duration="1s">
+                                <div class="ed-features__icon icon-bg bg-3">
+                                    <img src="{% static 'assets/images/features/features-1/3.svg' %}" alt="icon" />
+                                </div>
+                                <div class="ed-features__info">
+                                    <h4>Award Wining</h4>
+                                    <p>
+                                        Award-Winning Excellence: Recognized for Delivering Outstanding Learning Experiences!
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- End Features Area -->
+
+            <!-- Start Category Area -->
+            <section class="ed-category ed-category--style2 section-gap overflow-hidden">
+                <div class="container ed-container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="ed-section-head text-center">
+                                <span class="ed-section-head__sm-title">COURSE CATEGORIES</span>
+                                <h3 class="ed-section-head__title m-0 ed-split-text left">
+                                    Top Categories You Want to Learn
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="swiper ed-category__slider">
+                            <div class="swiper-wrapper">
+                                <!-- Single Coure Card  -->
+                                 {% for category in domains %}
+                                    
+                                <div class="swiper-slide">
+                                    <div class="ed-category__card ed-category__card--style2">
+                                        <a href="/" class="ed-category__content">
+                                            <div class="ed-category__icon">
+                                                <img src="{% static 'assets/images/category/category-1/1.svg' %}" alt="icon" />
+                                            </div>
+                                            <div class="ed-category__info">
+                                                <h4>{{category.name}}</h4>
+                                                <!-- <p>04 Courses</p> -->
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                {% endfor %}
+
+                            </div>
+                            <div class="swiper-pagination"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- End Category Area -->
+
+            <!-- Start Partner Area -->
+            <section class="ed-partner ed-partner--style2 section-gap pt-0">
+                <div class="container ed-container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-5 col-12">
+                            <div class="ed-section-head">
+                                <span class="ed-section-head__sm-title">OUR SPONSOR</span>
+                                <h3 class="ed-section-head__title m-0">
+                                    Get in touch with the <br />
+                                    <span> 250+ </span> companies who Collaboration us
+                                </h3>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-7 col-12">
+                            <div class="ed-partner__slider--style2">
+                                <div class="swiper ed-partner__slider-2">
+                                    <div class="swiper-wrapper ease-linear">
+                                        <!-- Single Slider  -->
+                                        <div class="swiper-slide">
+                                            <a href="#" target="_blank" class="ed-parnet__brand-logo">
+                                                <img src="{% static 'assets/images/partner/partner-1/1.svg' %}" alt="brand-logo" />
+                                            </a>
+                                        </div>
+
+                                        <!-- Single Slider  -->
+                                        <div class="swiper-slide">
+                                            <a href="#" target="_blank" class="ed-parnet__brand-logo">
+                                                <img src="{% static 'assets/images/partner/partner-1/2.svg' %}" alt="brand-logo" />
+                                            </a>
+                                        </div>
+
+                                        <!-- Single Slider  -->
+                                        <div class="swiper-slide">
+                                            <a href="#" target="_blank" class="ed-parnet__brand-logo">
+                                                <img src="{% static 'assets/images/partner/partner-1/3.svg' %}" alt="brand-logo" />
+                                            </a>
+                                        </div>
+                                        <!-- Single Slider  -->
+                                        <div class="swiper-slide">
+                                            <a href="#" target="_blank" class="ed-parnet__brand-logo">
+                                                <img src="{% static 'assets/images/partner/partner-1/4.svg' %}" alt="brand-logo" />
+                                            </a>
+                                        </div>
+                                        <!-- Single Slider  -->
+                                        <div class="swiper-slide">
+                                            <a href="#" target="_blank" class="ed-parnet__brand-logo">
+                                                <img src="{% static 'assets/images/partner/partner-1/5.svg' %}" alt="brand-logo" />
+                                            </a>
+                                        </div>
+                                        <!-- Single Slider  -->
+                                        <div class="swiper-slide">
+                                            <a href="#" target="_blank" class="ed-parnet__brand-logo">
+                                                <img src="{% static 'assets/images/partner/partner-1/6.svg' %}" alt="brand-logo" />
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="swiper ed-partner__slider-2-reverse">
+                                    <div class="swiper-wrapper ease-linear">
+                                        <!-- Single Slider  -->
+                                        <div class="swiper-slide">
+                                            <a href="#" target="_blank" class="ed-parnet__brand-logo">
+                                                <img src="{% static 'assets/images/partner/partner-1/1.svg' %}" alt="brand-logo" />
+                                            </a>
+                                        </div>
+
+                                        <!-- Single Slider  -->
+                                        <div class="swiper-slide">
+                                            <a href="#" target="_blank" class="ed-parnet__brand-logo">
+                                                <img src="{% static 'assets/images/partner/partner-1/2.svg' %}" alt="brand-logo" />
+                                            </a>
+                                        </div>
+
+                                        <!-- Single Slider  -->
+                                        <div class="swiper-slide">
+                                            <a href="#" target="_blank" class="ed-parnet__brand-logo">
+                                                <img src="{% static 'assets/images/partner/partner-1/3.svg' %}" alt="brand-logo" />
+                                            </a>
+                                        </div>
+                                        <!-- Single Slider  -->
+                                        <div class="swiper-slide">
+                                            <a href="#" target="_blank" class="ed-parnet__brand-logo">
+                                                <img src="{% static 'assets/images/partner/partner-1/4.svg' %}" alt="brand-logo" />
+                                            </a>
+                                        </div>
+                                        <!-- Single Slider  -->
+                                        <div class="swiper-slide">
+                                            <a href="#" target="_blank" class="ed-parnet__brand-logo">
+                                                <img src="{% static 'assets/images/partner/partner-1/5.svg' %}" alt="brand-logo" />
+                                            </a>
+                                        </div>
+                                        <!-- Single Slider  -->
+                                        <div class="swiper-slide">
+                                            <a href="#" target="_blank" class="ed-parnet__brand-logo">
+                                                <img src="{% static 'assets/images/partner/partner-1/6.svg' %}" alt="brand-logo" />
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- End Partner Area -->
+            <!-- Start Contact Area -->
+            <section class="ed-contact section-gap position-relative pb-0">
+                <div class="ed-contact__bg">
+                    <img src="{% static 'assets/images/contact.jpg' %}" alt="contact-bg" />
+                </div>
+                <div class="ed-contact__shapes">
+                    <img class="ed-contact__shape-1 rotate-ani" src="{% static 'assets/images/contact/shape-1.svg' %}" alt="shape-1" />
+                    <img class="ed-contact__shape-2" src="{% static 'assets/images/contact/shape-2.svg' %}" alt="shape-1" />
+                    <img class="ed-contact__shape-3" src="{% static 'assets/images/contact/shape-3.svg' %}" alt="shape-1" />
+                </div>
+                <div class="container ed-container">
+                    <div class="row align-items-end">
+                        <div class="col-lg-3 col-12">
+                            <div class="ed-contact__info-wrapper">
+                                <h4 class="ed-contact__info-title">Contact</h4>
+
+                                <!-- Sigle Info  -->
+                                <div class="ed-contact__info-item">
+                                    <div class="ed-contact__info-icon">
+                                        <img src="{% static 'assets/images/icons/icon-phone-blue.svg' %}" alt="icon-phone-blue" />
+                                    </div>
+                                    <div class="ed-contact__info-content">
+                                        <span>24/7 Support</span>
+                                        <a href="tel:+91 63609 97345">+91 63609 97345</a>
+                                    </div>
+                                </div>
+                                <!-- Sigle Info  -->
+                                <div class="ed-contact__info-item">
+                                    <div class="ed-contact__info-icon">
+                                        <img src="{% static 'assets/images/icons/icon-envelope-blue.svg' %}" alt="icon-envelope-blue" />
+                                    </div>
+                                    <div class="ed-contact__info-content">
+                                        <span>Send Message</span>
+                                        <a href="mailto:info@cognitixconsulting.com">info@cognitixconsulting.com</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-8 offset-lg-1 col-12 order-class">
+                            <!-- Contact Form -->
+                            <div class="ed-contact__form wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1s">
+                                <div class="ed-contact__form-head">
+                                    <span class="ed-contact__form-sm-title">GET IN TOUCH</span>
+                                    <h3 class="ed-contact__form-big-title">
+                                        Have Any Questions About Cognitix Conuslting? Contact With Us Today
+                                    </h3>
+                                </div>
+                                <form action="#" method="post" class="ed-contact__form-main">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-12">
+                                            <div class="form-group">
+                                                <input type="text" id="name" name="name" placeholder="Full name" required />
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-12">
+                                            <div class="form-group">
+                                                <input type="tel" id="number" name="number" placeholder="Your phone" required />
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <input type="text" id="website" name="website" placeholder="Your website" required />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <input type="email" id="email" name="email" placeholder="Enter your email" required />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <textarea id="message" name="message" placeholder="How can we help you? Feel free to get in touch!" required></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <div class="form-check">
+                                                <label class="form-check-label" for="flexCheckDefault"> <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />I agree to the Privacy Policy. </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12">
+                                            <div class="ed-contact__form-btn">
+                                                <button type="submit" class="ed-btn">Send Your Message<i class="fi fi-rr-arrow-small-right"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- End Contact Area -->
+
+            <!-- Start Blog Area -->
+
+            <!-- End Blog Area -->
+
+            <!-- Start Call Action Area -->
+            <section class="ed-call-action position-relative">
+                <div class="container ed-container">
+                    <div class="ed-call-action__inner position-relative">
+                        <div class="ed-call-action__shapes">
+                            <img class="ed-call-action__shape-1 rotate-ani" src="{% static 'assets/images/call-action/call-action-1/shape-1.svg' %}" alt="shape-1" />
+                            <img class="ed-call-action__shape-2" src="{% static 'assets/images/call-action/call-action-1/shape-2.svg' %}" alt="shape-2" />
+                            <img class="ed-call-action__shape-3 updown-ani" src="{% static 'assets/images/call-action/call-action-1/shape-3.svg' %}" alt="shape-3" />
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-12">
+                                <div class="ed-call-action__img">
+                                    <img src="{% static 'assets/images/leftpic2.jpg' %}" alt="call-action-img" />
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-12 order-class">
+                                <div class="ed-call-action__content">
+                                    <div class="ed-section-head">
+                                        <span class="ed-section-head__sm-title">GET STARTED NOW</span>
+                                        <h3 class="ed-section-head__title">
+                                            Affordable Your Online Courses <br />
+                                            & Learning Opportunities
+                                        </h3>
+                                        <p class="ed-section-head__text">
+                                            Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit. Excepteur sint occaecat.
+                                        </p>
+                                    </div>
+                                    <div class="ed-call-action__content-btn">
+                                        <a href="/" class="ed-btn"> Start Learning Today<i class="fi fi-rr-arrow-small-right"></i> </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- End Call Action Area -->
+        </main>
+{% endblock main-content %}

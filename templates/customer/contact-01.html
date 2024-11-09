@@ -1,0 +1,160 @@
+{% extends 'customer/index-3.html' %}
+{% block main-content %}
+{% load static %}
+<div id="smooth-wrapper">
+    <div id="smooth-content">
+        <main>
+            <div class="section-bg hero-bg">
+                <!-- Start Bredcrumbs Area -->
+                <section class="ed-breadcrumbs background-image" style="background-image: url('{% static "assets/images/breadcrumbs-bg.png" %}');">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <div class="ed-breadcrumbs__content">
+                                    <h3 class="ed-breadcrumbs__title">Contact With Us</h3>
+                                    <ul class="ed-breadcrumbs__menu">
+                                        <li class="active"><a href="/">Home</a></li>
+                                        <li>/</li>
+                                        <li>Contact With Us</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- End Bredcrumbs Area -->
+            </div>
+
+            <!-- Start Contact Card Area -->
+            <div class="ed-contact__card section-gap">
+                <div class="container ed-container">
+                    <div class="row">
+                        <!-- Single Card  -->
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div class="ed-contact__card-item">
+                                <div class="ed-contact__card-icon">
+                                    <img src="{% static 'assets/images/icons/icon-white-phone.svg' %}" alt="icon-white-phone" />
+                                </div>
+                                <div class="ed-contact__card-info">
+                                    <a href="tel:+91 63609 97345">+91 63609 97345</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Single Card  -->
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div class="ed-contact__card-item">
+                                <div class="ed-contact__card-icon">
+                                    <img src="{% static 'assets/images/icons/icon-white-message.svg' %}" alt="icon-white-phone" />
+                                </div>
+                                <div class="ed-contact__card-info">
+                                    <a href="mailto:helloCognitix Conuslting@gmail.com" >info@cognitixconsulting.com</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Single Card  -->
+                        <div class="col-lg-4 col-md-6 col-12">
+                            <div class="ed-contact__card-item">
+                                <div class="ed-contact__card-icon">
+                                    <img src="{% static 'assets/images/icons/icon-white-map.svg' %}" alt="icon-white-phone" />
+                                </div>
+                                <div class="ed-contact__card-info">
+                                    <a href="#" target="_blank">
+                                        #1207 /343 
+                                        9th MAIN, 7th SECTOR, <br> HSR LAYOUT, BANGALORE, KARNATAKA 560102 
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Contact Card Area -->
+
+            <!-- Start Contact Area -->
+            <section class="ed-contact ed-contact--style2 section-gap pt-0 position-relative">
+                <div class="container ed-container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="ed-contact__inner">
+                                <!-- Contact Image  -->
+                                <div class="ed-contact__img">
+                                    <img src="{% static 'assets/images/contact/contact-img.png' %}" alt="contact-img" />
+                                </div>
+
+                                <!-- Contact Form  -->
+                                <div class="ed-contact__form">
+                                    <div class="ed-contact__form-head">
+                                        <span class="ed-contact__form-sm-title">CONTACT US</span>
+                                        <h3 class="ed-contact__form-big-title ed-split-text right">
+                                            Have questions? Contact <br />
+                                            with us today
+                                        </h3>
+                                    </div>
+                                    <form action="#" method="post" class="ed-contact__form-main">
+                                        <div class="form-group">
+                                            <input type="text" id="name" name="name" placeholder="Full name" required />
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="email" id="email" name="email" placeholder="Enter your email" required />
+                                        </div>
+
+                                        <div class="form-group">
+                                            <textarea id="message" name="message" placeholder="How can we help you? Feel free to get in touch!" required></textarea>
+                                        </div>
+                                        <div class="form-check">
+                                            <label class="form-check-label" for="flexCheckDefault"> <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />I agree to the Privacy Policy. </label>
+                                        </div>
+                                        <div class="ed-contact__form-btn">
+                                            <button type="submit" class="ed-btn">Send Message<i class="fi fi-rr-arrow-small-right"></i></button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- End Contact Area -->
+
+            <!-- Start Call Action Area -->
+            <section class="ed-call-action position-relative">
+                <div class="container ed-container">
+                    <div class="ed-call-action__inner position-relative">
+                        <div class="ed-call-action__shapes">
+                            <img class="ed-call-action__shape-1 rotate-ani" src="{% static 'assets/images/call-action/call-action-1/shape-1.svg' %}" alt="shape-1" />
+                            <img class="ed-call-action__shape-2" src="{% static 'assets/images/call-action/call-action-1/shape-2.svg' %}" alt="shape-2" />
+                            <img class="ed-call-action__shape-3 updown-ani" src="{% static 'assets/images/call-action/call-action-1/shape-3.svg' %}" alt="shape-3" />
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-12">
+                                <div class="ed-call-action__img">
+                                    <img src="{% static 'assets/images/call-action/call-action-1/call-action-img.png' %}" alt="call-action-img" />
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-12 order-class">
+                                <div class="ed-call-action__content">
+                                    <div class="ed-section-head">
+                                        <span class="ed-section-head__sm-title">GET STARTED NOW</span>
+                                        <h3 class="ed-section-head__title">
+                                            Affordable Your Online Courses <br />
+                                            & Learning Opportunities
+                                        </h3>
+                                        <p class="ed-section-head__text">
+                                            Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit. Excepteur sint occaecat.
+                                        </p>
+                                    </div>
+                                    <div class="ed-call-action__content-btn">
+                                        <a href="/" class="ed-btn"> Start Learning Today<i class="fi fi-rr-arrow-small-right"></i> </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- End Call Action Area -->
+        </main>
+
+{% endblock main-content %}

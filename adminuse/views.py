@@ -192,4 +192,5 @@ class AddSubscription(APIView):
         subscription.max_users = max_users
         subscription.save()
         return JsonResponse({"status":"pass"})
-        
+def adminDash(request):
+    return render(request, 'adminuse/admin_dashboard.html')
