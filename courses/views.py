@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
 from customer.models import Customer
-from .models import Trainer, Category
+from .models import Trainer, Category,Cart
 from adminuse.models import AddTrainers
 from django.http import JsonResponse, HttpResponse, Http404
 from django.views.generic import TemplateView
@@ -382,3 +382,28 @@ class StartPayment(APIView):
         return JsonResponse({"status": "pass"})
 
 
+def add_to_cart(request):
+    if request.method == 'POST':
+        course_id = request.POST.get('medicine_id')
+        quantity = request.POST.get('quantity')
+        customer_id = request.POST.get('customer_id')
+
+        try:
+            course = Course.objects.get(course_id=course_id)
+
+            # Get the customer associated with the customer_id
+            customer = get_object_or_404(Customer, customer_id=customer_id)
+
+            # Create a cart entry
+            Cart.objects.create(
+                cid=customer,  # Assign the customer instance here
+                course=course,
+                quantity=quantity
+            )
+            return JsonResponse({'status': 'success'})
+        except Course.DoesNotExist:
+            return JsonResponse({'status': 'fail', 'message': 'Medicine not found'})
+        except Customer.DoesNotExist:
+            return JsonResponse({'status': 'fail', 'message': 'Customer not found'})
+    
+    return JsonResponse({'status': 'fail', 'message': 'Invalid request method'})
