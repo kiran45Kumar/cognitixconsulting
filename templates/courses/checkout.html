@@ -1,0 +1,150 @@
+{% extends 'customer/index-3.html' %}
+{% block main-content %}
+{% load static %}
+
+<div id="smooth-wrapper">
+    <div id="smooth-content">
+        <main>
+            <div class="section-bg hero-bg">
+                <!-- Start Bredcrumbs Area -->
+                <section class="ed-breadcrumbs background-image" style="background-image: url('assets/images/breadcrumbs-bg.png');">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <div class="ed-breadcrumbs__content">
+                                    <h3 class="ed-breadcrumbs__title">Checkout Page</h3>
+                                    <ul class="ed-breadcrumbs__menu">
+                                        <li class="active"><a href="/">Home</a></li>
+                                        <li>/</li>
+                                        <li>Checkout Page</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- End Bredcrumbs Area -->
+            </div>
+
+            <!-- Checkout Page -->
+            <section class="ed-checkout section-gap">
+                <div class="container ed-container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="ed-checkout__form-wrapper">
+                                <div class="ed-checkout__form">
+                                    <div class="row">
+                                        <div class="col-lg-8 col-12 mg-top-40">
+                                            <div class="ed-checkout__section">
+                                                <h2 class="ed-checkout__section-title">
+                                                    Basic Details
+                                                </h2>
+                                                <div class="row">
+                                                    <div class="col-lg-6 col-md-6 col-12">
+                                                        <div class="ed-checkout__form-group">
+                                                            <label class="ed-checkout__label">First name *</label>
+                                                            <input class="ed-checkout__input" type="text" id="fname" name="name" placeholder="First name" required />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-12">
+                                                        <div class="ed-checkout__form-group">
+                                                            <label class="ed-checkout__label">Last name *</label>
+                                                            <input class="ed-checkout__input" type="text" id="lname" name="name" placeholder="Last name" required />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-12">
+                                                        <div class="ed-checkout__form-group">
+                                                            <label class="ed-checkout__label">Phone Number*</label>
+                                                            <input class="ed-checkout__input" type="text" id="phone" name="name" placeholder="Phone Number" required />
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="ed-checkout__form-group">
+                                                            <label class="ed-checkout__label">Email *</label>
+                                                            <input class="ed-checkout__input" type="email" id="name" name="name" placeholder="Email Address" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-12 mg-top-40">
+                                            <div class="ed-checkout__section ed-checkout__section--order">
+                                                <h2 class="ed-checkout__section-title">My Order</h2>
+                                                <div class="ed-checkout__summary">
+                                                    <div class="ed-checkout__summary-item">
+                                                        <div class="ed-checkout__summary-item-name">
+                                                            <img src="{{course.course_img.url}}" />
+                                                            <a href="/course/{{course.course_id}}">{{course.title}}</a>
+                                                        </div>
+                                                        <div class="ed-checkout_summary-item-name">
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="ed-cart__totals">
+                                                    <div class="ed-cart__totals-row">
+                                                        <span class="ed-cart__totals-label">Price</span>
+                                                        <span class="ed-cart__totals-value subtotal-amount">{{course.price}}</span>
+                                                    </div>
+                                                    <div class="ed-cart__totals-row">
+                                                        <span class="ed-cart__totals-label">GST</span>
+                                                        <span class="ed-cart__totals-value">{{course.course_gst}}%</span>
+                                                    </div>
+                                                    <div class="ed-cart__totals-row">
+                                                        <span class="ed-cart__totals-label">Total</span>
+                                                        <span class="ed-cart__totals-value total-amount">{{course.total_price}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="ed-payment-infos">
+                                                <button type="submit" class="ed-btn">Pay with Phone Pe<i class="fi fi-rr-arrow-small-right"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- End Checkout Page -->
+
+            <!-- Start Call Action Area -->
+            <section class="ed-call-action position-relative">
+                <div class="container ed-container">
+                    <div class="ed-call-action__inner position-relative">
+                        <div class="ed-call-action__shapes">
+                            <img class="ed-call-action__shape-1 rotate-ani" src="assets/images/call-action/call-action-1/shape-1.svg" alt="shape-1" />
+                            <img class="ed-call-action__shape-2" src="assets/images/call-action/call-action-1/shape-2.svg" alt="shape-2" />
+                            <img class="ed-call-action__shape-3 updown-ani" src="assets/images/call-action/call-action-1/shape-3.svg" alt="shape-3" />
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-12">
+                                <div class="ed-call-action__img">
+                                    <img src="assets/images/call-action/call-action-1/call-action-img.png" alt="call-action-img" />
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-12 order-class">
+                                <div class="ed-call-action__content">
+                                    <div class="ed-section-head">
+                                        <span class="ed-section-head__sm-title">GET STARTED NOW</span>
+                                        <h3 class="ed-section-head__title">
+                                            Affordable Your Online Courses <br />
+                                            & Learning Opportunities
+                                        </h3>
+                                        <p class="ed-section-head__text">
+                                            Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit. Excepteur sint occaecat.
+                                        </p>
+                                    </div>
+                                    <div class="ed-call-action__content-btn">
+                                        <a href="course-1.html" class="ed-btn"> Start Learning Today<i class="fi fi-rr-arrow-small-right"></i> </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- End Call Action Area -->
+        </main>
+{% endblock main-content %}

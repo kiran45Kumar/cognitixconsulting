@@ -139,3 +139,13 @@ class Cart(models.Model):
 
     def __str__(self) -> str:
         return f"{self.cid.username} - {self.quantity} - {self.cid}"
+    
+class Orders(models.Model):
+    order_id = models.AutoField(primary_key=True)
+    first_name = models.CharField(max_length=20)
+    last_name = models.CharField(max_length=20)
+    phone = models.CharField(max_length=10)
+    email = models.EmailField(unique=True)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    user = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    

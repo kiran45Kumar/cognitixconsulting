@@ -5,6 +5,13 @@
     .ed-contact__info-content a{
 font-size: 17px;
     }
+    .register-btn{
+        padding: 15px 25px;
+        background: #06d;
+        color: white;
+        border-radius: 10px;
+        margin: 10px 0;
+    }
 </style>
 <div id="smooth-wrapper">
     <div id="smooth-content">
@@ -111,6 +118,9 @@ font-size: 17px;
                                         </div>
                                     </div>
                                 </div>
+                                <button type="button" id="enroll" class="register-btn" onclick="enroll('{{course_by_id.course_id}}')">
+                                    Enroll
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -156,4 +166,10 @@ font-size: 17px;
             </section>
             <!-- End Call Action Area -->
         </main>
+
+        <script>
+            function enroll(id){
+                window.location.href = '/enroll_page/'+encodeURIComponent(id)
+            }
+        </script>
     {% endblock main-content %}

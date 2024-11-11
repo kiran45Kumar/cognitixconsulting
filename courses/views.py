@@ -468,7 +468,9 @@ def cart_page(request, cid):
     return render(request, 'courses/cart.html', context)
 
 
-
+def enroll_page(request, id):
+    course = Course.objects.get(course_id = id)
+    return render(request, 'courses/checkout.html',{'course':course})
 # class Cart_Page(TemplateView):
 #     template_name = 'courses/cart.html'
 #     def get_context_data(self, **kwargs):
