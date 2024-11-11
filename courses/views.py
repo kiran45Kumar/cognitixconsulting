@@ -381,54 +381,97 @@ class StartPayment(APIView):
 
         return JsonResponse({"status": "pass"})
 
-def cart_add(request):
-    if request.method == "POST":
+
+
+
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+def add_to_cart(request):
+    if request.method == 'POST':
         course_id = request.POST.get('course_id')
         quantity = request.POST.get('quantity')
         customer_id = request.POST.get('customer_id')
 
         try:
-            course = Course.objects.get(course_id = course_id)
-            customer = get_object_or_404(Customer, customer_id = customer_id)
-            
+            course = Course.objects.get(course_id=course_id)
+
+            # Get the customer associated with the customer_id
+            customer = get_object_or_404(Customer, customer_id=customer_id)
+
+            # Create a cart entry
             Cart.objects.create(
-                cid = customer,
-                course = course,
-                quantity = quantity
+                cid=customer,  # Assign the customer instance here
+                course=course,
+                quantity=quantity
             )
-            return JsonResponse({"status":"success"})
+            return JsonResponse({'status': 'success'})
         except Course.DoesNotExist:
-            return JsonResponse({"status":"fail","message":"Course Not Found"})
+            return JsonResponse({'status': 'fail', 'message': 'Medicine not found'})
         except Customer.DoesNotExist:
-            return JsonResponse({"status":"fail","message":"Customer Not Found"})
-        
-    return JsonResponse({"status":"success","message":"Invalid request method"})
+            return JsonResponse({'status': 'fail', 'message': 'Customer not found'})
+    
+    return JsonResponse({'status': 'fail', 'message': 'Invalid request method'})
+
+
+from django.shortcuts import get_object_or_404, render
+from django.http import JsonResponse
+from .models import Cart
+
+from django.shortcuts import get_object_or_404, render
+from django.http import JsonResponse
+from .models import Cart
+
 def cart_page(request, cid):
+    # Retrieve cart items for the given customer ID
     cart_items = Cart.objects.filter(cid=cid)
-    total_price = sum(item.medicine.price * item.quantity for item in cart_items)
-    if request.method == 'POST':
-        action = request.POST.get('action')
+
+    # Add a subtotal attribute for each item
+    for item in cart_items:
+        item.subtotal = item.course.price * item.quantity
+
+    if request.method == 'POST' and request.headers.get('x-requested-with') == 'XMLHttpRequest':
         cart_item_id = request.POST.get('cart_item_id')
+        action = request.POST.get('action')
+
+        # Retrieve the specific cart item being updated
         cart_item = get_object_or_404(Cart, id=cart_item_id)
+
+        # Increment or decrement quantity based on action
         if action == 'increment':
             cart_item.quantity += 1
         elif action == 'decrement' and cart_item.quantity > 1:
             cart_item.quantity -= 1
+
+        # Save the updated quantity
         cart_item.save()
-        customer_id = request.session.get('customer_id')
-        cart = Cart.objects.filter(cid=customer_id)
-        request.session['count'] =  cart.count()
-        total_price = sum(item.medicine.price * item.quantity for item in cart_items)
+
+        # Calculate the total price for the specific cart item
+        item_total_price = cart_item.course.price * cart_item.quantity
+
+        # Calculate the overall total price for all cart items
+        total_price = sum(item.course.price * item.quantity for item in cart_items)
+
+        # Return JSON response with updated quantity and prices
         return JsonResponse({
             'quantity': cart_item.quantity,
-            'total_price': total_price,
+            'item_total_price': item_total_price,  # Updated total price for the specific item
+            'total_price': total_price,  # Updated overall cart total price
+            'cart_item_id': cart_item_id,
         })
-        
+
+    # Context for rendering the cart page
     context = {
         'cart_items': cart_items,
-        'total_price': total_price,
-        'currentUser':request.session['user_name'],
-        'currentUserId':request.session['customer_id'],
-        'count':   request.session['count'] 
+        'currentUser': request.session.get('user_name', ''),
+        'currentUserId': request.session.get("customer_id", ''),
     }
     return render(request, 'courses/cart.html', context)
+
+
+
+# class Cart_Page(TemplateView):
+#     template_name = 'courses/cart.html'
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         currentUserId = self.request.session.get('customer_id')
+#         cart_items = Cart.objects.filter()

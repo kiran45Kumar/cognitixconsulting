@@ -30,5 +30,6 @@ urlpatterns = [
     path("remove_trainer/",views.RemoveTrainer.as_view(),name='remove_trainer' ),
     path('payment_page/<int:id>',views.payment_page, name='payment_page'),
     path('start_payment/',views.StartPayment.as_view(), name='start_payment'),
-    path('cart_view/', views.cart_add, name='cart_add'),
+    path('cart_add/', views.add_to_cart, name='cart_add'),
+    path('cart_page/<int:cid>', views.cart_page, name='cart_page')
 ]

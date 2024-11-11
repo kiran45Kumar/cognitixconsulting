@@ -41,82 +41,39 @@
                                         </tr>
                                     </thead>
                                     <tbody class="ed-cart__body">
-                                        <!-- Item 1 -->
-                                        <tr class="ed-cart__item">
-                                            <td class="ed-cart__product">
+                                        <!-- Item 1 -->         
+                                         {% for cart in cart_items %}
+                                            
+                                         <tr class="ed-cart__item">
+                                             <td class="ed-cart__product">
                                                 <button class="ed-cart__remove-button">
                                                     <i class="fi-rr-cross"></i>
                                                 </button>
-                                                <img class="ed-cart__product-image" src="{% static 'assets/images/product/cart-1.png' %}" alt="Product Name" />
-                                                <a href="/product/" class="ed-cart__product-name">Digital marketing demo 1</a>
+                                                <img class="ed-cart__product-image" src="{{cart.course.course_img.url}}" height="50px" width="50px" alt="Product Name" />
+                                                <a href="/product/" class="ed-cart__product-name">{{cart.course.title}}</a>
                                             </td>
-                                            <td class="ed-cart__price">$64</td>
+                                            <td class="ed-cart__price">&#8377;{{cart.course.price}}</td>
                                             <td class="ed-cart__quantity">
                                                 <div class="ed-cart__quantity-selector">
-                                                    <button class="ed-cart__quantity-decrease">
+                                                    <button class="ed-cart__quantity-decrease" data-action="decrement" data-id="{{ cart.id }}">
                                                         <i class="fi-rr-minus"></i>
                                                     </button>
-                                                    <input type="number" class="ed-cart__quantity-input" value="1" min="1" />
-                                                    <button class="ed-cart__quantity-increase">
+                                                    <input type="number" class="ed-cart__quantity-input" value="{{ cart.quantity }}" min="1" readonly />
+                                                    <button class="ed-cart__quantity-increase" data-action="increment" data-id="{{ cart.id }}">
                                                         <i class="fi-rr-plus"></i>
                                                     </button>
                                                 </div>
                                             </td>
-                                            <td class="ed-cart__subtotal">$64</td>
-                                        </tr>
+                                            <td class="ed-cart__subtotal" id="item-total-price-{{ cart.id }}">&#8377;{{ cart.subtotal|floatformat:2 }}</td>
 
-                                        <!-- Item 2 -->
-                                        <tr class="ed-cart__item">
-                                            <td class="ed-cart__product">
-                                                <button class="ed-cart__remove-button">
-                                                    <i class="fi-rr-cross"></i>
-                                                </button>
 
-                                                <img class="ed-cart__product-image" src="{% static 'assets/images/product/cart-2.png' %}" alt="Product Name" />
-                                                <a href="/product/" class="ed-cart__product-name">Business solution book</a>
-                                            </td>
-                                            <td class="ed-cart__price">$70</td>
-                                            <td class="ed-cart__quantity">
-                                                <div class="ed-cart__quantity-selector">
-                                                    <button class="ed-cart__quantity-decrease">
-                                                        <i class="fi-rr-minus"></i>
-                                                    </button>
-                                                    <input type="number" class="ed-cart__quantity-input" value="1" min="1" />
-                                                    <button class="ed-cart__quantity-increase">
-                                                        <i class="fi-rr-plus"></i>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                            <td class="ed-cart__subtotal">$70</td>
                                         </tr>
-
-                                        <!-- Item 3 -->
-                                        <tr class="ed-cart__item">
-                                            <td class="ed-cart__product">
-                                                <button class="ed-cart__remove-button">
-                                                    <i class="fi-rr-cross"></i>
-                                                </button>
-                                                <img class="ed-cart__product-image" src="{% static 'assets/images/product/cart-3.png' %}" alt="Product Name" />
-                                                <a href="/product/" class="ed-cart__product-name">Business type 4</a>
-                                            </td>
-                                            <td class="ed-cart__price">$90</td>
-                                            <td class="ed-cart__quantity">
-                                                <div class="ed-cart__quantity-selector">
-                                                    <button class="ed-cart__quantity-decrease">
-                                                        <i class="fi-rr-minus"></i>
-                                                    </button>
-                                                    <input type="number" class="ed-cart__quantity-input" value="1" min="1" />
-                                                    <button class="ed-cart__quantity-increase">
-                                                        <i class="fi-rr-plus"></i>
-                                                    </button>
-                                                </div>
-                                            </td>
-                                            <td class="ed-cart__subtotal">$90</td>
-                                        </tr>
+                                        {% empty %}
+                                        Your Cart Is Empty
+                                        {% endfor %}                                   
                                     </tbody>
                                 </table>
                             </div>
-
                             <!-- Shop Cart Bottom  -->
                             <div class="ed-cart__bottom">
                                 <form action="#" method="post" class="ed-cart__bottom-form">
@@ -208,4 +165,35 @@
             </section>
             <!-- End Call Action Area -->
         </main>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('.ed-cart__quantity-selector button').on('click', function() {
+        var action = $(this).data('action');
+        var cartItemId = $(this).data('id');
+
+        $.ajax({
+            url: '{% url "cart_page" currentUserId %}', // Adjust with your URL pattern
+            type: 'POST',
+            data: {
+                'cart_item_id': cartItemId,
+                'action': action,
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            success: function(response) {
+                // Update the quantity in the UI for the specific item
+                $('button[data-id="' + cartItemId + '"]').siblings('.ed-cart__quantity-input').val(response.quantity);
+
+                // Update the specific item's total price
+                $('#item-total-price-' + cartItemId).text('₹' + response.item_total_price);
+
+                // Update the overall total price
+                $('#total-price').text('₹' + response.total_price);
+            }
+        });
+    });
+});
+
+</script>
         {% endblock main-content %}

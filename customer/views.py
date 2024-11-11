@@ -28,7 +28,7 @@ def courses(request):
     domains = Category.objects.all()
     allTrainers = AddTrainers.objects.all().order_by('-trainer_created')
     courses = Course.objects.all()
-    return render(request, 'courses/courses.html',{'currentUserId':request.session.get('customer_id',''),'currentUser':request.session.get('user_name',''),'domains':domains,'allTrainers':allTrainers,"courses":courses})
+    return render(request, 'courses/courses.html',{'currentUserId':request.session['customer_id'],'currentUser':request.session.get('user_name',''),'domains':domains,'allTrainers':allTrainers,"courses":courses})
 
 def aboutus(request):
     domains = Category.objects.all()

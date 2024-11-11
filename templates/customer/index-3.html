@@ -189,8 +189,8 @@
 
                                 <div class="ed-header__action">
                                     <div class="ed-header__cart">
-                                        <button type="button" data-bs-toggle="offcanvas" data-bs-target="#edSidebarCart" aria-controls="offcanvasRight" class="ed-topbar__action-icon">
-                                            <img src="{% static 'assets/images/icons/icon-white-bag.svg' %}" alt="icon-white-bag" />
+                                        <button type="button" class="ed-topbar__action-icon" onclick="cart('{{currentUserId}}')">
+                                            <img  src="{% static 'assets/images/icons/icon-white-bag.svg' %}" alt="icon-white-bag" />
                                             <span>3</span>
                                         </button>
                                     </div>
@@ -1246,7 +1246,7 @@
         <!-- End Register Modal -->
 
         <!-- Start Sidebar Cart -->
-        <div class="offcanvas offcanvas-end ed-sidebar ed-sidebar-cart" tabindex="-1" id="edSidebarCart" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas offcanvas-end ed-sidebar ed-sidebar-cart" tabindex="-1" id="edSidebarCart" aria-labelledby="offcanvasRightLabel" hidden>
             <div class="ed-sidebar-header">
                 <h3 class="ed-sidebar-header-title">Add to cart</h3>
                 <button type="button" class="text-reset" data-bs-dismiss="offcanvas" aria-label="Close">
@@ -1255,52 +1255,22 @@
             </div>
             <div class="ed-sidebar-body">
                 <!-- Single Cart Item  -->
+                 {% for item in cart_items %}
                 <div class="ed-sidebar-cart-item">
                     <div class="ed-sidebar-cart-main">
                         <div class="ed-sidebar-cart-img">
-                            <img src="{% static 'assets/images/product/cart-1.png' %}" alt="cart-1" />
+                            <img src="{% static 'item.course.course_img' %}" alt="cart-1" />
                         </div>
                         <div class="ed-sidebar-cart-info">
                             <span>1 x <strong>$64</strong></span>
-                            <a href="product-details.html">Digital marketing demo</a>
+                            <a href="product-details.html">{{item.course.title}}</a>
                         </div>
                     </div>
                     <div class="ed-sidebar-cart-remove">
-                        <button type="button"><i class="fi-rr-cross"></i></button>
+                        <button type="button" onclick=""><i class="fi-rr-cross"></i></button>
                     </div>
                 </div>
-
-                <!-- Single Cart Item  -->
-                <div class="ed-sidebar-cart-item">
-                    <div class="ed-sidebar-cart-main">
-                        <div class="ed-sidebar-cart-img">
-                            <img src="{% static 'assets/images/product/cart-2.png' %}" alt="cart-2" />
-                        </div>
-                        <div class="ed-sidebar-cart-info">
-                            <span>1 x <strong>$74</strong></span>
-                            <a href="product-details.html">Business solution book</a>
-                        </div>
-                    </div>
-                    <div class="ed-sidebar-cart-remove">
-                        <button type="button"><i class="fi-rr-cross"></i></button>
-                    </div>
-                </div>
-
-                <!-- Single Cart Item  -->
-                <div class="ed-sidebar-cart-item">
-                    <div class="ed-sidebar-cart-main">
-                        <div class="ed-sidebar-cart-img">
-                            <img src="{% static 'assets/images/product/cart-3.png' %}" alt="cart-3" />
-                        </div>
-                        <div class="ed-sidebar-cart-info">
-                            <span>1 x <strong>$94</strong></span>
-                            <a href="product-details.html">Business type</a>
-                        </div>
-                    </div>
-                    <div class="ed-sidebar-cart-remove">
-                        <button type="button"><i class="fi-rr-cross"></i></button>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
 
             <div class="ed-sidebar-footer">
@@ -1413,6 +1383,9 @@
         }
       },
     });
+  }
+  function cart(customer) {
+  window.location.href = '/cart_page/'+encodeURIComponent(customer)
   }
  </script>
         <!-- Jquery JS -->

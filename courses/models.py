@@ -138,4 +138,4 @@ class Cart(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:
-        return f"{self.medicine.generic_name} - {self.quantity} - {self.cid}"
+        return f"{self.cid.username} - {self.quantity} - {self.cid}"
