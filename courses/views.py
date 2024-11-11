@@ -381,33 +381,7 @@ class StartPayment(APIView):
 
         return JsonResponse({"status": "pass"})
 
-
-def add_to_cart(request):
-    if request.method == 'POST':
-        course_id = request.POST.get('course_id')
-        quantity = request.POST.get('quantity')
-        customer_id = request.POST.get('customer_id')
-
-        try:
-            course = Course.objects.get(course_id=course_id)
-
-            # Get the customer associated with the customer_id
-            customer = get_object_or_404(Customer, customer_id=customer_id)
-
-            # Create a cart entry
-            Cart.objects.create(
-                cid=customer,  # Assign the customer instance here
-                course=course,
-                quantity=quantity
-            )
-            return JsonResponse({'status': 'success'})
-        except Course.DoesNotExist:
-            return JsonResponse({'status': 'fail', 'message': 'Medicine not found'})
-        except Customer.DoesNotExist:
-            return JsonResponse({'status': 'fail', 'message': 'Customer not found'})
-    
-    return JsonResponse({'status': 'fail', 'message': 'Invalid request method'})
-def add_to_cart(request):
+def cart_add(request):
     if request.method == "POST":
         course_id = request.POST.get('course_id')
         quantity = request.POST.get('quantity')
@@ -427,5 +401,34 @@ def add_to_cart(request):
             return JsonResponse({"status":"fail","message":"Course Not Found"})
         except Customer.DoesNotExist:
             return JsonResponse({"status":"fail","message":"Customer Not Found"})
-    return JsonResponse({"status":"success","message":"Invalid "})
         
+    return JsonResponse({"status":"success","message":"Invalid request method"})
+def cart_page(request, cid):
+    cart_items = Cart.objects.filter(cid=cid)
+    total_price = sum(item.medicine.price * item.quantity for item in cart_items)
+    if request.method == 'POST':
+        action = request.POST.get('action')
+        cart_item_id = request.POST.get('cart_item_id')
+        cart_item = get_object_or_404(Cart, id=cart_item_id)
+        if action == 'increment':
+            cart_item.quantity += 1
+        elif action == 'decrement' and cart_item.quantity > 1:
+            cart_item.quantity -= 1
+        cart_item.save()
+        customer_id = request.session.get('customer_id')
+        cart = Cart.objects.filter(cid=customer_id)
+        request.session['count'] =  cart.count()
+        total_price = sum(item.medicine.price * item.quantity for item in cart_items)
+        return JsonResponse({
+            'quantity': cart_item.quantity,
+            'total_price': total_price,
+        })
+        
+    context = {
+        'cart_items': cart_items,
+        'total_price': total_price,
+        'currentUser':request.session['user_name'],
+        'currentUserId':request.session['customer_id'],
+        'count':   request.session['count'] 
+    }
+    return render(request, 'courses/cart.html', context)

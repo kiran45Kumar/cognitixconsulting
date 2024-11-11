@@ -1,0 +1,211 @@
+{% extends 'customer/index-3.html' %}
+{% block main-content %}
+{% load static %}
+<div id="smooth-wrapper">
+    <div id="smooth-content">
+        <main>
+            <div class="section-bg hero-bg">
+                <!-- Start Bredcrumbs Area -->
+                <section class="ed-breadcrumbs background-image" style="background-image: url('{% static "assets/images/breadcrumbs-bg.png" %}');">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-6 col-md-6 col-12">
+                                <div class="ed-breadcrumbs__content">
+                                    <h3 class="ed-breadcrumbs__title">Cart Page</h3>
+                                    <ul class="ed-breadcrumbs__menu">
+                                        <li class="active"><a href="/">Home</a></li>
+                                        <li>/</li>
+                                        <li>Cart Page</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- End Bredcrumbs Area -->
+            </div>
+
+            <!-- Shop Cart -->
+            <section class="ed-cart section-gap">
+                <div class="container ed-container">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="ed-cart__table-wrapper table-responsive">
+                                <table class="ed-cart__table">
+                                    <thead class="ed-cart__header">
+                                        <tr class="ed-cart__header-row">
+                                            <th class="ed-cart__header-item">Product</th>
+                                            <th class="ed-cart__header-item">Price</th>
+                                            <th class="ed-cart__header-item">Quantity</th>
+                                            <th class="ed-cart__header-item">Subtotal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="ed-cart__body">
+                                        <!-- Item 1 -->
+                                        <tr class="ed-cart__item">
+                                            <td class="ed-cart__product">
+                                                <button class="ed-cart__remove-button">
+                                                    <i class="fi-rr-cross"></i>
+                                                </button>
+                                                <img class="ed-cart__product-image" src="{% static 'assets/images/product/cart-1.png' %}" alt="Product Name" />
+                                                <a href="/product/" class="ed-cart__product-name">Digital marketing demo 1</a>
+                                            </td>
+                                            <td class="ed-cart__price">$64</td>
+                                            <td class="ed-cart__quantity">
+                                                <div class="ed-cart__quantity-selector">
+                                                    <button class="ed-cart__quantity-decrease">
+                                                        <i class="fi-rr-minus"></i>
+                                                    </button>
+                                                    <input type="number" class="ed-cart__quantity-input" value="1" min="1" />
+                                                    <button class="ed-cart__quantity-increase">
+                                                        <i class="fi-rr-plus"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                            <td class="ed-cart__subtotal">$64</td>
+                                        </tr>
+
+                                        <!-- Item 2 -->
+                                        <tr class="ed-cart__item">
+                                            <td class="ed-cart__product">
+                                                <button class="ed-cart__remove-button">
+                                                    <i class="fi-rr-cross"></i>
+                                                </button>
+
+                                                <img class="ed-cart__product-image" src="{% static 'assets/images/product/cart-2.png' %}" alt="Product Name" />
+                                                <a href="/product/" class="ed-cart__product-name">Business solution book</a>
+                                            </td>
+                                            <td class="ed-cart__price">$70</td>
+                                            <td class="ed-cart__quantity">
+                                                <div class="ed-cart__quantity-selector">
+                                                    <button class="ed-cart__quantity-decrease">
+                                                        <i class="fi-rr-minus"></i>
+                                                    </button>
+                                                    <input type="number" class="ed-cart__quantity-input" value="1" min="1" />
+                                                    <button class="ed-cart__quantity-increase">
+                                                        <i class="fi-rr-plus"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                            <td class="ed-cart__subtotal">$70</td>
+                                        </tr>
+
+                                        <!-- Item 3 -->
+                                        <tr class="ed-cart__item">
+                                            <td class="ed-cart__product">
+                                                <button class="ed-cart__remove-button">
+                                                    <i class="fi-rr-cross"></i>
+                                                </button>
+                                                <img class="ed-cart__product-image" src="{% static 'assets/images/product/cart-3.png' %}" alt="Product Name" />
+                                                <a href="/product/" class="ed-cart__product-name">Business type 4</a>
+                                            </td>
+                                            <td class="ed-cart__price">$90</td>
+                                            <td class="ed-cart__quantity">
+                                                <div class="ed-cart__quantity-selector">
+                                                    <button class="ed-cart__quantity-decrease">
+                                                        <i class="fi-rr-minus"></i>
+                                                    </button>
+                                                    <input type="number" class="ed-cart__quantity-input" value="1" min="1" />
+                                                    <button class="ed-cart__quantity-increase">
+                                                        <i class="fi-rr-plus"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                            <td class="ed-cart__subtotal">$90</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Shop Cart Bottom  -->
+                            <div class="ed-cart__bottom">
+                                <form action="#" method="post" class="ed-cart__bottom-form">
+                                    <div class="ed-cart__coupon">
+                                        <input type="text" class="ed-cart__coupon-input" id="coupon_code" placeholder="Coupon code" required />
+                                    </div>
+                                    <div class="ed-cart__actions">
+                                        <button type="submit" class="ed-cart__coupon-button ed-btn">Apply Coupon<i class="fi fi-rr-arrow-small-right"></i></button>
+                                        <button type="button" class="ed-cart__update-button ed-btn">Update Cart<i class="fi fi-rr-arrow-small-right"></i></button>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <!-- Shop Cart Summary  -->
+                            <div class="ed-cart__summary">
+                                <div class="ed-cart__summary-inside">
+                                    <div class="ed-cart__summary-body">
+                                        <div class="ed-cart__heading">
+                                            <h4 class="ed-cart__heading-title">Cart Totals</h4>
+                                        </div>
+                                        <div class="ed-cart__totals">
+                                            <div class="ed-cart__totals-row">
+                                                <span class="ed-cart__totals-label">Subtotal</span>
+                                                <span class="ed-cart__totals-value subtotal">$224</span>
+                                            </div>
+                                            <div class="ed-cart__totals-row">
+                                                <span class="ed-cart__totals-label">Shipping</span>
+                                                <span class="ed-cart__totals-value">
+                                                    <ul>
+                                                        <li>Flat Rate</li>
+                                                        <li>Shipping to <a href="#">UA.</a></li>
+                                                        <li>Change Address</li>
+                                                    </ul>
+                                                </span>
+                                            </div>
+                                            <div class="ed-cart__totals-row">
+                                                <span class="ed-cart__totals-label total-amount-label">Total</span>
+                                                <span class="ed-cart__totals-value total-amount-price">$224</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="ed-cart__checkout-button">
+                                        <a href="checkout.html" class="ed-btn"> Procced to Checkout<i class="fi fi-rr-arrow-small-right"></i> </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- End Shop Cart -->
+
+            <!-- Start Call Action Area -->
+            <section class="ed-call-action position-relative">
+                <div class="container ed-container">
+                    <div class="ed-call-action__inner position-relative">
+                        <div class="ed-call-action__shapes">
+                            <img class="ed-call-action__shape-1 rotate-ani" src="{% static 'assets/images/call-action/call-action-1/shape-1.svg' %}" alt="shape-1" />
+                            <img class="ed-call-action__shape-2" src="{% static 'assets/images/call-action/call-action-1/shape-2.svg' %}" alt="shape-2" />
+                            <img class="ed-call-action__shape-3 updown-ani" src="{% static 'assets/images/call-action/call-action-1/shape-3.svg' %}" alt="shape-3" />
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-12">
+                                <div class="ed-call-action__img">
+                                    <img src="{% static 'assets/images/call-action/call-action-1/call-action-img.png' %}" alt="call-action-img" />
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-12 order-class">
+                                <div class="ed-call-action__content">
+                                    <div class="ed-section-head">
+                                        <span class="ed-section-head__sm-title">GET STARTED NOW</span>
+                                        <h3 class="ed-section-head__title">
+                                            Affordable Your Online Courses <br />
+                                            & Learning Opportunities
+                                        </h3>
+                                        <p class="ed-section-head__text">
+                                            Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit. Excepteur sint occaecat.
+                                        </p>
+                                    </div>
+                                    <div class="ed-call-action__content-btn">
+                                        <a href="/courses/" class="ed-btn"> Start Learning Today<i class="fi fi-rr-arrow-small-right"></i> </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- End Call Action Area -->
+        </main>
+        {% endblock main-content %}

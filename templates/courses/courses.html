@@ -22,6 +22,9 @@
     width: fit-content; 
 }
 </style>
+
+<div id="success-message">Product Added to cart Successfully</div>
+
 <div id="smooth-wrapper">
     <div id="smooth-content">
         <main>
@@ -110,7 +113,7 @@
                                                 <button type="button" id="addToCartBtn" class="register-btn"  data-course-id="{{ course.course_id }}">
                                                     Add to Cart
                                                 </button>
-                                                <input type="hidden" id="customer_id"  value="{{currentUserId}}">
+                                                <input type="hidden" id="customerId"  value="{{currentUserId}}">
                                             </div>
                                         </div>
                                     </div>
@@ -169,7 +172,7 @@
 
                 $.ajax({
                     type: 'POST',
-                    url: '/cart_view/',
+                    url: '{% url "cart_add" %}',
                     data: {
                         'course_id': course_id,
                         'quantity': 1,
