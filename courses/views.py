@@ -384,7 +384,7 @@ class StartPayment(APIView):
 
 def add_to_cart(request):
     if request.method == 'POST':
-        course_id = request.POST.get('medicine_id')
+        course_id = request.POST.get('course_id')
         quantity = request.POST.get('quantity')
         customer_id = request.POST.get('customer_id')
 

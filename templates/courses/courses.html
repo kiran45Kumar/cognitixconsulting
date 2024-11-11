@@ -1,6 +1,27 @@
 {% extends 'customer/index-3.html' %}
 {% block main-content %}
 {% load static %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<style>
+     #success-message {
+    display: none; 
+    background-color: #d4edda; 
+    color: #155724;  
+    border: 1px solid #c3e6cb; 
+    padding: 10px 20px;
+    margin: 0 auto;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 16px;
+    position: fixed;
+    top: 20%; 
+    left: 50%;
+    transform: translateX(-50%); 
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: fit-content; 
+}
+</style>
 <div id="smooth-wrapper">
     <div id="smooth-content">
         <main>
@@ -86,9 +107,10 @@
                                         <div class="ed-course__students">
                                             <i class="fi fi-rr-graduation-cap"></i>
                                             <div class="ed-topbar__info-buttons">
-                                                <button type="button" class="register-btn" data-bs-toggle="modal" data-bs-target="#registerModal">
+                                                <button type="button" id="addToCartBtn" class="register-btn"  data-course-id="{{ course.course_id }}">
                                                     Add to Cart
                                                 </button>
+                                                <input type="hidden" id="customer_id"  value="{{currentUserId}}">
                                             </div>
                                         </div>
                                     </div>
@@ -139,6 +161,37 @@
             </section>
             <!-- End Call Action Area -->
         </main>
+
+        <script>
+            $(document).on('click', '#addToCartBtn', function() {
+            var course_id = $(this).data('course-id');
+            var customerId = $('#customerId').val();  // Get customerId from the hidden input
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/cart_view/',
+                    data: {
+                        'course_id': course_id,
+                        'quantity': 1,
+                        'customer_id': customerId,  // Pass the customer_id here
+                        'csrfmiddlewaretoken': '{{ csrf_token }}'
+                    },
+                    success: function(response) {
+                        // alert("Medicine added to cart successfully!");
+                        const successMessage = document.getElementById('success-message');
+                            successMessage.style.display = 'block';
+
+                            // Hide the message after 3 seconds
+                            setTimeout(function() {
+                                successMessage.style.display = 'none';
+                            }, 3000);
+                    },
+                    error: function(response) {
+                        alert("Failed to add medicine to cart.");
+                    }
+                });
+            });
+        </script>
     {% endblock main-content %}
         <!-- End Footer Area  -->
     </div>

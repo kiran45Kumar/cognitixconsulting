@@ -10,7 +10,7 @@
         <meta name="keywords" content="Online Education Courses HTML5 Template" />
         <meta name="author" content="BizanTheme" />
         <title>Cognitix Consulting | Driving Business Excellence with Cognitix Consulting</title>
-        <link rel="shortcut icon" href="{% static 'assets/images/cogntixmain.png' %}" />
+        <link rel="shortcut icon" href="{% static 'assets/images/logobgremoved.png' %}" />
 
         <!-- Bootstrap -->
         <link rel="stylesheet" href="{% static 'assets/plugins/css/bootstrap.min.css' %}" />
@@ -86,7 +86,7 @@
                         <!-- Mobile Menu Logo -->
                         <div class="offcanvas-logo">
                             <a href="/">
-                                <img src="{% static 'assets/images/cogntixmain.png' %}" height="500px" width="200px" style="object-fit:cover;" alt="white-logo" />
+                                <img src="{% static 'assets/images/logobgremoved.png' %}"style="object-fit:cover;" alt="white-logo" />
                                 <img src="{% static 'assets/images/logobg.png' %}" alt="white-logo" />
                             </a>
                         </div>
@@ -140,7 +140,7 @@
                                     <!-- Logo  -->
                                     <div class="ed-topbar__logo">
                                         <a href="/">
-                                            <img src="{% static 'assets/images/cogntixmain.png' %}" height="500px" width="200px" style="object-fit:cover;" alt="white-logo" />
+                                            <img src="{% static 'assets/images/logobgremoved.png' %}" height="500px" width="200px" alt="white-logo" />
                                             <img src="{% static 'assets/images/logobg.png' %}" alt="white-logo" />
                                         </a>
                                     </div>
@@ -498,7 +498,7 @@
                                 <div class="col-lg-6 col-xl-4 col-md-6 col-12">
                                     <div class="ed-course__card ed-course__card--style3 ed-course__card--style4 wow fadeInUp" data-wow-delay=".3s" data-wow-duration="1s">
                                         <div class="ed-course__cover">
-                                            <a href="course-details.html" class="ed-course__img">
+                                            <a href="/course/{{course.course_id}}" class="ed-course__img">
                                                 <img src="{{course.course_img.url}}" alt="course-img" />
                                             </a>
                                         </div>
@@ -513,7 +513,7 @@
                                                     <li><span>(45 Reviews)</span></li>
                                                 </ul>
                                             </div>
-                                            <a href="course-details.html" class="ed-course__title">
+                                            <a href="/course/{{course.course_id}}" class="ed-course__title">
                                                 <h5>
                                                     {{course.title}}
                                                 </h5>
@@ -1008,7 +1008,7 @@
                                     <div class="col-lg-4 col-md-6 col-12">
                                         <div class="ed-footer__widget ed-footer__about">
                                             <a href="/" class="ed-footer__logo">
-                                                <img src="{% static 'assets/images/cogntixmain.png' %}" height="500px" width="200px" style="object-fit:cover;" alt="white-logo" />
+                                                <img src="{% static 'assets/images/logobgremoved.png' %}" height="500px" width="200px" alt="white-logo" />
                                             </a>
                                             <a href="/" class="ed-footer__logo">
                                                 <img src="{% static 'assets/images/logobg.png' %}" alt="white-logo" />
