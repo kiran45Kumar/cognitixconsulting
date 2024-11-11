@@ -57,8 +57,6 @@ class CreateUser(APIView):
         email = request.POST.get('email')
         phone = request.POST.get('phone')
         password = request.POST.get('password')
-        confirmpassword = request.POST.get('cpassword')
-        role = request.POST.get('role')
         if Customer.objects.filter(email = email).exists():
             return JsonResponse({'status':"fail","message":"Email Already Exists"})
         customer = Customer()
@@ -66,8 +64,6 @@ class CreateUser(APIView):
         customer.email = email
         customer.phone = phone
         customer.password = password
-        customer.confirm_password = confirmpassword
-        customer.role = role
         customer.save()
         return JsonResponse({"status":"pass"})
 def index(request):
@@ -150,3 +146,5 @@ class UpdatePassword(APIView):
         confpassword = request.POST.get('confirm_password')
         Customer.objects.filter(customer_id = id).update(password = newpassword,confirm_password = confpassword)
         return JsonResponse({"status":"pass"})
+def terms_conditions(request):
+    return render(request, 'customer/termsconditions.html')

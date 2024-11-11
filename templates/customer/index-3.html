@@ -1038,6 +1038,7 @@
                                             <ul class="ed-footer__widget-links">
                                                 <li><a href="/aboutus/">About Us</a></li>
                                                 <li><a href="/courses/">Our Courses</a></li>
+                                                <li><a href="/terms&conditons/">Terms and Conditions</a></li>
                                                 <li><a href="/privacy/">Privacy Policy</a></li>
                                                 <li><a href="/refund/">Refund</a></li>
                                                 <li><a href="/contactus/">Contact Us</a></li>
@@ -1116,7 +1117,7 @@
                         <a href="/" class="ed-auth__modal-logo" style="margin-bottom: 20px;">
                             <img src="{% static 'assets/images/cognitixjpg.jpg' %}" style="margin-bottom: 30px;"  alt="">
                         </a>
-                        <h3 class="ed-auth__modal-title">Sign In Now</h3>
+                        <h3 class="ed-auth__modal-title" id="successmsg" >Sign In Now</h3>
                         <p class="ed-auth__modal-text">
                             Didn’t Create an account?
                             <button type="button" data-bs-toggle="modal" data-bs-target="#registerModal">
@@ -1127,13 +1128,13 @@
 
                     <!-- Auth Body  -->
                     <div class="ed-auth__modal-body">
-                        <form action="#" method="post" class="ed-auth__modal-form">
+                        <div class="ed-auth__modal-form">
                             <div class="form-group">
-                                <input type="text" name="name" placeholder="Enter user name" required />
+                                <input type="email" name="email" id="login_email" placeholder="Enter your email" required />
                             </div>
 
                             <div class="form-group">
-                                <input type="password" name="password" placeholder="Enter password" required />
+                                <input type="password" name="password" id="login_password" placeholder="Enter password" required />
                             </div>
 
                             <div class="form-check">
@@ -1143,9 +1144,9 @@
                                 </label>
                             </div>
                             <div class="ed-auth__form-btn">
-                                <button type="submit" class="ed-btn">Sign In<i class="fi fi-rr-arrow-small-right"></i></button>
+                                <button type="submit" onclick="login()" class="ed-btn">Sign In<i class="fi fi-rr-arrow-small-right"></i></button>
                             </div>
-                        </form>
+                        </div>
                     </div>
                     <!-- Auth Footer  -->
                     <div class="ed-auth__modal-footer">
@@ -1183,7 +1184,7 @@
                         <a href="/" class="ed-auth__modal-logo" style="margin-bottom: 20px;">
                             <img src="{% static 'assets/images/cognitixjpg.jpg' %}" style="margin-bottom: 30px;" alt="">
                         </a>
-                        <h3 class="ed-auth__modal-title">Sign Up Now</h3>
+                        <h3 class="ed-auth__modal-title" id="success">Sign Up Now</h3>
                         <p class="ed-auth__modal-text">
                             already have an account?
                             <button type="button" data-bs-toggle="modal" data-bs-target="#loginModal">
@@ -1194,33 +1195,32 @@
 
                     <!-- Auth Body  -->
                     <div class="ed-auth__modal-body">
-                        <form action="#" method="post" class="ed-auth__modal-form">
+                        <div  class="ed-auth__modal-form">
                             <div class="form-group">
-                                <input type="text" name="name" placeholder="Enter name" required />
+                                <input type="text" name="name" id="username" placeholder="Enter User name" required />
                             </div>
 
                             <div class="form-group">
-                                <input type="text" name="user name" placeholder="Enter user name" required />
+                                <input type="email" name="email" id="useremail" placeholder="Enter email" required />
                             </div>
 
                             <div class="form-group">
-                                <input type="email" name="email" placeholder="Enter email" required />
+                                <input type="number" name="phone" id="userphone" placeholder="Enter Phone" required />
                             </div>
 
                             <div class="form-group">
-                                <input type="password" name="password" placeholder="Enter password" required />
+                                <input type="password" name="password" id="userpassword" placeholder="Enter password" required />
                             </div>
 
                             <div class="form-check">
                                 <label class="form-check-label" for="flexCheckDefault2">
                                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2" />
-                                    I agree with your <strong>Privacy Policy</strong>
-                                </label>
+                                  <p onclick="window.location.href = '/privacy/'">I agree with your <strong>Privacy Policy</strong>label></p>
                             </div>
                             <div class="ed-auth__form-btn">
-                                <button type="submit" class="ed-btn">Register Now<i class="fi fi-rr-arrow-small-right"></i></button>
+                                <button type="submit" class="ed-btn" onclick="signup()">Register Now<i class="fi fi-rr-arrow-small-right"></i></button>
                             </div>
-                        </form>
+                        </div>
                     </div>
                     <!-- Auth Footer  -->
                     <div class="ed-auth__modal-footer">
@@ -1319,7 +1319,102 @@
             </svg>
         </div>
         <!-- End Back To Top -->
+<!-- main scripts -->
+ <script>
+    function login() { 
+        let login_email = $("#login_email").val();
+        let login_password = $("#login_password").val();
+        if(!login_email){
+            $("#successmsg").html("Enter Your Email").css('color','#dc3545')
+            return;
+        }
+       else if(!login_password){
+            $("#successmsg").html("Enter Your Password").css('color','#dc3545')
+            return;
+        }
+        $.ajax({
+            type:"POST",
+            url:"/login_check/",
+            data:{
+                "email":login_email,
+                "password":login_password
+            },
+            success:function(data){
+                if(data['status'] == 'pass'){
 
+                    if(data['role'] == 'Admin'){
+                        $("#successmsg").html("Login Successful").css('color','#28a475');
+                        window.location.href = '/admin_dashboard/'
+                    }
+                    else if(data['role'] == 'customer'){
+                         $("#successmsg").html("Login Successful").css('color','#28a475');
+                        window.location.href = '/'
+                    }
+                }
+                else if(data['status'] == 'fail'){
+                    $("#successmsg").html(data['message']).css({'color':'#dc3545',"font-size":"18px"})
+                }
+                else{
+                    alert("Failed")
+                }
+            },
+            error:function(xhr, error, status){
+                if(error){
+                    $("#successmsg").html("Email doesn't exist Please Signup").css({'color':'#dc3545',"font-size":"18px"})
+                }
+            }
+        })
+     }
+      function signup() {
+    let username = $("#username").val();
+    let email = $("#useremail").val();
+    let phone = $("#userphone").val();
+    let password = $("#userpassword").val();
+    const passwordPattern = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    if (!username) {
+      $("#success").html("Enter Username").css('color', '#dc3545');
+      return;
+    } 
+    else if (!email) {
+      $("#success").html("Your Email Please").css('color', '#dc3545');
+      return;
+    } 
+    else if(!phone){
+      $("#success").html("Your Phoneno Please").css('color', '#dc3545');
+      return;
+    }
+    else if(phone.length !== 10){
+      $("#success").html("Invalid Phoneno").css('color', '#dc3545');
+      return;
+    }
+    else if (!password) {
+      $("#success").html("Your Password").css('color', '#dc3545');
+      return;
+    } 
+    $.ajax({
+      type: "POST",
+      url: "/create_user/",
+      data: {
+        "username": username,
+        "email": email,
+        "phone":phone,
+        "password": password,
+      },
+      success: function (data) {
+        if (data['status'] == 'pass') {
+          $("#success").html("Signup Successful").css('color', '#28a475');
+        } 
+        else if(data['status'] == 'fail')
+        {
+          $("#success").html(data['message']).css({'color':'#dc3545','font-size':'18px','font-weight':"bold"});
+        }
+        else {
+          alert("Failed");
+        }
+      },
+    });
+  }
+ </script>
         <!-- Jquery JS -->
         <script src="{% static 'assets/plugins/js/jquery.min.js' %}"></script>
         <script src="{% static 'assets/plugins/js/jquery-migrate.js' %}"></script>

@@ -12,7 +12,7 @@ class Customer(models.Model):
     email = models.EmailField(max_length=200, unique=True)
     phone = models.IntegerField()
     password = models.CharField(max_length=200)
-    confirm_password = models.CharField(max_length=200)
+    agreed_to_privacy_policy = models.BooleanField(default=False)
     role = models.CharField(max_length=20, choices=role_choices,default='customer') 
 
     def __str__(self) -> str:

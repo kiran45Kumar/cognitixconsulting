@@ -82,10 +82,14 @@
                                     </div>
 
                                     <div class="ed-course__bottom">
-                                        <span class="ed-course__price">$674.00</span>
+                                        <span class="ed-course__price">{{course.price}}</span>
                                         <div class="ed-course__students">
                                             <i class="fi fi-rr-graduation-cap"></i>
-                                            <p>673 Students</p>
+                                            <div class="ed-topbar__info-buttons">
+                                                <button type="button" class="register-btn" data-bs-toggle="modal" data-bs-target="#registerModal">
+                                                    Add to Cart
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
