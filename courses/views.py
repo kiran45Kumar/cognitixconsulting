@@ -407,3 +407,25 @@ def add_to_cart(request):
             return JsonResponse({'status': 'fail', 'message': 'Customer not found'})
     
     return JsonResponse({'status': 'fail', 'message': 'Invalid request method'})
+def add_to_cart(request):
+    if request.method == "POST":
+        course_id = request.POST.get('course_id')
+        quantity = request.POST.get('quantity')
+        customer_id = request.POST.get('customer_id')
+
+        try:
+            course = Course.objects.get(course_id = course_id)
+            customer = get_object_or_404(Customer, customer_id = customer_id)
+            
+            Cart.objects.create(
+                cid = customer,
+                course = course,
+                quantity = quantity
+            )
+            return JsonResponse({"status":"success"})
+        except Course.DoesNotExist:
+            return JsonResponse({"status":"fail","message":"Course Not Found"})
+        except Customer.DoesNotExist:
+            return JsonResponse({"status":"fail","message":"Customer Not Found"})
+    return JsonResponse({"status":"success","message":"Invalid "})
+        
