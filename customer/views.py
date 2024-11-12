@@ -25,23 +25,10 @@ def index2(request):
     courses = Course.objects.all()
     return render(request, 'customer/index-3.html',{'currentUser':request.session.get('user_name',''),'domains':domains,'allTrainers':allTrainers,"courses":courses})
 def courses(request):
-    # Check if 'customer_id' exists in the session
-    customer_id = request.session.get('customer_id')
-    if not customer_id:
-        # Redirect to login if 'customer_id' is missing
-        return redirect('login')  # Replace 'login' with your actual login URL name
-
     domains = Category.objects.all()
     allTrainers = AddTrainers.objects.all().order_by('-trainer_created')
     courses = Course.objects.all()
-    
-    return render(request, 'courses/courses.html', {
-        'currentUserId': customer_id,
-        'currentUser': request.session.get('user_name', ''),
-        'domains': domains,
-        'allTrainers': allTrainers,
-        'courses': courses,
-    })
+    return render(request, 'courses/courses.html',{'currentUserId':request.session['customer_id'],'currentUser':request.session.get('user_name',''),'domains':domains,'allTrainers':allTrainers,"courses":courses})
 def aboutus(request):
     domains = Category.objects.all()
     allTrainers = AddTrainers.objects.all().order_by('-trainer_created')
